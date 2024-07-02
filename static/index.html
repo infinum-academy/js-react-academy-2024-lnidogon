@@ -9,7 +9,7 @@
 <body>
     <div id = "page-container">
         <span class = "small-title">
-            TV show APP
+            TV shows APP
         </span>
         <div id = "show-display">
             <img src="https://m.media-amazon.com/images/S/pv-target-images/e56c18e08e0a07c8d4ee65f45be64cefe6b070992a84182dd5ba35eb7cfc6510.jpg" alt="slika nije učitana">
@@ -24,9 +24,9 @@
         </div>
         <form>
             <span class = "small-title">Reviews</span>
-            <textarea placeholder="Add reviews"></textarea>
-            <input type="number" placeholder="Add rating" >
-            <input type="button" value="Post">
+            <textarea id = "review-text-input", placeholder="Add reviews"></textarea>
+            <input id = "review-rank-input", type="number" placeholder="Add rating" >
+            <input type="button" value="Post" onclick="addReview()">
         </form>
         <div id = "reviews">
             <div class = "review">
