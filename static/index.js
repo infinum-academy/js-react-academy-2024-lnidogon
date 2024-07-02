@@ -23,6 +23,12 @@ function createReviewElement(review) {
     return reviewEl;
 }
 
+function calculateAverage() {
+    let ret = 0;
+    reviewArray.forEach((t) => (ret += parseInt(t.rank)));
+    ret = ret / reviewArray.length;
+    return Math.round(ret * 100)/100;
+}
 
 function renderPage() {
     const reviewList = document.getElementById(`reviews`);
@@ -30,6 +36,8 @@ function renderPage() {
     reviewArray.forEach((review) => {
         reviewList.appendChild(createReviewElement(review));
     });
+    const cRank = document.getElementById("c-rank");
+    cRank.innerHTML = calculateAverage() + " / 5";
 }
 
 function addReview() {

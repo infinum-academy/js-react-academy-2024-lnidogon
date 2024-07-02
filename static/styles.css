@@ -19,7 +19,7 @@ body {
 
 #show-display {
     width: 500px;
-    height: 450px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -119,3 +119,7 @@ input, textarea {
     background-color: rgb(245, 128, 99);
 }
 
+#c-rank {
+    text-decoration: underline;
+    font-size: 1.1rem;
+}
