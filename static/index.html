@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id = "page-container">
-        <span>
+        <span class = "small-title">
             TV show APP
         </span>
         <div id = "show-display">
@@ -23,14 +23,20 @@
             </div>
         </div>
         <form>
-            <span>Reviews</span>
-            <input placeholder="Add review">
-            <input number="Add rating">
+            <span class = "small-title">Reviews</span>
+            <textarea placeholder="Add reviews"></textarea>
+            <input type="number" placeholder="Add rating" >
             <input type="button" value="Post">
         </form>
-        <div>
-            <span> Ovdje ide neki konstruktivni komentar</span>
-            <span> Ovdje ide ocjena / 5 </span>
+        <div id = "reviews">
+            <div class = "review">
+                <span> Ovdje ide neki konstruktivni komentar</span>
+                <span> Ovdje ide ocjena / 5 </span>
+            </div>
+            <div class = "review">
+                <span> Ovdje ide drugi konstruktivni komentar</span>
+                <span> Loše / 5 </span>
+            </div>
         </div>
 
     </div>
