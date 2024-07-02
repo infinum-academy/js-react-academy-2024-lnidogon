@@ -134,8 +134,13 @@ input, textarea {
 }
 #review-rank-input img{
     width: 15%;
-    cursor: pointer;;
+    cursor: pointer;
 }
+
+.review img {
+    width: 5%;
+}
+
 .selected-star {
     content: URL("filled-star.png");
 }

@@ -1,4 +1,4 @@
-let reviewArray = [{text: "proba", rank: 4}];
+let reviewArray = [];
 let selectedStarNumber = 0;
 
 function createReviewElement(review) {
@@ -8,6 +8,15 @@ function createReviewElement(review) {
     reviewText.innerHTML = review.text;
     const reviewRank = document.createElement(`span`);
     reviewRank.innerHTML = review.rank + '/5';
+
+    const reviewDisplay = document.createElement('div');
+    for(let i = 0; i < 5; i++) {
+        const tempStar = document.createElement('img');
+        tempStar.src = "empty-star.png";
+        if(i < review.rank) tempStar.classList = ['selected-star'];
+        reviewDisplay.appendChild(tempStar);
+    }
+
     const deleteButton = document.createElement('input');
     deleteButton.value = "Remove";
     deleteButton.type = "Button";
@@ -20,6 +29,7 @@ function createReviewElement(review) {
     }
     reviewEl.appendChild(reviewText);
     reviewEl.appendChild(reviewRank);
+    reviewEl.appendChild(reviewDisplay);
     reviewEl.appendChild(deleteButton);
     return reviewEl;
 }
@@ -54,6 +64,7 @@ function addReview() {
         const nthStar = document.querySelector(`#review-rank-input img:nth-child(${i + 2})`);
         nthStar.classList = [];
     }
+    selectedStarNumber = 0;
     
     saveReviewsToLocalStorage();
     renderPage();
