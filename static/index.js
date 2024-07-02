@@ -25,8 +25,20 @@ function addReview() {
     const reviewTextInput = document.getElementById('review-text-input');
     const reviewRankInput = document.getElementById(`review-rank-input`);
     reviewArray.push({text: reviewTextInput.value, rank: reviewRankInput.value});
+    saveReviewsToLocalStorage();
     renderPage();
 }
 
+function saveReviewsToLocalStorage() {
+    localStorage.setItem("movie-reviews", JSON.stringify(reviewArray));
+}
+
+function loadReviewsFromLocalStorage() {
+    const savedArray = localStorage.getItem("movie-reviews");
+    reviewArray = JSON.parse(savedArray);
+    if(reviewArray == undefined) reviewArray = [];
+}
+
+loadReviewsFromLocalStorage();
 renderPage();
 
