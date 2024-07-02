@@ -7,8 +7,19 @@ function createReviewElement(review) {
     reviewText.innerHTML = review.text;
     const reviewRank = document.createElement(`span`);
     reviewRank.innerHTML = review.rank + '/5';
+    const deleteButton = document.createElement('input');
+    deleteButton.value = "Remove";
+    deleteButton.type = "Button";
+    deleteButton.classList = ['delete-button'];
+    deleteButton.onclick = () => {
+        reviewArray = reviewArray.filter((curr)=>{
+            return curr !== review; 
+        });
+        renderPage();
+    }
     reviewEl.appendChild(reviewText);
     reviewEl.appendChild(reviewRank);
+    reviewEl.appendChild(deleteButton);
     return reviewEl;
 }
 

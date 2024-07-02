@@ -46,6 +46,7 @@ body {
 .small-title {
     font-size: 1.5rem;
     font-weight: 700;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 form {
     width: 500px;
@@ -75,8 +76,12 @@ form input:nth-child(4) {
     width: 15%;
     height: 40px;
     border-radius: 15px;
-    cursor: pointer;
 }
+form input:nth-child(4):hover {
+    cursor: pointer;
+    background-color: rgb(223, 245, 99);
+}
+
 
 input, textarea {
     background-color: rgb(254, 242, 218);
@@ -100,3 +105,17 @@ input, textarea {
     gap: 10px;
     background-color: rgb(103, 65, 103)
 }
+
+
+.delete-button {
+    width: 18%;
+    padding: 5px;
+    border-radius: 10px;   
+}
+
+
+.delete-button:hover {
+    cursor: pointer;
+    background-color: rgb(245, 128, 99);
+}
+
