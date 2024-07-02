@@ -28,7 +28,14 @@
         <form>
             <span class = "small-title">Reviews</span>
             <textarea id = "review-text-input", placeholder="Add review"></textarea>
-            <input id = "review-rank-input", type="number" placeholder="Add rating" >
+            <div id = "review-rank-input">
+                <span> Ranking: </span>
+                <img src="empty-star.png" alt="star" onclick="selectAStar(1)"> 
+                <img src="empty-star.png" alt="star" onclick="selectAStar(2)"> 
+                <img src="empty-star.png" alt="star" onclick="selectAStar(3)"> 
+                <img src="empty-star.png" alt="star" onclick="selectAStar(4)"> 
+                <img src="empty-star.png" alt="star" onclick="selectAStar(5)">                
+            </div>
             <input type="button" value="Post" onclick="addReview()">
         </form>
         <div id = "reviews">

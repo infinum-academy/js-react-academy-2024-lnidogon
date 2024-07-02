@@ -1,4 +1,5 @@
 let reviewArray = [{text: "proba", rank: 4}];
+let selectedStarNumber = 0;
 
 function createReviewElement(review) {
     const reviewEl = document.createElement(`div`);
@@ -26,7 +27,9 @@ function createReviewElement(review) {
 function calculateAverage() {
     let ret = 0;
     reviewArray.forEach((t) => (ret += parseInt(t.rank)));
+    if(reviewArray.length == 0) return '-';
     ret = ret / reviewArray.length;
+    
     return Math.round(ret * 100)/100;
 }
 
@@ -37,16 +40,20 @@ function renderPage() {
         reviewList.appendChild(createReviewElement(review));
     });
     const cRank = document.getElementById("c-rank");
-    cRank.innerHTML = calculateAverage() + " / 5";
+    cRank.innerHTML = calculateAverage() +  " / 5";
+    saveReviewsToLocalStorage();
 }
 
 function addReview() {
     const reviewTextInput = document.getElementById('review-text-input');
-    const reviewRankInput = document.getElementById(`review-rank-input`);
-    if(reviewRankInput.value == "" || reviewTextInput.value == "") return;
-    reviewArray.push({text: reviewTextInput.value, rank: reviewRankInput.value});
+    console.log(selectedStarNumber + " " + reviewTextInput.value);
+    if(reviewTextInput.value == "" || selectedStarNumber == 0) return;
+    reviewArray.push({text: reviewTextInput.value, rank: selectedStarNumber});
     reviewTextInput.value = "";
-    reviewRankInput.value = "";
+    for(let i = 0; i < 5; i++) {
+        const nthStar = document.querySelector(`#review-rank-input img:nth-child(${i + 2})`);
+        nthStar.classList = [];
+    }
     
     saveReviewsToLocalStorage();
     renderPage();
@@ -61,6 +68,14 @@ function loadReviewsFromLocalStorage() {
     reviewArray = JSON.parse(savedArray);
     if(reviewArray == undefined) reviewArray = [];
 }
+
+function selectAStar(numberOfStars) {
+    selectedStarNumber = numberOfStars;
+    for(let i = 0; i < 5; i++) {
+        const nthStar = document.querySelector(`#review-rank-input img:nth-child(${i + 2})`);
+        nthStar.classList = (i<numberOfStars?['selected-star']:[]);
+    }
+} 
 
 loadReviewsFromLocalStorage();
 renderPage();
