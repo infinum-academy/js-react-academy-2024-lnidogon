@@ -24,7 +24,11 @@ function renderPage() {
 function addReview() {
     const reviewTextInput = document.getElementById('review-text-input');
     const reviewRankInput = document.getElementById(`review-rank-input`);
+    if(reviewRankInput.value == "" || reviewTextInput.value == "") return;
     reviewArray.push({text: reviewTextInput.value, rank: reviewRankInput.value});
+    reviewTextInput.value = "";
+    reviewRankInput.value = "";
+    
     saveReviewsToLocalStorage();
     renderPage();
 }

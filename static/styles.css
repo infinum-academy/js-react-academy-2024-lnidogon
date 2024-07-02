@@ -1,7 +1,7 @@
 * {
     box-sizing: border-box;
     font-size: 20px;
-    overflow: hidden;
+
 }
 
 body {
@@ -26,6 +26,7 @@ body {
     background-color: rgb(254, 242, 218);
     color: black;
     border-radius: 10px;
+    overflow: hidden;
 }
 
 
