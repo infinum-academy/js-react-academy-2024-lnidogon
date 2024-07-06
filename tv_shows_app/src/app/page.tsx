@@ -1,8 +1,20 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { ShowDetais } from "@/components/features/shows/ShowDetails";
+import { Container, Flex, Text} from "@chakra-ui/react";
+import { devNull } from "os";
+
 
 export default function Home() {
   return (
-    <main className={styles.main}></main>
+    <main>
+
+      <Flex
+      flexDirection={"column"}
+      alignItems={"center"}>
+      <Text>
+          TV shows APP
+      </Text>
+      <ShowDetais avgRating = {1}/>
+      </Flex>
+    </main>
   );
 }
