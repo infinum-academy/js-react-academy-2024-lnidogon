@@ -1,12 +1,12 @@
 import { ShowDetais } from "@/components/features/shows/ShowDetails";
-import { Container, Flex, Text} from "@chakra-ui/react";
-import { devNull } from "os";
+import { background, Box, Container, Flex, Text} from "@chakra-ui/react";
 
 
 export default function Home() {
   return (
-    <main>
-
+  <main>
+      <Box backgroundColor={"purple"}
+          height={"100vh"}>
       <Flex
       flexDirection={"column"}
       alignItems={"center"}>
@@ -15,6 +15,7 @@ export default function Home() {
       </Text>
       <ShowDetais avgRating = {1}/>
       </Flex>
+      </Box>
     </main>
   );
 }
