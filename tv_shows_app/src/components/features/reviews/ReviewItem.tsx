@@ -1,6 +1,7 @@
-import { Container, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
+import { StarReview } from "./StarReview";
 
-interface IReview{
+export interface IReview{
     email: string,
     avatarUrl: string, 
     comment: string,
@@ -13,12 +14,23 @@ interface IReviewItemProps {
 
 export const ReviewItem = ({review}: IReviewItemProps) => {
     return (
-        <Container>
+        <Flex
+            fontSize={"17"}
+            backgroundColor={"pink.800"}
+            color={"white"}
+            borderRadius={"8"}
+            padding={"5"}
+            flexDirection={"column"}
+            gap={"2"}
+            >
               <Text>
+                {review.comment}
               </Text>
+                {review.rating} / 5
               <Text>
              </Text> 
-        </Container>
+             <StarReview noOfStars={review.rating}/>
+        </Flex>
 
 
     );
