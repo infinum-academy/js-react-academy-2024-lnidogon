@@ -38,7 +38,7 @@ export const ShowDetais = ({avgRating}: IShowDetailsProps) => {
                 fontSize={"20"}
                 as={"u"}>
                     
-               {avgRating==undefined?`no ratings`:avgRating + `/5`}
+               {!avgRating?`no ratings`:avgRating + `/5`}
             </Text>
         </Flex>
     </Flex>

@@ -12,7 +12,9 @@ export const ReviewList = ({reviews, onRemove}: IReviewsList) => {
     <Flex
         flexDirection={"column"}
         gap={"8"}
-        width={"100%"}>
+        width={"100%"}
+        marginBottom={"3"}
+        >        
         {reviews.map((review, index)=> {
             return <ReviewItem key={index} review={review} onRemove={onRemove}/>;
         })}

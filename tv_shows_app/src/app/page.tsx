@@ -34,7 +34,6 @@ export default function Home() {
   };
   function OnAdd(review: IReview) {
     const newList = [...reviews, review];
-    console.log(newList);
     setReviews(newList);
     saveToLocalStorage(newList);
     const reviewInput = document.getElementById("review-input") as HTMLInputElement;
@@ -45,6 +44,13 @@ export default function Home() {
     setReviews(newList);
     saveToLocalStorage(newList);
   }
+
+  const avgRating  = () => {
+    if(reviews.length == 0) return 0;
+    let sum = reviews.map((currReview) => currReview.rating).reduce((acc, val)=> acc + val);
+    return Math.round(sum * 100 / reviews.length)/100;
+  }
+
   return (
   <main>
       <Box backgroundColor={"pink.900"}
@@ -54,7 +60,7 @@ export default function Home() {
         alignItems={"center"}
         gap={"8"}>
          <SmallTitle content="TV shows APP"/>
-         <ShowDetais avgRating = {1}/>  
+         <ShowDetais avgRating = {avgRating()}/>  
         <ShowReviewSection reviews={reviews} onAdd={OnAdd} onRemove={OnRemove}/>         
         </Flex>
       </Box>

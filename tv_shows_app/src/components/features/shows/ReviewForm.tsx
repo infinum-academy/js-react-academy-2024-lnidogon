@@ -1,5 +1,6 @@
-import { Input, Button, Flex, Textarea } from "@chakra-ui/react"
+import { Input, Button, Flex, Textarea, Image, Container} from "@chakra-ui/react"
 import { IReview } from "../reviews/ReviewItem";
+import { useState } from "react";
 
 export interface IReviewFormProps {
     onAdd: (review: IReview) => void,
@@ -8,10 +9,29 @@ export interface IReviewFormProps {
 
 
 export const ReviewForm = ({onAdd}: IReviewFormProps) => {
+    let starArray = [];
+    let locked = false;
+    const [selectedNumberOfStars, setNumberOfStars] = useState(0);
+    
     const OnClickHandler = () => {
         const reviewInput = document.getElementById("review-input") as HTMLInputElement;
-        onAdd({email: "", avatarUrl: "", comment: reviewInput.value, rating: 1});
+        if(reviewInput.value == "" || selectedNumberOfStars == 0) return;
+        onAdd({email: "", avatarUrl: "", comment: reviewInput.value, rating: selectedNumberOfStars});
     };
+    for(let i = 1; i <= 5; i++) {
+        //znam da nije prikladno ali sviđa mi se ovo ime
+        const starFragment = (
+        <Image
+        src= {(i <= selectedNumberOfStars ? "filled":"empty") + "-star.png"}
+        width={"15%"}
+        onClick={()=>{locked=true;}}
+        onMouseOver={()=>{if(!locked) setNumberOfStars(i)}}
+            key={i + " unique key" + Math.random()}
+        />
+        );
+        starArray.push(starFragment);
+    }
+
     return (
         <Flex
         flexDirection={"column"}
@@ -31,6 +51,15 @@ export const ReviewForm = ({onAdd}: IReviewFormProps) => {
             borderRadius={"7"}
             fontFamily={"'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"}       
         />
+        <Flex
+            flexDirection={"row"}
+            width={"40%"}
+            gap={"1"}
+            onMouseLeave={()=>{
+                locked=false}}
+        >
+            {starArray}
+        </Flex>
         <Button
             onClick={OnClickHandler}
             width={"16%"}
