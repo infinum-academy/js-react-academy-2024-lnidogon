@@ -3,6 +3,7 @@ import { IReview } from "../reviews/ReviewItem";
 import { SmallTitle } from "@/components/shared/Titles/SmallTitle";
 import { ReviewForm } from "./ReviewForm";
 import { ReviewList } from "../reviews/ReviewList";
+import next from "next";
 
 
 interface IShowReviewSectionProps {

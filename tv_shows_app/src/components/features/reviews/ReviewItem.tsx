@@ -36,6 +36,7 @@ export const ReviewItem = ({review, onRemove}: IReviewItemProps) => {
              <StarReview noOfStars={review.rating}/>
              <Button
                 width={"18%"}
+                minWidth={"fit-content"}
                 height={"fit-content"}
                 padding={"1"}
                 backgroundColor={"orange.100"}

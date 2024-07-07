@@ -12,7 +12,6 @@ import { stringify } from "querystring";
 import { useState, useEffect } from 'react';
 
 export default function Home() {
-
   let tempList = [
     {email:"", avatarUrl:"", rating:3, comment:"Dobar film :D"},
     {email:"", avatarUrl:"", rating:4, comment:"Loš film >:("}
@@ -34,7 +33,6 @@ export default function Home() {
     localStorage.setItem('infinum-reviews', JSON.stringify(newList));
   };
   function OnAdd(review: IReview) {
-    console.log("muahahaha\n"); 
     const newList = [...reviews, review];
     console.log(newList);
     setReviews(newList);
@@ -43,11 +41,9 @@ export default function Home() {
     reviewInput.value = "";
   }
   const OnRemove = (review: IReview) => {
-    let newList = reviews.filter((t)=>{
-      return review === t;
-    });
-    newList = reviews;
+    let newList = reviews.filter(t => t !== review);
     setReviews(newList);
+    saveToLocalStorage(newList);
   }
   return (
   <main>

@@ -2,7 +2,7 @@ import { Input, Button, Flex, Textarea } from "@chakra-ui/react"
 import { IReview } from "../reviews/ReviewItem";
 
 export interface IReviewFormProps {
-    onAdd: (review: IReview) => void
+    onAdd: (review: IReview) => void,
 }
 
 
