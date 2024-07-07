@@ -19,20 +19,24 @@ export const ReviewForm = ({onAdd}: IReviewFormProps) => {
         width={"100%"}
         >
         <Textarea
-        backgroundColor={"orange.100"}
-        placeholder="Add review..."
-        id = "review-input"
-        width={"100%"}
-        fontSize={"14"}
-        padding={"5"}
-        height={"70px"}
-        minHeight={"70px"}
-        resize={"vertical"}
-        borderRadius={"7"}/>
+            backgroundColor={"orange.100"}
+            placeholder="Add review..."
+            id = "review-input"
+            width={"100%"}
+            fontSize={"14"}
+            padding={"5"}
+            height={"70px"}
+            minHeight={"70px"}
+            resize={"vertical"}
+            borderRadius={"7"}
+            fontFamily={"'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"}       
+        />
         <Button
-        onClick={OnClickHandler}
-        width={"16%"}
-        borderRadius={"20px"}
+            onClick={OnClickHandler}
+            width={"16%"}
+            borderRadius={"15px"}
+            _hover={{backgroundColor: 'green.300' }}
+            backgroundColor={"orange.100"}
         > Post
         </Button>
         </Flex>

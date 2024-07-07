@@ -35,11 +35,13 @@ export const ReviewItem = ({review, onRemove}: IReviewItemProps) => {
              </Text> 
              <StarReview noOfStars={review.rating}/>
              <Button
-              width={"18%"}
-              height={"fit-content"}
-              padding={"1"}
-              backgroundColor={"orange.100"}
-              onClick={OnClickHandler}>
+                width={"18%"}
+                height={"fit-content"}
+                padding={"1"}
+                backgroundColor={"orange.100"}
+                _hover={{ backgroundColor: 'red.300' }}
+                onClick={OnClickHandler}
+              >
                 Remove
              </Button>
         </Flex>

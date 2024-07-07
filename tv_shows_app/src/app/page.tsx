@@ -8,20 +8,46 @@ import { ShowDetais } from "@/components/features/shows/ShowDetails";
 import { ShowReviewSection } from "@/components/features/shows/ShowReviewSection";
 import { SmallTitle } from "@/components/shared/Titles/SmallTitle";
 import { background, Box, Container, Flex, Text} from "@chakra-ui/react";
-import { Contrail_One } from "next/font/google";
-
+import { stringify } from "querystring";
+import { useState, useEffect } from 'react';
 
 export default function Home() {
+
   let tempList = [
     {email:"", avatarUrl:"", rating:3, comment:"Dobar film :D"},
     {email:"", avatarUrl:"", rating:4, comment:"Loš film >:("}
 
   ]
-  const OnAdd = (review: IReview) => {
-    console.log(review.comment);
+  const [reviews, setReviews] = useState(tempList);
+  useEffect(()=>{
+    const loadedList = loadFromLocalStorage();
+    setReviews(loadedList);
+  }, []);
+  
+  const loadFromLocalStorage = () => {
+    const lsValue = localStorage.getItem('infinum-reviews');
+    if(!lsValue)
+      return tempList;
+    return JSON.parse(lsValue);
+  };
+  const saveToLocalStorage = (newList: IReview[]) => {
+    localStorage.setItem('infinum-reviews', JSON.stringify(newList));
+  };
+  function OnAdd(review: IReview) {
+    console.log("muahahaha\n"); 
+    const newList = [...reviews, review];
+    console.log(newList);
+    setReviews(newList);
+    saveToLocalStorage(newList);
+    const reviewInput = document.getElementById("review-input") as HTMLInputElement;
+    reviewInput.value = "";
   }
   const OnRemove = (review: IReview) => {
-    console.log(review.comment);
+    let newList = reviews.filter((t)=>{
+      return review === t;
+    });
+    newList = reviews;
+    setReviews(newList);
   }
   return (
   <main>
@@ -33,7 +59,7 @@ export default function Home() {
         gap={"8"}>
          <SmallTitle content="TV shows APP"/>
          <ShowDetais avgRating = {1}/>  
-        <ShowReviewSection reviews={tempList} onAdd={OnAdd} onRemove={OnRemove}/>         
+        <ShowReviewSection reviews={reviews} onAdd={OnAdd} onRemove={OnRemove}/>         
         </Flex>
       </Box>
     </main>
