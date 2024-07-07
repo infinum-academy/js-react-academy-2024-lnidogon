@@ -11,8 +11,7 @@ export const SmallTitle = ({content}: SmallTitleProps) => {
             color={"white"}
             fontWeight={"700"}
             fontFamily={"'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"}
-            fontSize={"30"}
-        >
+            fontSize={"30"}>
             {content}
         </Text>
 

@@ -21,6 +21,9 @@ export const StarReview = ({noOfStars}: IStarReview) => {
         flexDirection={"row"}
         gap={"0"}
         width={"30%"}
+        marginTop={"1"}
+        marginBottom={"3"}
+
         >
         {tempList}
      </Flex>

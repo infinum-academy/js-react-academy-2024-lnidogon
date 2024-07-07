@@ -3,18 +3,18 @@ import { IReview, ReviewItem } from './ReviewItem';
 
 
 interface IReviewsList {
-    reviews: Array<IReview>   
+    reviews: Array<IReview>,
+    onRemove: (review: IReview) => void; 
 }
 
-export const ReviewList = ({reviews}: IReviewsList) => {
+export const ReviewList = ({reviews, onRemove}: IReviewsList) => {
     return (
     <Flex
         flexDirection={"column"}
         gap={"8"}
-        width={"50%"}
-        maxWidth={"500px"}>
+        width={"100%"}>
         {reviews.map((review, index)=> {
-            return <ReviewItem key={"index"} review={review}/>;
+            return <ReviewItem key={index} review={review} onRemove={onRemove}/>;
         })}
     </Flex>
     );

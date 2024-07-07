@@ -1,4 +1,4 @@
-import { Flex, Text } from "@chakra-ui/react";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { StarReview } from "./StarReview";
 
 export interface IReview{
@@ -10,9 +10,13 @@ export interface IReview{
 
 interface IReviewItemProps {
     review: IReview
+    onRemove: (review: IReview) => void;
 }
 
-export const ReviewItem = ({review}: IReviewItemProps) => {
+export const ReviewItem = ({review, onRemove}: IReviewItemProps) => {
+    const OnClickHandler = () => {
+      onRemove(review);
+    }
     return (
         <Flex
             fontSize={"17"}
@@ -26,10 +30,18 @@ export const ReviewItem = ({review}: IReviewItemProps) => {
               <Text>
                 {review.comment}
               </Text>
-                {review.rating} / 5
               <Text>
+              {review.rating} / 5
              </Text> 
              <StarReview noOfStars={review.rating}/>
+             <Button
+              width={"18%"}
+              height={"fit-content"}
+              padding={"1"}
+              backgroundColor={"orange.100"}
+              onClick={OnClickHandler}>
+                Remove
+             </Button>
         </Flex>
 
 

@@ -22,7 +22,7 @@ export const ShowDetais = ({avgRating}: IShowDetailsProps) => {
             flexDirection={"column"}
             gap={"3"}
             color={"black"}
-            backgroundColor={"wheat"}
+            backgroundColor={"orange.100"}
             padding={"5"}
             >
             <Text
