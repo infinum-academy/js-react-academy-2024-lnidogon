@@ -3,8 +3,13 @@ import { ShowDetais } from './ShowDetails';
 import { IReview } from '../reviews/ReviewItem';
 import { useEffect, useState } from 'react';
 import { ShowReviewSection } from './ShowReviewSection';
+import { IShow } from '@/typings/show';
 
-export const ShowSection = () => {
+interface IShowSection {
+  show: IShow;
+}
+
+export const ShowSection = ({ show }: IShowSection) => {
   let tempList = [
     { email: '', avatarUrl: '', rating: 3, comment: 'Dobar film :D' },
     { email: '', avatarUrl: '', rating: 4, comment: 'Loš film >:(' },
@@ -16,12 +21,12 @@ export const ShowSection = () => {
   }, []);
 
   const loadFromLocalStorage = () => {
-    const lsValue = localStorage.getItem('infinum-reviews');
+    const lsValue = localStorage.getItem('infinum-reviews-' + show.id);
     if (!lsValue) return tempList;
     return JSON.parse(lsValue);
   };
   const saveToLocalStorage = (newList: IReview[]) => {
-    localStorage.setItem('infinum-reviews', JSON.stringify(newList));
+    localStorage.setItem('infinum-reviews-' + show.id, JSON.stringify(newList));
   };
   function onAdd(review: IReview) {
     console.log('bruh');
@@ -50,16 +55,7 @@ export const ShowSection = () => {
   return (
     <Box backgroundColor="pink.900" height="100%" padding="4">
       <Flex flexDirection="column" alignItems="center" gap="5">
-        <ShowDetais
-          show={{
-            averageRating: avgRating,
-            title: 'Friends',
-            description:
-              'Follows the personal and professional lives of six twenty to thirty year-old friends living in the Manhattan borough of New York City.',
-            imageUrl:
-              'https://m.media-amazon.com/images/S/pv-target-images/e56c18e08e0a07c8d4ee65f45be64cefe6b070992a84182dd5ba35eb7cfc6510.jpg',
-          }}
-        />
+        <ShowDetais show={show} />
         <ShowReviewSection
           reviews={reviews}
           onAdd={onAdd}

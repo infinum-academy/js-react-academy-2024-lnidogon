@@ -6,13 +6,13 @@ interface IShowResponse {
 }
 
 export function getAllShows() {
-  return fetcher<IShowResponse>('api/shows');
+  return fetcher<IShowResponse>('/api/shows');
 }
 
 export function getTopShows() {
-  return fetcher<IShowResponse>('api/shows/top-rated');
+  return fetcher<IShowResponse>('/api/shows/top-rated');
 }
 
 export function getShow(id: string) {
-  return fetcher<IShow>(`api/shows/${id}`);
+  return fetcher<IShow>(`../api/shows/${id}`);
 }

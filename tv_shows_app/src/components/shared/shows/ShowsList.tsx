@@ -18,8 +18,8 @@ export const ShowsList = ({ shows }: IShowsList) => {
       gap="7"
       overflow="auto"
     >
-      {shows.map((show) => (
-        <ShowCard show={show} />
+      {shows.map((show, index) => (
+        <ShowCard show={show} key={index} />
       ))}
     </Flex>
   );

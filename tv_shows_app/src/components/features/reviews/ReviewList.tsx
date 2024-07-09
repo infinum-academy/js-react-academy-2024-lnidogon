@@ -24,7 +24,6 @@ export const ReviewList = ({ reviews, onRemove }: IReviewsList) => {
           (el, index) => index >= openPage * 3 && index < openPage * 3 + 3
         )
         .map((review, index) => {
-          console.log(index);
           return <ReviewItem key={index} review={review} onRemove={onRemove} />;
         })}
       <Flex

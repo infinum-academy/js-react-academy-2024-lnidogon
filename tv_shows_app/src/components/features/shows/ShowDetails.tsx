@@ -19,7 +19,7 @@ export const ShowDetais = ({ show }: IShowDetailsProps) => {
       }
     >
       <Image
-        src={show?.imageUrl}
+        src={show?.image_url}
         alt="slika nije učitana"
         fallbackSrc="https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:("
         objectFit="cover"
@@ -42,7 +42,7 @@ export const ShowDetais = ({ show }: IShowDetailsProps) => {
             {show.title}
           </Text>
           <Text fontSize="sm" textDecoration="underline" width="fit-content">
-            {!show.averageRating ? `no ratings` : show.averageRating + `/5`}
+            {!show.average_rating ? `no ratings` : show.average_rating + `/5`}
           </Text>
         </Flex>
         <Text fontSize="xs">{show.description}</Text>

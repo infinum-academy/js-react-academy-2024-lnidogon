@@ -17,9 +17,9 @@ export const ShowCard = ({ show }: IShowCard) => {
       borderRadius="8px"
       overflow="hidden"
       as={NextLink}
-      href={`/all-shows/${show.title}`}
+      href={`/shows/${show.id}`}
     >
-      <Image src={show.imageUrl} objectFit="cover" height="70%" />
+      <Image src={show.image_url} objectFit="cover" height="70%" />
       <Flex
         flexDirection="column"
         padding="2"
@@ -28,7 +28,9 @@ export const ShowCard = ({ show }: IShowCard) => {
         fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
       >
         <Text> {show.title} </Text>
-        <Text> {show.averageRating}/5 </Text>
+        <Text>
+          {!show.average_rating ? 'no rating' : show.average_rating + '/5'}
+        </Text>
       </Flex>
     </Flex>
   );
