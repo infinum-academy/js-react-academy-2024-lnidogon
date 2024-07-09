@@ -1,46 +1,51 @@
-import { Flex, Image, Text} from "@chakra-ui/react"
+import { IShow } from '@/typings/show';
+import { Flex, Image, Text } from '@chakra-ui/react';
 
 interface IShowDetailsProps {
-    avgRating: number
+  show: IShow;
 }
 
-export const ShowDetais = ({avgRating}: IShowDetailsProps) => {
-    return <Flex
-            width={"50%"}
-            maxWidth={"500px"}
-            flexDirection={"column"}  
-            borderRadius={"7"}
-            overflow={"hidden"}   
-            fontFamily={"'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"}       
-            >
-        <Image
-            src={"https://m.media-amazon.com/images/S/pv-target-images/e56c18e08e0a07c8d4ee65f45be64cefe6b070992a84182dd5ba35eb7cfc6510.jpg"} 
-            alt={"slika nije učitana"}
-            fallbackSrc={"https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:("}
-            width={"100%"}/>
-        <Flex
-            flexDirection={"column"}
-            gap={"3"}
-            color={"black"}
-            backgroundColor={"orange.100"}
-            padding={"5"}
-            >
-            <Text
-                fontSize={"30"}
-                fontWeight={"700"}>
-                Friends
-            </Text>
-            <Text
-                fontSize={"15"}>
-                Follows the personal and professional lives of six twenty to thirty year-old friends living in the Manhattan borough of New York City.   
-            </Text>
-            <Text
-                fontSize={"20"}
-                as={"u"}>
-                    
-               {!avgRating?`no ratings`:avgRating + `/5`}
-            </Text>
+export const ShowDetais = ({ show }: IShowDetailsProps) => {
+  return (
+    <Flex
+      height="45vh"
+      minHeight="fit-content"
+      width="80%"
+      maxWidth="1000px"
+      flexDirection="column"
+      borderRadius="7"
+      overflow="hidden"
+      fontFamily={
+        "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
+      }
+    >
+      <Image
+        src={show?.imageUrl}
+        alt="slika nije učitana"
+        fallbackSrc="https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:("
+        objectFit="cover"
+        height="40"
+      />
+      <Flex
+        flexDirection="row"
+        gap="3"
+        color="black"
+        backgroundColor="orange.100"
+        padding="5"
+        overflow="hidden"
+        alignItems="center"
+        borderRadius="7"
+      >
+        <Flex flexDirection="column" width="fit-content" minWidth="40%">
+          <Text fontSize="lg " fontWeight="700" width="fit-content">
+            {show.title}
+          </Text>
+          <Text fontSize="md" textDecoration="underline" width="fit-content">
+            {!show.averageRating ? `no ratings` : show.averageRating + `/5`}
+          </Text>
         </Flex>
+        <Text fontSize="sm">{show.description}</Text>
+      </Flex>
     </Flex>
-
-}
+  );
+};
