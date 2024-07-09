@@ -8,8 +8,7 @@ interface IShowDetailsProps {
 export const ShowDetais = ({ show }: IShowDetailsProps) => {
   return (
     <Flex
-      height="45vh"
-      minHeight="fit-content"
+      height="fit-content"
       width="80%"
       maxWidth="1000px"
       flexDirection="column"
@@ -31,20 +30,22 @@ export const ShowDetais = ({ show }: IShowDetailsProps) => {
         gap="3"
         color="black"
         backgroundColor="orange.100"
-        padding="5"
+        padding="2"
+        paddingRight="5"
+        paddingLeft="5"
         overflow="hidden"
         alignItems="center"
         borderRadius="7"
       >
-        <Flex flexDirection="column" width="fit-content" minWidth="40%">
+        <Flex flexDirection="column" width="fit-content" minWidth="30%">
           <Text fontSize="lg " fontWeight="700" width="fit-content">
             {show.title}
           </Text>
-          <Text fontSize="md" textDecoration="underline" width="fit-content">
+          <Text fontSize="sm" textDecoration="underline" width="fit-content">
             {!show.averageRating ? `no ratings` : show.averageRating + `/5`}
           </Text>
         </Flex>
-        <Text fontSize="sm">{show.description}</Text>
+        <Text fontSize="xs">{show.description}</Text>
       </Flex>
     </Flex>
   );

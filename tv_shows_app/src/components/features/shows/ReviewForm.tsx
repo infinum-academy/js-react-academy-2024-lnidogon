@@ -36,8 +36,11 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
     //znam da nije prikladno ali sviđa mi se ovo ime
     const starFragment = (
       <Image
-        src={(i <= selectedNumberOfStars ? 'filled' : 'empty') + '-star.png'}
-        width="10%"
+        src={
+          '/' + (i <= selectedNumberOfStars ? 'filled' : 'empty') + '-star.png'
+        }
+        width="20px"
+        maxWidth="15%"
         onClick={() => {
           setLocked(true), setClickedNumberOfStars(i);
         }}
@@ -51,7 +54,7 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
     starArray.push(starFragment);
   }
   return (
-    <Flex flexDirection="column" gap="5" width="100%" overflow="hidden">
+    <Flex flexDirection="column" gap="2" width="100%" overflow="hidden">
       <Textarea
         backgroundColor="orange.100"
         placeholder="Add review..."

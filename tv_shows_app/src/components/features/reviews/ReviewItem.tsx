@@ -1,6 +1,6 @@
-import { Button, Flex, IconButton, Text } from '@chakra-ui/react';
+import { Button, Flex, IconButton, Text, Image } from '@chakra-ui/react';
 import { StarReview } from './StarReview';
-import { SearchIcon } from '@chakra-ui/icons';
+import { DeleteIcon, SearchIcon } from '@chakra-ui/icons';
 
 export interface IReview {
   email: string;
@@ -20,30 +20,44 @@ export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
   };
   return (
     <Flex
-      fontSize="17"
+      height="50px"
       backgroundColor="pink.800"
       color="white"
       borderRadius="8"
-      padding="5"
+      paddingLeft="4"
+      paddingRight="4"
+      paddingBottom="2"
+      paddingTop="2"
       flexDirection="row"
       gap="2"
+      alignItems="center"
     >
+      <Image
+        borderRadius="full"
+        src={review.avatarUrl}
+        alt="profilna"
+        fallbackSrc="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+        width="30px"
+        maxW="10%"
+      />
       <Flex
         flexDirection="column"
-        fontSize="sm"
+        fontSize="xs"
         width="20%"
+        height="fit-content"
         minWidth="fit-content"
       >
-        <Text> email </Text>
-        <Flex flexDirection="row" alignItems="center" gap="4">
-          <Text fontSize="xs">{review.rating} / 5</Text>
+        <Text fontSize="10px"> {review.email} </Text>
+        <Flex flexDirection="row" alignItems="center" gap="1">
+          <Text>{review.rating} / 5</Text>
           <StarReview noOfStars={review.rating} />
         </Flex>
       </Flex>
-      <Text fontSize="sm">{review.comment}</Text>
+      <Text fontSize="xs">{review.comment}</Text>
       <IconButton
-        aria-label="Search database"
-        icon={<SearchIcon />}
+        marginLeft="auto"
+        aria-label="Delete review"
+        icon={<DeleteIcon />}
         minWidth="fit-content"
         height="fit-content"
         padding="1"

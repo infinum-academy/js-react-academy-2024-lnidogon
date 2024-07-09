@@ -1,6 +1,7 @@
 import { Flex, Text } from '@chakra-ui/react';
+import NextLink from 'next/link';
 
-export const Sidebar = () => {
+export const SidebarNavigation = () => {
   return (
     <Flex
       width="100%"
@@ -15,10 +16,17 @@ export const Sidebar = () => {
         TV shows APP
       </Text>
       <Flex flexDirection="column" fontSize="md" color="white" gap="2">
-        <Text>All shows</Text>
-        <Text>Top rated</Text>
+        <Text as={NextLink} href="/all-shows">
+          All shows
+        </Text>
+        <Text as={NextLink} href="/top-rated">
+          Top rated
+        </Text>
         <Text>My profile</Text>
       </Flex>
+      <Text marginTop="auto" color="white">
+        Log out
+      </Text>
     </Flex>
   );
 };

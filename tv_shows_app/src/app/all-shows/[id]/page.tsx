@@ -7,19 +7,19 @@ import { ReviewForm } from '@/components/features/shows/ReviewForm';
 import { ShowDetais } from '@/components/features/shows/ShowDetails';
 import { ShowReviewSection } from '@/components/features/shows/ShowReviewSection';
 import { ShowSection } from '@/components/features/shows/ShowSection';
-import { Sidebar } from '@/components/shared/Sidebar/Sidebar';
+import { SidebarNavigation } from '@/components/shared/SidebarNavigation/SidebarNavigation';
 import { background, Box, Container, Flex, Text } from '@chakra-ui/react';
 import { stringify } from 'querystring';
 import { useState, useEffect } from 'react';
 
-export default function Home() {
+export default function SpecificShow() {
   return (
     <main>
-      <Flex>
-        <Box width="20%">
-          <Sidebar />
+      <Flex height="100vh">
+        <Box width="15%">
+          <SidebarNavigation />
         </Box>
-        <Box width="80%">
+        <Box width="85%">
           <ShowSection />
         </Box>
       </Flex>

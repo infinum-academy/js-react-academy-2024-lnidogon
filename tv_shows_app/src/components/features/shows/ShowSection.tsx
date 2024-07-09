@@ -48,8 +48,8 @@ export const ShowSection = () => {
   };
   const avgRating = calcAvgRating();
   return (
-    <Box backgroundColor="pink.900" height="auto" padding="4">
-      <Flex flexDirection="column" alignItems="center" gap="3">
+    <Box backgroundColor="pink.900" height="100%" padding="4">
+      <Flex flexDirection="column" alignItems="center" gap="5">
         <ShowDetais
           show={{
             averageRating: avgRating,

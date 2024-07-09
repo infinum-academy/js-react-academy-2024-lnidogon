@@ -27,7 +27,7 @@ export const ShowReviewSection = ({
       >
         Reviews
       </Text>
-      <Flex flexDirection="column" gap="4" width="100%">
+      <Flex flexDirection="column" gap="2" width="100%">
         <ReviewForm onAdd={onAdd} />
         <ReviewList reviews={reviews} onRemove={onRemove} />
       </Flex>
