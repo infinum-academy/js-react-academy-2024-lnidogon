@@ -21,6 +21,7 @@ export const ShowSection = ({ show }: IShowSection) => {
   }, []);
 
   const loadFromLocalStorage = () => {
+    console.log(show.id);
     const lsValue = localStorage.getItem('infinum-reviews-' + show.id);
     if (!lsValue) return tempList;
     return JSON.parse(lsValue);
@@ -29,7 +30,6 @@ export const ShowSection = ({ show }: IShowSection) => {
     localStorage.setItem('infinum-reviews-' + show.id, JSON.stringify(newList));
   };
   function onAdd(review: IReview) {
-    console.log('bruh');
     const newList = [...reviews, review];
     setReviews(newList);
     saveToLocalStorage(newList);

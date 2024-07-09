@@ -1,3 +1,4 @@
+'use client';
 import { SidebarNavigation } from '@/components/shared/SidebarNavigation/SidebarNavigation';
 import { Box, Flex, Spinner } from '@chakra-ui/react';
 import { ShowSection } from '../shows/ShowSection';
@@ -7,7 +8,7 @@ import { getShow } from '@/fetchers/shows';
 
 export const ShowContainer = () => {
   const params = useParams();
-  const { data, error, isLoading } = useSWR(`/api/shows`, () =>
+  const { data, error, isLoading } = useSWR(`/api/shows/${params.id}`, () =>
     getShow(params.id as string)
   );
   if (isLoading || !data) {
@@ -20,6 +21,7 @@ export const ShowContainer = () => {
   if (error) {
     return <div> Ajoj čini se da se nešto jaaaako loše desilo... </div>;
   }
+  console.log(data);
   return (
     <main>
       <Flex height="100vh">

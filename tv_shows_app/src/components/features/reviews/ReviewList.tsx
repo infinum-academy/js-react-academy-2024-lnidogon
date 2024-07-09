@@ -43,7 +43,7 @@ export const ReviewList = ({ reviews, onRemove }: IReviewsList) => {
           onClick={() => changePage(-1)}
         />
         <Text color="white" fontSize="xs">
-          {openPage + 1} od {maxPage}
+          {maxPage ? openPage + 1 + ' od ' + maxPage : 'no reviews'}
         </Text>
 
         <IconButton

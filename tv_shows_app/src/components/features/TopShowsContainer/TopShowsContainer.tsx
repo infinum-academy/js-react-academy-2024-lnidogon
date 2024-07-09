@@ -1,3 +1,4 @@
+'use client';
 import { ShowsList } from '@/components/shared/shows/ShowsList';
 import { SidebarNavigation } from '@/components/shared/SidebarNavigation/SidebarNavigation';
 import { getTopShows } from '@/fetchers/shows';
@@ -6,7 +7,9 @@ import { useParams } from 'next/navigation';
 import useSWR from 'swr';
 
 export const TopShowsContainer = () => {
-  const { data, error, isLoading } = useSWR(`/api/shows`, () => getTopShows());
+  const { data, error, isLoading } = useSWR(`/api/top-rated`, () =>
+    getTopShows()
+  );
   const showList = data?.shows || [];
   if (isLoading || !data) {
     return (

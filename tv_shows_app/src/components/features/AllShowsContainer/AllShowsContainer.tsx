@@ -11,7 +11,6 @@ import useSWR from 'swr';
 export const AllShowsContainer = () => {
   const { data, error, isLoading } = useSWR(`/api/shows`, () => getAllShows());
   const showList = data?.shows || [];
-  console.log(data);
   if (isLoading || !data) {
     return (
       <Flex height="100vh" alignItems="center" justifyContent="space-around">
@@ -19,6 +18,7 @@ export const AllShowsContainer = () => {
       </Flex>
     );
   }
+  console.log('and it aint loading');
 
   if (error) {
     return <div> Ajoj čini se da se nešto jaaaako loše desilo... </div>;
