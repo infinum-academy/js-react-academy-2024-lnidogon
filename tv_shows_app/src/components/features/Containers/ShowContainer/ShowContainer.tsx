@@ -1,10 +1,11 @@
 'use client';
 import { SidebarNavigation } from '@/components/shared/SidebarNavigation/SidebarNavigation';
 import { Box, Flex, Spinner } from '@chakra-ui/react';
-import { ShowSection } from '../shows/ShowSection';
+import { ShowSection } from '../../shows/ShowSection';
 import useSWR from 'swr';
 import { useParams } from 'next/navigation';
 import { getShow } from '@/fetchers/shows';
+import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 
 export const ShowContainer = () => {
   const params = useParams();
@@ -12,11 +13,7 @@ export const ShowContainer = () => {
     getShow(params.id as string)
   );
   if (isLoading || !data) {
-    return (
-      <Flex height="100vh" alignItems="center" justifyContent="space-around">
-        <Spinner />
-      </Flex>
-    );
+    return <LoadingScreen />;
   }
   if (error) {
     return <div> Ajoj čini se da se nešto jaaaako loše desilo... </div>;
@@ -26,7 +23,7 @@ export const ShowContainer = () => {
     <main>
       <Flex height="100vh">
         <Box width="15%">
-          <SidebarNavigation selectedCategory="none" />
+          <SidebarNavigation />
         </Box>
         <Box width="85%">
           <ShowSection show={data} />

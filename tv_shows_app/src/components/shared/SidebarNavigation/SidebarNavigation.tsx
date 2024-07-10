@@ -2,11 +2,8 @@ import { Flex, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useParams } from 'next/navigation';
 
-interface ISidebarNavigation {
-  selectedCategory: string;
-}
-
-export const SidebarNavigation = ({ selectedCategory }: ISidebarNavigation) => {
+export const SidebarNavigation = () => {
+  const path = window.location.pathname;
   return (
     <Flex
       width="100%"
@@ -24,14 +21,14 @@ export const SidebarNavigation = ({ selectedCategory }: ISidebarNavigation) => {
         <Text
           as={NextLink}
           href="/shows"
-          textDecoration={selectedCategory == 'all' ? 'underline' : ''}
+          textDecoration={path == '/shows' ? 'underline' : ''}
         >
           All shows
         </Text>
         <Text
           as={NextLink}
           href="/top-rated"
-          textDecoration={selectedCategory == 'top' ? 'underline' : ''}
+          textDecoration={path == '/top-rated' ? 'underline' : ''}
         >
           Top rated
         </Text>

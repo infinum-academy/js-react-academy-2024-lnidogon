@@ -33,10 +33,6 @@ export const ShowSection = ({ show }: IShowSection) => {
     const newList = [...reviews, review];
     setReviews(newList);
     saveToLocalStorage(newList);
-    const reviewInput = document.getElementById(
-      'review-input'
-    ) as HTMLInputElement;
-    reviewInput.value = '';
   }
   const onRemove = (review: IReview) => {
     let newList = reviews.filter((t) => t !== review);

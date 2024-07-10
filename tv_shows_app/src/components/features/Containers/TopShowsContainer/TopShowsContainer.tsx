@@ -1,4 +1,5 @@
 'use client';
+import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 import { ShowsList } from '@/components/shared/shows/ShowsList';
 import { SidebarNavigation } from '@/components/shared/SidebarNavigation/SidebarNavigation';
 import { getTopShows } from '@/fetchers/shows';
@@ -12,11 +13,7 @@ export const TopShowsContainer = () => {
   );
   const showList = data?.shows || [];
   if (isLoading || !data) {
-    return (
-      <Flex height="100vh" alignItems="center" justifyContent="space-around">
-        <Spinner />
-      </Flex>
-    );
+    return <LoadingScreen />;
   }
 
   if (error) {
@@ -26,7 +23,7 @@ export const TopShowsContainer = () => {
     <main>
       <Flex height="100vh">
         <Box width="15%">
-          <SidebarNavigation selectedCategory="top" />
+          <SidebarNavigation />
         </Box>
         <Box width="85%">
           <ShowsList shows={showList} />

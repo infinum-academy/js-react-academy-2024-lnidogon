@@ -20,7 +20,7 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
   const [clickedNumberOfStars, setClickedNumberOfStars] = useState(0);
   const [selectedNumberOfStars, setNumberOfStars] = useState(0);
   const [locked, setLocked] = useState(false);
-  const OnClickHandler = () => {
+  const onClickHandler = () => {
     const reviewInput = document.getElementById(
       'review-input'
     ) as HTMLInputElement;
@@ -31,6 +31,9 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
       comment: reviewInput.value,
       rating: selectedNumberOfStars,
     });
+    reviewInput.value = '';
+    setClickedNumberOfStars(0);
+    setNumberOfStars(0);
   };
   for (let i = 1; i <= 5; i++) {
     //znam da nije prikladno ali sviđa mi se ovo ime
@@ -84,12 +87,13 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
           onMouseLeave={() => {
             setLocked(false), setNumberOfStars(clickedNumberOfStars);
           }}
+          id="star-input"
         >
           {starArray}
         </Flex>
         <Button
           fontSize="sm"
-          onClick={OnClickHandler}
+          onClick={onClickHandler}
           height="7"
           width="100px"
           borderRadius="15px"
