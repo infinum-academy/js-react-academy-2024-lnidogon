@@ -6,7 +6,7 @@ import { ShowsList } from './ShowsList';
 /**
  * 1) renders all shows
  */
-describe('ShowCard', () => {
+describe('ShowList', () => {
   const mockShows: Array<IShow> = [
     {
       title: 'test1',

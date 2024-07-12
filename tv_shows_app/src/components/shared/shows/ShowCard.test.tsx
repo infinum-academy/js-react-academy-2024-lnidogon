@@ -2,6 +2,7 @@ import { IShow } from '@/typings/show';
 import { ShowCard } from './ShowCard';
 import { render, screen } from '@testing-library/react';
 import { mock } from 'node:test';
+import { Container } from '@chakra-ui/react';
 /**
  * 1) contain correct image element
  * 2) show title is rendered
@@ -16,7 +17,14 @@ describe('ShowCard', () => {
     image_url: 'https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:(',
     average_rating: 15,
   };
-
+  const mockShow2: IShow = {
+    title: 'test',
+    description:
+      'ovo je doslovno test show, svejedno bolji love story od Twilighta',
+    id: '0',
+    image_url: 'https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:(',
+    average_rating: 0,
+  };
   it('should contain correct image element', () => {
     render(<ShowCard show={mockShow} />);
     const image = screen.getByRole('img') as HTMLImageElement;
@@ -29,8 +37,15 @@ describe('ShowCard', () => {
     expect(title).toBeInTheDocument();
   });
   it('should render correct average rating', () => {
-    render(<ShowCard show={mockShow} />);
+    render(
+      <Container>
+        <ShowCard show={mockShow} />
+        <ShowCard show={mockShow2} />
+      </Container>
+    );
     const avgRating = screen.getByText(mockShow.average_rating + '/5');
+    const avgRating2 = screen.getByText('no rating');
     expect(avgRating).toBeInTheDocument();
+    expect(avgRating2).toBeInTheDocument();
   });
 });
