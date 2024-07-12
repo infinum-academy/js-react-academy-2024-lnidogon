@@ -12,5 +12,16 @@ export async function mutator<T>(url: string, { arg }: { arg: T }) {
   }
 
   const responseData = await response.json();
-  return responseData;
+  console.log(responseData);
+  const accessToken = response.headers.get('access-token');
+  const client = response.headers.get('client');
+  const tokenType = response.headers.get('token-type');
+  return {
+    data: responseData,
+    headers: JSON.stringify({
+      accessToken: accessToken,
+      client: client,
+      tokenType: tokenType,
+    }),
+  };
 }

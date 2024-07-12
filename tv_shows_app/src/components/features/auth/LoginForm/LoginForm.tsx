@@ -1,7 +1,7 @@
 'use client';
 import { CustomInput } from '@/components/shared/auth/CustomInput';
 import { SuccessWindow } from '@/components/shared/auth/SuccessWindow';
-import { mutator } from '@/fetchers/mutators';
+import { mutator } from '@/fetchers/mutator';
 import { EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { Button, Flex, Heading, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
@@ -24,8 +24,9 @@ export const LoginForm = () => {
   const onLogin = async (data: ILoginForm) => {
     const response = await trigger(data);
     console.log(response);
-    console.log(response.user.id);
-    localStorage.setItem('tv-shows-uid', response.user.id);
+    console.log(response.data.user.id);
+    localStorage.setItem('tv-shows-uid', response.data.user.id);
+    localStorage.setItem('tv-shows-header', response.headers);
     setLoggedIn(true);
   };
   return (

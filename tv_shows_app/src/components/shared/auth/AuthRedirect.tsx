@@ -1,15 +1,22 @@
 'use client';
 import { useRouter } from 'next/navigation';
 import { LoadingScreen } from '../LoadingScreen/LoadingScreen';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-export const AuthRedirect = () => {
+interface IAuthRedirect {
+  loginFunc: (login: boolean) => void;
+}
+
+export const AuthRedirect = ({ loginFunc }: IAuthRedirect) => {
   const router = useRouter();
   useEffect(() => {
-    console.log(localStorage.getItem('tv-shows-uid'));
-    if (localStorage.getItem('tv-shows-uid') != undefined)
+    if (localStorage.getItem('tv-shows-uid') != undefined) {
       router.push('/shows');
-    else router.push('/login');
+      loginFunc(true);
+    } else {
+      router.push('/login');
+      loginFunc(false);
+    }
   }, []);
   return null;
 };

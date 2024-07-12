@@ -1,12 +1,14 @@
 import { Flex, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 export const SidebarNavigation = () => {
-  const [path, setPath] = useState(window.location.pathname);
+  const router = useRouter();
+  const pathname = usePathname();
+  const [path, setPath] = useState(pathname);
   useEffect(() => {
-    setPath(window.location.pathname);
+    setPath(pathname);
   }, []);
   return (
     <Flex
@@ -38,7 +40,18 @@ export const SidebarNavigation = () => {
         </Text>
         <Text>My profile</Text>
       </Flex>
-      <Text marginTop="auto" color="white">
+      <Text
+        marginTop="auto"
+        color="white"
+        as="button"
+        marginRight="auto"
+        _hover={{ color: 'red' }}
+        onClick={() => {
+          localStorage.removeItem('tv-shows-uid'),
+            localStorage.removeItem('tv-shows-header');
+          router.push('/login');
+        }}
+      >
         Log out
       </Text>
     </Flex>

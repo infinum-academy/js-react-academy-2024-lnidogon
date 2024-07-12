@@ -1,6 +1,6 @@
 'use client';
 import { CustomInput } from '@/components/shared/auth/CustomInput';
-import { mutator } from '@/fetchers/mutators';
+import { mutator } from '@/fetchers/mutator';
 import { EmailIcon, LockIcon, RepeatIcon } from '@chakra-ui/icons';
 import NextLink from 'next/link';
 import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
