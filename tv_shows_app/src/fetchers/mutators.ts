@@ -10,5 +10,7 @@ export async function mutator<T>(url: string, { arg }: { arg: T }) {
   if (!response.ok) {
     throw new Error(`Dogodila se greška kod mutiranja na url: ${url}`);
   }
-  return await response.json;
+
+  const responseData = await response.json();
+  return responseData;
 }

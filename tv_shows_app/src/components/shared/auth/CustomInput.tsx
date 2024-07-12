@@ -5,6 +5,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Text,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 
