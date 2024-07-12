@@ -1,19 +1,35 @@
-import { Container, Flex, Image } from "@chakra-ui/react";
+import { StarIcon } from "@chakra-ui/icons";
+import { Container, Flex, Icon, Image } from "@chakra-ui/react";
 
 interface IStarReview {
   noOfStars: number;
+  isStatic: boolean;
+  onChange: (index: number) => void;
+  onHover: (index: number) => void;
 }
 
-export const StarReview = ({ noOfStars }: IStarReview) => {
+export const StarReview = (starReview: IStarReview) => {
   let tempList = [];
   for (let i = 1; i <= 5; i++) {
     tempList.push(
-      <Image
-        src={i <= noOfStars ? "/filled-star.png" : "/empty-star.png"}
-        fallbackSrc="https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:("
-        alt="Nema slike"
+      <StarIcon
+        color={i <= starReview.noOfStars ? "yellow" : "gray"}
         width="15%"
-        key={"slika-" + i}
+        key={i}
+        onClick={
+          starReview.isStatic
+            ? () => {}
+            : () => {
+                starReview.onChange(i);
+              }
+        }
+        onMouseOver={
+          starReview.isStatic
+            ? () => {}
+            : () => {
+                starReview.onHover(i);
+              }
+        }
       />
     );
   }

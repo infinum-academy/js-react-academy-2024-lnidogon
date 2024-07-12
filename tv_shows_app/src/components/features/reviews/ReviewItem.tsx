@@ -29,7 +29,12 @@ export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
     >
       <Text>{review.comment}</Text>
       <Text>{review.rating} / 5</Text>
-      <StarReview noOfStars={review.rating} />
+      <StarReview
+        noOfStars={review.rating}
+        isStatic={true}
+        onChange={() => {}}
+        onHover={() => {}}
+      />
       <Button
         width="18%"
         minWidth="fit-content"

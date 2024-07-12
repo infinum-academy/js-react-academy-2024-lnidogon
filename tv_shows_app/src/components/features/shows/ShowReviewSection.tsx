@@ -16,7 +16,7 @@ export const ShowReviewSection = ({
   onRemove,
 }: IShowReviewSectionProps) => {
   return (
-    <Flex flexDirection={"column"} gap={"7"} width={"50%"} maxWidth={"500px"}>
+    <Flex flexDirection="column" gap="7" width="50%" maxWidth="500px">
       <Heading
         color="white"
         fontWeight="700"

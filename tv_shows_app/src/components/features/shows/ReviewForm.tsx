@@ -5,9 +5,11 @@ import {
   Textarea,
   Image,
   Container,
+  Text,
 } from "@chakra-ui/react";
 import { IReview } from "../reviews/ReviewItem";
 import { useState } from "react";
+import { StarReview } from "../reviews/StarReview";
 
 export interface IReviewFormProps {
   onAdd: (review: IReview) => void;
@@ -15,10 +17,11 @@ export interface IReviewFormProps {
 
 export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
   let starArray = [];
-  let locked = false;
-  const [selectedNumberOfStars, setNumberOfStars] = useState(0);
+  const [locked, setLocked] = useState(false);
+  const [selectedNumberOfStars, setSelectedNumberOfStars] = useState(0);
+  const [hoveredNumberOfStars, setHoveredNumberOfStars] = useState(0);
 
-  const OnClickHandler = () => {
+  const onClickHandler = () => {
     const reviewInput = document.getElementById(
       "review-input"
     ) as HTMLInputElement;
@@ -29,25 +32,14 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
       comment: reviewInput.value,
       rating: selectedNumberOfStars,
     });
+    setSelectedNumberOfStars(0);
   };
-  for (let i = 1; i <= 5; i++) {
-    //znam da nije prikladno ali sviđa mi se ovo ime
-    const starFragment = (
-      <Image
-        src={(i <= selectedNumberOfStars ? "filled" : "empty") + "-star.png"}
-        width="15%"
-        onClick={() => {
-          locked = true;
-        }}
-        onMouseOver={() => {
-          if (!locked) setNumberOfStars(i);
-        }}
-        key={i}
-      />
-    );
-    starArray.push(starFragment);
-  }
-
+  const onClick = (index: number) => {
+    setSelectedNumberOfStars(index);
+  };
+  const onHover = (index: number) => {
+    setHoveredNumberOfStars(index);
+  };
   return (
     <Flex flexDirection="column" gap="5" width="100%">
       <Textarea
@@ -64,17 +56,19 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
         fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
       />
       <Flex
-        flexDirection="row"
-        width="40%"
-        gap="1"
-        onMouseLeave={() => {
-          locked = false;
-        }}
+        width="100%"
+        onMouseLeave={() => setLocked(true)}
+        onMouseEnter={() => setLocked(false)}
       >
-        {starArray}
+        <StarReview
+          noOfStars={locked ? selectedNumberOfStars : hoveredNumberOfStars}
+          isStatic={false}
+          onChange={onClick}
+          onHover={onHover}
+        />
       </Flex>
       <Button
-        onClick={OnClickHandler}
+        onClick={onClickHandler}
         width="16%"
         borderRadius="15px"
         _hover={{ backgroundColor: "green.300" }}
