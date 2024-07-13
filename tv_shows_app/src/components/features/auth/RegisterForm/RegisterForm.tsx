@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import useSWRMutation from 'swr/mutation';
 import { useState } from 'react';
 import { SuccessWindow } from '@/components/shared/auth/SuccessWindow';
+import { PasswordInput } from '@/components/shared/auth/PasswordInput';
 
 interface IRegisterForm {
   email: string;
@@ -76,18 +77,16 @@ export const RegisterForm = () => {
             type="email"
             icon={<EmailIcon color="gray.300" />}
           />
-          <CustomInput
+          <PasswordInput
             disable={isSubmitting}
             thatPart={register('password')}
             placeholder="Password"
-            type="password"
             icon={<LockIcon color="gray.300" />}
           />
-          <CustomInput
+          <PasswordInput
             disable={isSubmitting}
             thatPart={register('password_confirmation')}
             placeholder="Confirm password"
-            type="password"
             icon={<RepeatIcon color="gray.300" />}
           />
           {errorMesssage && (

@@ -1,5 +1,6 @@
 'use client';
 import { CustomInput } from '@/components/shared/auth/CustomInput';
+import { PasswordInput } from '@/components/shared/auth/PasswordInput';
 import { SuccessWindow } from '@/components/shared/auth/SuccessWindow';
 import { mutator } from '@/fetchers/mutator';
 import { EmailIcon, LockIcon } from '@chakra-ui/icons';
@@ -65,11 +66,10 @@ export const LoginForm = () => {
             type="email"
             icon={<EmailIcon color="gray.300" />}
           />
-          <CustomInput
+          <PasswordInput
             disable={isSubmitting}
             thatPart={register('password')}
             placeholder="Password"
-            type="password"
             icon={<LockIcon color="gray.300" />}
           />
           <Button
