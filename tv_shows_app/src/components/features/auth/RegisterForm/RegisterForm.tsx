@@ -3,7 +3,7 @@ import { CustomInput } from '@/components/shared/auth/CustomInput';
 import { mutator } from '@/fetchers/mutator';
 import { EmailIcon, LockIcon, RepeatIcon } from '@chakra-ui/icons';
 import NextLink from 'next/link';
-import { Box, Button, Flex, Heading, Text } from '@chakra-ui/react';
+import { Box, Button, Flex, Heading, Spinner, Text } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import useSWRMutation from 'swr/mutation';
 import { useState } from 'react';
@@ -17,7 +17,11 @@ interface IRegisterForm {
 
 export const RegisterForm = () => {
   const [registred, setRegistred] = useState(false);
-  const { register, handleSubmit } = useForm<IRegisterForm>();
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<IRegisterForm>();
   const [errorMesssage, setErrorMessage] = useState('');
   const { trigger } = useSWRMutation(
     'https://tv-shows.infinum.academy/users',
@@ -66,18 +70,21 @@ export const RegisterForm = () => {
             TV shows APP
           </Heading>
           <CustomInput
+            disable={isSubmitting}
             thatPart={register('email')}
             placeholder="Email"
             type="email"
             icon={<EmailIcon color="gray.300" />}
           />
           <CustomInput
+            disable={isSubmitting}
             thatPart={register('password')}
             placeholder="Password"
             type="password"
             icon={<LockIcon color="gray.300" />}
           />
           <CustomInput
+            disable={isSubmitting}
             thatPart={register('password_confirmation')}
             placeholder="Confirm password"
             type="password"
@@ -90,6 +97,8 @@ export const RegisterForm = () => {
           )}
           <Button
             type="submit"
+            isLoading={isSubmitting}
+            loadingText="Registering"
             marginTop="8"
             backgroundColor="orange.100"
             _hover={{ bg: 'green.200' }}

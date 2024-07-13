@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form';
 
 interface ICustomInput {
   thatPart: any;
+  disable: any;
   placeholder: string;
   icon: any;
   type: string;
@@ -26,6 +27,7 @@ export const CustomInput = (params: ICustomInput) => {
       />
       <FormControl textColor="white">
         <Input
+          isDisabled={params.disable}
           paddingLeft="35px"
           {...params.thatPart}
           required

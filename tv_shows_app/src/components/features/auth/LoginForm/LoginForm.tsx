@@ -3,7 +3,7 @@ import { CustomInput } from '@/components/shared/auth/CustomInput';
 import { SuccessWindow } from '@/components/shared/auth/SuccessWindow';
 import { mutator } from '@/fetchers/mutator';
 import { EmailIcon, LockIcon } from '@chakra-ui/icons';
-import { Button, Flex, Heading, Text } from '@chakra-ui/react';
+import { Button, Flex, Heading, Spinner, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -16,7 +16,11 @@ interface ILoginForm {
 
 export const LoginForm = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const { register, handleSubmit } = useForm<ILoginForm>();
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<ILoginForm>();
   const { trigger } = useSWRMutation(
     'https://tv-shows.infinum.academy/users/sign_in',
     mutator<ILoginForm>
@@ -55,18 +59,22 @@ export const LoginForm = () => {
             TV shows APP
           </Heading>
           <CustomInput
+            disable={isSubmitting}
             thatPart={register('email')}
             placeholder="Email"
             type="email"
             icon={<EmailIcon color="gray.300" />}
           />
           <CustomInput
+            disable={isSubmitting}
             thatPart={register('password')}
             placeholder="Password"
             type="password"
             icon={<LockIcon color="gray.300" />}
           />
           <Button
+            isLoading={isSubmitting}
+            loadingText="Logging in"
             type="submit"
             marginTop="8"
             backgroundColor="orange.100"

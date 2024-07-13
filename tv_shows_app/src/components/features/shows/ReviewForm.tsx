@@ -6,34 +6,46 @@ import {
   Image,
   Container,
   Text,
+  FormControl,
+  Spinner,
 } from '@chakra-ui/react';
 import { IReview } from '../reviews/ReviewItem';
 import { useState } from 'react';
 import { setEngine } from 'crypto';
+import { useForm } from 'react-hook-form';
+import { Form } from 'react-router-dom';
 
 export interface IReviewFormProps {
   onAdd: (review: IReview) => void;
 }
 
+interface IReviewFormInputs {
+  comment: string;
+  rating: number;
+}
+
 export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
   let starArray = [];
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<IReviewFormInputs>({ defaultValues: { comment: '', rating: 0 } });
   const [clickedNumberOfStars, setClickedNumberOfStars] = useState(0);
   const [selectedNumberOfStars, setNumberOfStars] = useState(0);
   const [locked, setLocked] = useState(false);
-  const onClickHandler = () => {
-    const reviewInput = document.getElementById(
-      'review-input'
-    ) as HTMLInputElement;
-    if (reviewInput.value == '' || selectedNumberOfStars == 0) return;
+  const onSubmitHandler = (data: IReviewFormInputs) => {
+    if (data.rating == 0) return;
     onAdd({
       email: '',
       avatarUrl: '',
-      comment: reviewInput.value,
-      rating: selectedNumberOfStars,
+      comment: data.comment,
+      rating: data.rating,
     });
-    reviewInput.value = '';
     setClickedNumberOfStars(0);
     setNumberOfStars(0);
+    setValue('rating', 0);
   };
   for (let i = 1; i <= 5; i++) {
     //znam da nije prikladno ali sviđa mi se ovo ime
@@ -46,6 +58,7 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
         maxWidth="15%"
         onClick={() => {
           setLocked(true), setClickedNumberOfStars(i);
+          setValue('rating', i);
         }}
         _hover={{ cursor: locked ? '' : 'pointer' }}
         onMouseOver={() => {
@@ -57,19 +70,32 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
     starArray.push(starFragment);
   }
   return (
-    <Flex flexDirection="column" gap="2" width="100%" overflow="hidden">
-      <Textarea
-        backgroundColor="orange.100"
-        placeholder="Add review..."
-        id="review-input"
-        width="100%"
-        fontSize="sm"
-        padding="2"
-        height="40px"
-        minHeight="40px"
-        borderRadius="7"
-        fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
-      />
+    <Flex
+      flexDirection="column"
+      gap="2"
+      width="100%"
+      overflow="hidden"
+      as="form"
+      onSubmit={handleSubmit(onSubmitHandler)}
+    >
+      <FormControl>
+        <Textarea
+          {...register('comment')}
+          required
+          backgroundColor="orange.100"
+          placeholder="Add review..."
+          id="review-input"
+          width="100%"
+          fontSize="sm"
+          padding="2"
+          height="40px"
+          minHeight="40px"
+          borderRadius="7"
+          fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
+          isDisabled={isSubmitting}
+        />
+      </FormControl>
+
       <Flex
         flexDirection="row"
         alignItems="center"
@@ -80,20 +106,24 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
         <Text color="white" fontSize="sm">
           Rating:
         </Text>
-        <Flex
-          flexDirection="row"
-          width="40%"
-          gap="1"
-          onMouseLeave={() => {
-            setLocked(false), setNumberOfStars(clickedNumberOfStars);
-          }}
-          id="star-input"
-        >
-          {starArray}
-        </Flex>
+        <FormControl>
+          <Flex
+            flexDirection="row"
+            width="40%"
+            gap="1"
+            onMouseLeave={() => {
+              setLocked(false);
+              setNumberOfStars(clickedNumberOfStars);
+            }}
+            id="star-input"
+          >
+            {starArray}
+          </Flex>
+        </FormControl>
         <Button
+          isDisabled={isSubmitting}
+          type="submit"
           fontSize="sm"
-          onClick={onClickHandler}
           height="7"
           width="100px"
           borderRadius="15px"
@@ -101,7 +131,7 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
           backgroundColor="orange.100"
           marginLeft="auto"
         >
-          Post
+          {isSubmitting ? <Spinner /> : 'Post'}
         </Button>
       </Flex>
     </Flex>
