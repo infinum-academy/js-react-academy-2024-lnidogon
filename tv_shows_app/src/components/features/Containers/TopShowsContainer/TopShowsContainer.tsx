@@ -2,14 +2,30 @@
 import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 import { ShowsList } from '@/components/shared/shows/ShowsList';
 import { SidebarNavigation } from '@/components/shared/SidebarNavigation/SidebarNavigation';
+import { getMutator } from '@/fetchers/getMutator';
 import { getTopShows } from '@/fetchers/shows';
 import { Box, Flex, Spinner } from '@chakra-ui/react';
 import { useParams } from 'next/navigation';
 import useSWR from 'swr';
+import useSWRMutation from 'swr/mutation';
+
+interface IGetAllShowsParams {
+  page: string;
+  items: string;
+}
 
 export const TopShowsContainer = () => {
+  const { trigger } = useSWRMutation(
+    'https://tv-shows.infinum.academy/shows/top_rated',
+    getMutator<IGetAllShowsParams>
+  );
+  async function getTopShows(params: IGetAllShowsParams) {
+    const response = await trigger(params);
+    return response.data;
+  }
+
   const { data, error, isLoading } = useSWR(`/api/top-rated`, () =>
-    getTopShows()
+    getTopShows({ page: '1', items: '20' })
   );
   const showList = data?.shows || [];
   if (isLoading || !data) {
