@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TV show app </title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id = "page-container">
+        <span class = "small-title">
+            TV shows APP
+        </span>
+        <div id = "show-display">
+            <img src="https://m.media-amazon.com/images/S/pv-target-images/e56c18e08e0a07c8d4ee65f45be64cefe6b070992a84182dd5ba35eb7cfc6510.jpg" alt="slika nije učitana">
+            <div>
+                <span class = "small-title">
+                    Friends
+                </span>
+                <span>
+                    Follows the personal and professional lives of six twenty to thirty year-old friends living in the Manhattan borough of New York City.
+                </span>
+                <span id = "c-rank">
+                    Ocjena
+                </span>
+            </div>
+        </div>
+        <form>
+            <span class = "small-title">Reviews</span>
+            <textarea id = "review-text-input", placeholder="Add review"></textarea>
+            <div id = "review-rank-input">
+                <span> Ranking: </span>
+                <img src="empty-star.png" alt="star" onclick="selectAStar(1)"> 
+                <img src="empty-star.png" alt="star" onclick="selectAStar(2)"> 
+                <img src="empty-star.png" alt="star" onclick="selectAStar(3)"> 
+                <img src="empty-star.png" alt="star" onclick="selectAStar(4)"> 
+                <img src="empty-star.png" alt="star" onclick="selectAStar(5)">                
+            </div>
+            <input type="button" value="Post" onclick="addReview()">
+        </form>
+        <div id = "reviews">
+        </div>
+
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
