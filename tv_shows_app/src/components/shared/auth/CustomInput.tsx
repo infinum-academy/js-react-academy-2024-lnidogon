@@ -7,7 +7,6 @@ import {
   InputLeftElement,
   Text,
 } from '@chakra-ui/react';
-import { useForm } from 'react-hook-form';
 
 interface ICustomInput {
   thatPart: any;
@@ -15,6 +14,7 @@ interface ICustomInput {
   placeholder: string;
   icon: any;
   type: string;
+  testId: string;
 }
 
 export const CustomInput = (params: ICustomInput) => {
@@ -37,6 +37,7 @@ export const CustomInput = (params: ICustomInput) => {
           _placeholder={{ color: 'white' }}
           borderRadius="20px"
           size="md"
+          data-testid={params.testId}
         />
       </FormControl>
     </InputGroup>

@@ -10,10 +10,8 @@ interface IAuthRedirect {
 export const AuthRedirect = ({ loginFunc }: IAuthRedirect) => {
   const router = useRouter();
   useEffect(() => {
-    if (localStorage.getItem('tv-shows-uid') != undefined) {
-      router.push('/shows');
-      loginFunc(true);
-    } else {
+    if (localStorage.getItem('tv-shows-uid') != undefined) loginFunc(true);
+    else {
       router.push('/login');
       loginFunc(false);
     }

@@ -76,18 +76,21 @@ export const RegisterForm = () => {
             placeholder="Email"
             type="email"
             icon={<EmailIcon color="gray.300" />}
+            testId="email"
           />
           <PasswordInput
             disable={isSubmitting}
             thatPart={register('password')}
             placeholder="Password"
             icon={<LockIcon color="gray.300" />}
+            testId="password"
           />
           <PasswordInput
             disable={isSubmitting}
             thatPart={register('password_confirmation')}
             placeholder="Confirm password"
             icon={<RepeatIcon color="gray.300" />}
+            testId="password-confirmation"
           />
           {errorMesssage && (
             <Text color="white" fontSize="small">

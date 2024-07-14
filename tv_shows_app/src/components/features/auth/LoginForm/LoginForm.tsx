@@ -28,8 +28,6 @@ export const LoginForm = () => {
   );
   const onLogin = async (data: ILoginForm) => {
     const response = await trigger(data);
-    console.log(response);
-    console.log(response.data.user.id);
     localStorage.setItem('tv-shows-uid', response.data.user.id);
     localStorage.setItem('tv-shows-header', response.headers);
     setLoggedIn(true);
@@ -65,12 +63,14 @@ export const LoginForm = () => {
             placeholder="Email"
             type="email"
             icon={<EmailIcon color="gray.300" />}
+            testId="email"
           />
           <PasswordInput
             disable={isSubmitting}
             thatPart={register('password')}
             placeholder="Password"
             icon={<LockIcon color="gray.300" />}
+            testId="password"
           />
           <Button
             isLoading={isSubmitting}

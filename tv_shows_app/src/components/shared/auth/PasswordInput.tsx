@@ -18,6 +18,7 @@ interface IPasswordInput {
   disable: any;
   placeholder: string;
   icon: any;
+  testId: string;
 }
 
 export const PasswordInput = (params: IPasswordInput) => {
@@ -41,6 +42,7 @@ export const PasswordInput = (params: IPasswordInput) => {
           _placeholder={{ color: 'white' }}
           borderRadius="20px"
           size="md"
+          data-testId={params.testId}
         />
       </FormControl>
       <InputRightElement fontSize="md">
