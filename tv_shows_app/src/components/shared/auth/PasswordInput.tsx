@@ -36,7 +36,7 @@ export const PasswordInput = (params: IPasswordInput) => {
           {...params.thatPart}
           required
           placeholder={params.placeholder}
-          type={hidden ? 'password' : 'email'}
+          type={hidden ? 'password' : 'text'}
           color="white"
           _placeholder={{ color: 'white' }}
           borderRadius="20px"

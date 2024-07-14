@@ -6,6 +6,7 @@ interface IShowDetailsProps {
 }
 
 export const ShowDetais = ({ show }: IShowDetailsProps) => {
+  console.log(show);
   return (
     <Flex
       height="fit-content"

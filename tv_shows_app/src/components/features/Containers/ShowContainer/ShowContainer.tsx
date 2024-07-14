@@ -40,7 +40,7 @@ export const ShowContainer = () => {
           <SidebarNavigation />
         </Box>
         <Box width="85%">
-          <ShowSection show={data.shows} />
+          <ShowSection show={data.show} />
         </Box>
       </Flex>
     </main>
