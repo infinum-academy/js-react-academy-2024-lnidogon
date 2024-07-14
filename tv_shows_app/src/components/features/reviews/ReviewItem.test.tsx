@@ -44,5 +44,6 @@ describe('ReviewItem', () => {
     deleteButton.click();
     expect(mockOnDelete).toHaveBeenCalled();
     expect(mockOnDelete).toHaveBeenCalledTimes(1);
+    expect(mockOnDelete).toHaveBeenCalledWith(mockReview);
   });
 });
