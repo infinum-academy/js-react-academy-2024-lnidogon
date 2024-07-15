@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { setEngine } from 'crypto';
 import { useForm } from 'react-hook-form';
 import { Form } from 'react-router-dom';
+import { StarReview } from '@/components/features/reviews/StarReview';
 
 export interface IReviewFormProps {
   onAdd: (review: IReview) => void;
@@ -32,10 +33,23 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
     setValue,
     formState: { errors, isSubmitting },
   } = useForm<IReviewFormInputs>({ defaultValues: { comment: '', rating: 0 } });
-  const [clickedNumberOfStars, setClickedNumberOfStars] = useState(0);
-  const [selectedNumberOfStars, setNumberOfStars] = useState(0);
   const [locked, setLocked] = useState(false);
+
+  const [selectedNumberOfStars, setSelectedNumberOfStars] = useState(0);
+  const [hoveredNumberOfStars, setHoveredNumberOfStars] = useState(0);
+
+  const onClick = (index: number) => {
+    setSelectedNumberOfStars(index);
+    setValue('rating', index);
+    setLocked(true);
+  };
+
+  const onHover = (index: number) => {
+    setHoveredNumberOfStars(index);
+  };
+
   const onSubmitHandler = (data: IReviewFormInputs) => {
+    console.log(data, selectedNumberOfStars, hoveredNumberOfStars);
     if (data.rating == 0) return;
     onAdd({
       email: '',
@@ -43,32 +57,10 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
       comment: data.comment,
       rating: data.rating,
     });
-    setClickedNumberOfStars(0);
-    setNumberOfStars(0);
+    setSelectedNumberOfStars(0);
     setValue('rating', 0);
   };
-  for (let i = 1; i <= 5; i++) {
-    //znam da nije prikladno ali sviđa mi se ovo ime
-    const starFragment = (
-      <Image
-        src={
-          '/' + (i <= selectedNumberOfStars ? 'filled' : 'empty') + '-star.png'
-        }
-        width="20px"
-        maxWidth="15%"
-        onClick={() => {
-          setLocked(true), setClickedNumberOfStars(i);
-          setValue('rating', i);
-        }}
-        _hover={{ cursor: locked ? '' : 'pointer' }}
-        onMouseOver={() => {
-          if (!locked) setNumberOfStars(i);
-        }}
-        key={i}
-      />
-    );
-    starArray.push(starFragment);
-  }
+
   return (
     <Flex
       flexDirection="column"
@@ -113,11 +105,16 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
             gap="1"
             onMouseLeave={() => {
               setLocked(false);
-              setNumberOfStars(clickedNumberOfStars);
+              setSelectedNumberOfStars(hoveredNumberOfStars);
             }}
             id="star-input"
           >
-            {starArray}
+            <StarReview
+              noOfStars={locked ? selectedNumberOfStars : hoveredNumberOfStars}
+              isStatic={false}
+              onChange={onClick}
+              onHover={onHover}
+            />
           </Flex>
         </FormControl>
         <Button

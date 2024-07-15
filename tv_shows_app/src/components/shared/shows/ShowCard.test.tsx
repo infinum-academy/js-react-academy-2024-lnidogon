@@ -37,15 +37,13 @@ describe('ShowCard', () => {
     expect(title).toBeInTheDocument();
   });
   it('should render correct average rating', () => {
-    render(
-      <Container>
-        <ShowCard show={mockShow} />
-        <ShowCard show={mockShow2} />
-      </Container>
-    );
+    render(<ShowCard show={mockShow} />);
     const avgRating = screen.getByText(mockShow.average_rating + '/5');
-    const avgRating2 = screen.getByText('no rating');
     expect(avgRating).toBeInTheDocument();
-    expect(avgRating2).toBeInTheDocument();
+  });
+  it('should display no rating when appropriate', () => {
+    render(<ShowCard show={mockShow2} />);
+    const avgRating = screen.getByText('no rating');
+    expect(avgRating).toBeInTheDocument();
   });
 });

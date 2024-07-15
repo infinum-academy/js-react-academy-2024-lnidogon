@@ -1,5 +1,5 @@
 'use client';
 export default function HomeRedirect() {
-  window.location.href = '/shows';
-  return <></>;
+	window.location.href = '/shows';
+	return <></>;
 }
