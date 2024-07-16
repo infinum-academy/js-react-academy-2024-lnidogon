@@ -1,4 +1,12 @@
-import { Button, Flex, IconButton, Text, Image } from '@chakra-ui/react';
+import {
+  Button,
+  Flex,
+  IconButton,
+  Text,
+  Image,
+  Container,
+  Box,
+} from '@chakra-ui/react';
 import { StarReview } from './StarReview';
 import { DeleteIcon, SearchIcon } from '@chakra-ui/icons';
 
@@ -50,12 +58,14 @@ export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
         <Text fontSize="10px"> {review.email} </Text>
         <Flex flexDirection="row" alignItems="center" gap="1">
           <Text>{review.rating} / 5</Text>
-          <StarReview
-            noOfStars={review.rating}
-            isStatic={true}
-            onChange={() => {}}
-            onHover={() => {}}
-          />
+          <Box width="30%">
+            <StarReview
+              noOfStars={review.rating}
+              isStatic={true}
+              onChange={() => {}}
+              onHover={() => {}}
+            />
+          </Box>
         </Flex>
       </Flex>
       <Text fontSize="xs">{review.comment}</Text>

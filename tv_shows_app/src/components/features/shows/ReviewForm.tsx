@@ -98,11 +98,14 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
         <FormControl>
           <Flex
             flexDirection="row"
-            width="40%"
+            width="20%"
             gap="1"
-            onMouseLeave={() => {
+            onMouseEnter={() => {
               setLocked(false);
-              setSelectedNumberOfStars(hoveredNumberOfStars);
+            }}
+            onMouseLeave={() => {
+              setLocked(true);
+              setHoveredNumberOfStars(0);
             }}
             id="star-input"
           >
