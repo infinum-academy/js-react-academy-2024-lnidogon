@@ -39,6 +39,7 @@ export const ShowSection = ({ show }: IShowSection) => {
     getMutator<IListReviewsParams>,
     {
       onSuccess: (data) => {
+        console.log(data);
         setReviews(data.reviews);
       },
     }

@@ -20,6 +20,7 @@ export interface IReview {
   comment: string;
   rating: number;
   id: number;
+  user?: any;
 }
 
 interface IRemoveReviewParams {
@@ -95,15 +96,19 @@ export const ReviewItem = ({ review, showId, onRemove }: IReviewItemProps) => {
         </Flex>
       </Flex>
       <Text fontSize="xs">{review.comment}</Text>
-      <IconButton
-        backgroundColor="orange.100"
-        _hover={{ backgroundColor: 'red.300' }}
-        marginLeft="auto"
-        aria-label="Delete review"
-        size="sm"
-        icon={<DeleteIcon />}
-        onClick={onClickHandler}
-      />
+      {localStorage.getItem('tv-shows-uid') == review.user?.id ? (
+        <IconButton
+          backgroundColor="orange.100"
+          _hover={{ backgroundColor: 'red.300' }}
+          marginLeft="auto"
+          aria-label="Delete review"
+          size="sm"
+          icon={<DeleteIcon />}
+          onClick={onClickHandler}
+        />
+      ) : (
+        <></>
+      )}
     </Flex>
   );
 };
