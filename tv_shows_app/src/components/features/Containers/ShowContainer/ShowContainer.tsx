@@ -14,7 +14,7 @@ import { swrKeys } from '@/fetchers/swrKeys';
 export const ShowContainer = () => {
   const params = useParams();
   const { trigger } = useSWRMutation(
-    swrKeys.show + `/${params.id}`,
+    swrKeys.show(params.id as string),
     getMutator
   );
   async function getShow() {

@@ -12,7 +12,7 @@ describe('ShowList', () => {
       title: 'test1',
       description:
         'ovo je doslovno test show, svejedno bolji love story od Twilighta',
-      id: '0',
+      id: 0,
       image_url: 'https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:(',
       average_rating: 15,
     },
@@ -20,7 +20,7 @@ describe('ShowList', () => {
       title: 'test2',
       description:
         'ovo je doslovno test show, svejedno bolji love story od Twilighta',
-      id: '0',
+      id: 0,
       image_url: 'https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:(',
       average_rating: 15,
     },
@@ -28,7 +28,7 @@ describe('ShowList', () => {
       title: 'test3',
       description:
         'ovo je doslovno test show, svejedno bolji love story od Twilighta',
-      id: '0',
+      id: 0,
       image_url: 'https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:(',
       average_rating: 15,
     },
@@ -36,7 +36,7 @@ describe('ShowList', () => {
       title: 'test4',
       description:
         'ovo je doslovno test show, svejedno bolji love story od Twilighta',
-      id: '0',
+      id: 0,
       image_url: 'https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:(',
       average_rating: 15,
     },

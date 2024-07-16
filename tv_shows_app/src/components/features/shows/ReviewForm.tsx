@@ -13,7 +13,8 @@ import { Form } from 'react-router-dom';
 import { StarReview } from '@/components/features/reviews/StarReview';
 
 export interface IReviewFormProps {
-  onAdd: (review: IReview) => void;
+  onAdd: (review: IReview, showId: number) => void;
+  showId: number;
 }
 
 interface IReviewFormInputs {
@@ -21,8 +22,7 @@ interface IReviewFormInputs {
   rating: number;
 }
 
-export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
-  let starArray = [];
+export const ReviewForm = ({ onAdd, showId }: IReviewFormProps) => {
   const {
     register,
     handleSubmit,
@@ -46,12 +46,16 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
   const onSubmitHandler = (data: IReviewFormInputs) => {
     console.log(data, selectedNumberOfStars, hoveredNumberOfStars);
     if (data.rating == 0) return;
-    onAdd({
-      email: '',
-      avatarUrl: '',
-      comment: data.comment,
-      rating: data.rating,
-    });
+    onAdd(
+      {
+        email: '',
+        avatarUrl: '',
+        comment: data.comment,
+        rating: data.rating,
+        id: 0,
+      },
+      showId
+    );
     setSelectedNumberOfStars(0);
     setLocked(false);
     setHoveredNumberOfStars(0);

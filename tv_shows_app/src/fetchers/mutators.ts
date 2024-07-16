@@ -54,3 +54,50 @@ export async function getMutator<T>(url: string, { arg }: { arg: T }) {
   }
   return await response.json();
 }
+
+export async function createReviewMutator<T>(url: string, { arg }: { arg: T }) {
+  const headerJSON = localStorage.getItem('tv-shows-header');
+  if (headerJSON == null) throw new Error('Problem while accessing user data');
+  const header = JSON.parse(headerJSON);
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'aplication/json',
+      'access-token': header.accessToken,
+      client: header.client,
+      'token-type': header.tokenType,
+      uid: header.uid,
+      expiry: header.expiry,
+    },
+    body: JSON.stringify(arg),
+  });
+  if (!response.ok) {
+    throw new Error(`Dogodila se greška kod mutiranja na url: ${url}`);
+  }
+  return await response.json();
+}
+
+export async function deleteReviewMutator<T>(url: string, { arg }: { arg: T }) {
+  const headerJSON = localStorage.getItem('tv-shows-header');
+  if (headerJSON == null) throw new Error('Problem while accessing user data');
+  const header = JSON.parse(headerJSON);
+  const response = await fetch(url, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'aplication/json',
+      'access-token': header.accessToken,
+      client: header.client,
+      'token-type': header.tokenType,
+      uid: header.uid,
+      expiry: header.expiry,
+    },
+    body: JSON.stringify(arg),
+  });
+  if (response.status == 204) return;
+  if (!response.ok) {
+    throw new Error(`Dogodila se greška kod mutiranja na url: ${url}`);
+  }
+  return await response.json();
+}

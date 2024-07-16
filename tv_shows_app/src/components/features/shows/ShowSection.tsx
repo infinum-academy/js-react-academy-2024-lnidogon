@@ -4,50 +4,80 @@ import { IReview } from '../reviews/ReviewItem';
 import { useEffect, useState } from 'react';
 import { ShowReviewSection } from './ShowReviewSection';
 import { IShow } from '@/typings/show';
+import { swrKeys } from '@/fetchers/swrKeys';
+import {
+  createReviewMutator,
+  deleteReviewMutator,
+  getMutator,
+} from '@/fetchers/mutators';
+import useSWRMutation from 'swr/mutation';
+import useSWR, { mutate } from 'swr';
+import { create } from 'domain';
 
 interface IShowSection {
   show: IShow;
 }
 
+interface ICreateReviewParams {
+  comment: string;
+  rating: number;
+  show_id: number;
+}
+
+interface IListReviewsParams {
+  show_id: number;
+}
+
 export const ShowSection = ({ show }: IShowSection) => {
-  let tempList = [
-    { email: '', avatarUrl: '', rating: 3, comment: 'Dobar film :D' },
-    { email: '', avatarUrl: '', rating: 4, comment: 'Loš film >:(' },
-  ];
-  const [reviews, setReviews] = useState(tempList);
+  const [reviews, setReviews] = useState<IReview[]>([]);
   useEffect(() => {
-    const loadedList = loadFromLocalStorage();
-    setReviews(loadedList);
+    listReviews({ show_id: show.id });
   }, []);
 
-  const loadFromLocalStorage = () => {
-    console.log(show.id);
-    const lsValue = localStorage.getItem('infinum-reviews-' + show.id);
-    if (!lsValue) return tempList;
-    return JSON.parse(lsValue);
-  };
-  const saveToLocalStorage = (newList: IReview[]) => {
-    localStorage.setItem('infinum-reviews-' + show.id, JSON.stringify(newList));
-  };
-  function onAdd(review: IReview) {
-    const newList = [...reviews, review];
-    setReviews(newList);
-    saveToLocalStorage(newList);
+  const { trigger: triggerList } = useSWRMutation(
+    swrKeys.listReviews(show.id),
+    getMutator<IListReviewsParams>,
+    {
+      onSuccess: (data) => {
+        setReviews(data.reviews);
+      },
+    }
+  );
+  async function listReviews(params: IListReviewsParams) {
+    const data = await triggerList(params);
+    mutate(`/api/shows/${params.show_id}`);
+    return data;
   }
-  const onRemove = (review: IReview) => {
-    let newList = reviews.filter((t) => t !== review);
-    setReviews(newList);
-    saveToLocalStorage(newList);
-  };
 
-  const calcAvgRating = () => {
-    if (reviews.length == 0) return 0;
-    let sum = reviews
-      .map((currReview) => currReview.rating)
-      .reduce((acc, val) => acc + val);
-    return Math.round((sum * 100) / reviews.length) / 100;
-  };
-  const avgRating = calcAvgRating();
+  const { trigger: triggerCreate } = useSWRMutation(
+    swrKeys.createReview,
+    createReviewMutator<ICreateReviewParams>,
+    {
+      onSuccess: (data) => {
+        const newList = [...reviews, data.review];
+        setReviews(newList);
+      },
+    }
+  );
+  async function createReview(params: ICreateReviewParams) {
+    const data = await triggerCreate(params);
+    console.log(data);
+    mutate(`/api/shows/${params.show_id}`);
+  }
+
+  function onAdd(review: IReview, showId: number) {
+    createReview({
+      comment: review.comment,
+      rating: review.rating,
+      show_id: showId,
+    });
+  }
+
+  async function onRemove(reviewId: number) {
+    let newList = reviews.filter((t) => t.id !== reviewId);
+    setReviews(newList);
+  }
+
   return (
     <Box backgroundColor="pink.900" height="100%" padding="4">
       <Flex flexDirection="column" alignItems="center" gap="5">
@@ -56,6 +86,7 @@ export const ShowSection = ({ show }: IShowSection) => {
           reviews={reviews}
           onAdd={onAdd}
           onRemove={onRemove}
+          showId={show.id}
         />
       </Flex>
     </Box>

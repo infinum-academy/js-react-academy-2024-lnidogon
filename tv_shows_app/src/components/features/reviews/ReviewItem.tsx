@@ -9,22 +9,48 @@ import {
 } from '@chakra-ui/react';
 import { StarReview } from './StarReview';
 import { DeleteIcon, SearchIcon } from '@chakra-ui/icons';
+import useSWRMutation from 'swr/mutation';
+import { mutate } from 'swr';
+import { swrKeys } from '@/fetchers/swrKeys';
+import { deleteReviewMutator } from '@/fetchers/mutators';
 
 export interface IReview {
   email: string;
   avatarUrl: string;
   comment: string;
   rating: number;
+  id: number;
+}
+
+interface IRemoveReviewParams {
+  id: number;
 }
 
 interface IReviewItemProps {
   review: IReview;
-  onRemove: (review: IReview) => void;
+  showId: number;
+  onRemove: (reviewId: number) => void;
 }
 
-export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
+export const ReviewItem = ({ review, showId, onRemove }: IReviewItemProps) => {
+  const { trigger } = useSWRMutation(
+    swrKeys.deleteReview(review.id),
+    deleteReviewMutator<IRemoveReviewParams>,
+    {
+      onSuccess: () => {
+        onRemove(review.id);
+      },
+    }
+  );
+  async function removeReview(params: IRemoveReviewParams) {
+    console.log(params);
+    await trigger(params);
+    mutate(`/api/shows/${showId}`);
+  }
   const onClickHandler = () => {
-    onRemove(review);
+    removeReview({
+      id: review.id,
+    });
   };
   return (
     <Flex
