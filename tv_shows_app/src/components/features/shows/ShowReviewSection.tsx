@@ -6,7 +6,7 @@ import next from 'next';
 
 interface IShowReviewSectionProps {
   reviews: Array<IReview>;
-  onAdd: (review: IReview, showId: number) => void;
+  onAdd: (comment: string, rating: number, showId: number) => void;
   showId: number;
   onRemove: (reviewId: number) => void;
 }
@@ -31,7 +31,7 @@ export const ShowReviewSection = ({
       </Text>
       <Flex flexDirection="column" gap="2" width="100%">
         <ReviewForm onAdd={onAdd} showId={showId} />
-        <ReviewList reviews={reviews} showId={showId} onRemove={onRemove} />
+        <ReviewList reviews={reviews} onRemove={onRemove} />
       </Flex>
     </Flex>
   );

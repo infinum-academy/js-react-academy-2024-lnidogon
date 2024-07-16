@@ -66,10 +66,10 @@ export const ShowSection = ({ show }: IShowSection) => {
     mutate(`/api/shows/${params.show_id}`);
   }
 
-  function onAdd(review: IReview, showId: number) {
+  function onAdd(comment: string, rating: number, showId: number) {
     createReview({
-      comment: review.comment,
-      rating: review.rating,
+      comment: comment,
+      rating: rating,
       show_id: showId,
     });
   }

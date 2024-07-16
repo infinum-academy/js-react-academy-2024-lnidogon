@@ -15,11 +15,10 @@ import { swrKeys } from '@/fetchers/swrKeys';
 import { deleteReviewMutator } from '@/fetchers/mutators';
 
 export interface IReview {
-  email: string;
-  avatarUrl: string;
   comment: string;
   rating: number;
   id: number;
+  show_id: number;
   user?: any;
 }
 
@@ -29,11 +28,10 @@ interface IRemoveReviewParams {
 
 interface IReviewItemProps {
   review: IReview;
-  showId: number;
   onRemove: (reviewId: number) => void;
 }
 
-export const ReviewItem = ({ review, showId, onRemove }: IReviewItemProps) => {
+export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
   const { trigger } = useSWRMutation(
     swrKeys.deleteReview(review.id),
     deleteReviewMutator<IRemoveReviewParams>,
@@ -46,7 +44,7 @@ export const ReviewItem = ({ review, showId, onRemove }: IReviewItemProps) => {
   async function removeReview(params: IRemoveReviewParams) {
     console.log(params);
     await trigger(params);
-    mutate(`/api/shows/${showId}`);
+    mutate(`/api/shows/${review.show_id}`);
   }
   const onClickHandler = () => {
     removeReview({
@@ -69,7 +67,7 @@ export const ReviewItem = ({ review, showId, onRemove }: IReviewItemProps) => {
     >
       <Image
         borderRadius="full"
-        src={review.avatarUrl}
+        src={review.user.image_url}
         alt="profilna"
         fallbackSrc="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
         width="30px"
@@ -82,7 +80,7 @@ export const ReviewItem = ({ review, showId, onRemove }: IReviewItemProps) => {
         height="fit-content"
         minWidth="fit-content"
       >
-        <Text fontSize="10px"> {review.email} </Text>
+        <Text fontSize="10px"> {review.user.email} </Text>
         <Flex flexDirection="row" alignItems="center" gap="1">
           <Text>{review.rating} / 5</Text>
           <Box width="30%">

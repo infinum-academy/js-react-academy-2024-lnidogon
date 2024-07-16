@@ -5,11 +5,10 @@ import { useEffect, useState } from 'react';
 
 interface IReviewsList {
   reviews: Array<IReview>;
-  showId: number;
   onRemove: (reviewId: number) => void;
 }
 
-export const ReviewList = ({ reviews, showId, onRemove }: IReviewsList) => {
+export const ReviewList = ({ reviews, onRemove }: IReviewsList) => {
   const [openPage, setOpenPage] = useState(0);
   const maxPage = Math.ceil(reviews.length / 3);
 
@@ -25,14 +24,7 @@ export const ReviewList = ({ reviews, showId, onRemove }: IReviewsList) => {
           (el, index) => index >= openPage * 3 && index < openPage * 3 + 3
         )
         .map((review, index) => {
-          return (
-            <ReviewItem
-              key={index}
-              review={review}
-              showId={showId}
-              onRemove={onRemove}
-            />
-          );
+          return <ReviewItem key={index} review={review} onRemove={onRemove} />;
         })}
       <Flex
         flexDirection="row"
