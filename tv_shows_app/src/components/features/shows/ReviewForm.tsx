@@ -1,17 +1,13 @@
 import {
-  Input,
   Button,
   Flex,
   Textarea,
-  Image,
-  Container,
   Text,
   FormControl,
   Spinner,
 } from '@chakra-ui/react';
 import { IReview } from '../reviews/ReviewItem';
 import { useState } from 'react';
-import { setEngine } from 'crypto';
 import { useForm } from 'react-hook-form';
 import { Form } from 'react-router-dom';
 import { StarReview } from '@/components/features/reviews/StarReview';
@@ -34,7 +30,6 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
     formState: { errors, isSubmitting },
   } = useForm<IReviewFormInputs>({ defaultValues: { comment: '', rating: 0 } });
   const [locked, setLocked] = useState(false);
-
   const [selectedNumberOfStars, setSelectedNumberOfStars] = useState(0);
   const [hoveredNumberOfStars, setHoveredNumberOfStars] = useState(0);
 
@@ -58,6 +53,8 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
       rating: data.rating,
     });
     setSelectedNumberOfStars(0);
+    setLocked(false);
+    setHoveredNumberOfStars(0);
     setValue('rating', 0);
   };
 
@@ -121,8 +118,9 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
           isDisabled={isSubmitting}
           type="submit"
           fontSize="sm"
-          height="7"
           width="100px"
+          onSubmit={handleSubmit(onSubmitHandler)}
+          height="30px"
           borderRadius="15px"
           _hover={{ backgroundColor: 'green.300' }}
           backgroundColor="orange.100"
