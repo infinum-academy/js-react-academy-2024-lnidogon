@@ -1,11 +1,13 @@
 'use client';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Box, Divider } from '@chakra-ui/react';
+import { Box, Divider, Flex } from '@chakra-ui/react';
 import { SWRConfig } from 'swr';
 import { AuthRedirect } from '@/components/shared/auth/AuthRedirect';
 import { useState } from 'react';
 import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
+import { SidebarNavigation } from '@/components/shared/SidebarNavigation/SidebarNavigation';
+import { Router } from 'react-router-dom';
 
 const inter = Inter({ subsets: ['latin'] });
 /*
@@ -27,7 +29,16 @@ export default function RootLayout({
   return (
     <>
       <AuthRedirect loginFunc={onAuth} />
-      {loggedIn ? children : <LoadingScreen />}
+      {loggedIn ? (
+        <Flex height="100vh">
+          <Box width="15%">
+            <SidebarNavigation />
+          </Box>
+          <Box width="85%">{children}</Box>
+        </Flex>
+      ) : (
+        <LoadingScreen />
+      )}
     </>
   );
 }

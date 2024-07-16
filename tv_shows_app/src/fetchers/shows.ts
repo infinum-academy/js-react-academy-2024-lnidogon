@@ -1,8 +1,5 @@
 import { IShow } from '@/typings/show';
 import { fetcher } from './fetcher';
-import { getMutator } from './getMutator';
-import useSWRMutation from 'swr/mutation';
-import { mutator } from './mutator';
 
 interface IShowResponse {
   shows: Array<IShow>;

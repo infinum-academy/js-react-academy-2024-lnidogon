@@ -2,6 +2,7 @@ import { Flex, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 export const SidebarNavigation = () => {
   const router = useRouter();
@@ -9,7 +10,7 @@ export const SidebarNavigation = () => {
   const [path, setPath] = useState(pathname);
   useEffect(() => {
     setPath(pathname);
-  }, []);
+  }, [pathname]);
   return (
     <Flex
       width="100%"

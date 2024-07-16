@@ -42,7 +42,7 @@ export const PasswordInput = (params: IPasswordInput) => {
           _placeholder={{ color: 'white' }}
           borderRadius="20px"
           size="md"
-          data-testId={params.testId}
+          data-testid={params.testId}
         />
       </FormControl>
       <InputRightElement fontSize="md">

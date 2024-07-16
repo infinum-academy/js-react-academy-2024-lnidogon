@@ -8,18 +8,17 @@ import { getShow } from '@/fetchers/shows';
 import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 import useSWRMutation from 'swr/mutation';
 import { IShow } from '@/typings/show';
-import { mutator } from '@/fetchers/mutator';
-import { getMutator } from '@/fetchers/getMutator';
+import { mutator, getMutator } from '@/fetchers/mutators';
+import { swrKeys } from '@/fetchers/swrKeys';
 
 export const ShowContainer = () => {
   const params = useParams();
   const { trigger } = useSWRMutation(
-    `https://tv-shows.infinum.academy/shows/${params.id}`,
+    swrKeys.show + `/${params.id}`,
     getMutator
   );
   async function getShow() {
-    const response = await trigger(params);
-    return response.data;
+    return await trigger(params);
   }
 
   const { data, error, isLoading } = useSWR(
@@ -33,16 +32,5 @@ export const ShowContainer = () => {
   if (error) {
     return <div> Ajoj čini se da se nešto jaaaako loše desilo... </div>;
   }
-  return (
-    <main>
-      <Flex height="100vh">
-        <Box width="15%">
-          <SidebarNavigation />
-        </Box>
-        <Box width="85%">
-          <ShowSection show={data.show} />
-        </Box>
-      </Flex>
-    </main>
-  );
+  return <ShowSection show={data.show} />;
 };
