@@ -1,5 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
-import { IReview } from '../reviews/ReviewItem';
+import { IReview } from '../reviews/ReviewItem/ReviewItem';
 import { ReviewForm } from './ReviewForm';
 import { ReviewList } from '../reviews/ReviewList';
 import next from 'next';

@@ -1,6 +1,6 @@
 import { Flex, Image, Text, Box } from '@chakra-ui/react';
 import { ShowDetais } from './ShowDetails';
-import { IReview } from '../reviews/ReviewItem';
+import { IReview } from '../reviews/ReviewItem/ReviewItem';
 import { useEffect, useState } from 'react';
 import { ShowReviewSection } from './ShowReviewSection';
 import { IShow } from '@/typings/show';

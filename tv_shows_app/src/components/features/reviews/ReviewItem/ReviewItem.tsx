@@ -7,13 +7,13 @@ import {
   Container,
   Box,
 } from '@chakra-ui/react';
-import { StarReview } from './StarReview';
+import { StarReview } from '../StarReview';
 import { DeleteIcon, SearchIcon } from '@chakra-ui/icons';
 import useSWRMutation from 'swr/mutation';
 import { mutate } from 'swr';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { deleteReviewMutator } from '@/fetchers/mutators';
-import { DeleteButton } from './ReviewItem/DeleteButton';
+import { DeleteButton } from './DeleteButton/DeleteButton';
 
 export interface IReview {
   comment: string;

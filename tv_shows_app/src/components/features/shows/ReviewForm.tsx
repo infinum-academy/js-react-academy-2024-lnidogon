@@ -6,7 +6,6 @@ import {
   FormControl,
   Spinner,
 } from '@chakra-ui/react';
-import { IReview } from '../reviews/ReviewItem';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from 'react-router-dom';
