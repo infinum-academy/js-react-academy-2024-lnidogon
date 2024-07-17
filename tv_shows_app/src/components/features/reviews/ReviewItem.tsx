@@ -13,16 +13,17 @@ import useSWRMutation from 'swr/mutation';
 import { mutate } from 'swr';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { deleteReviewMutator } from '@/fetchers/mutators';
+import { DeleteButton } from './ReviewItem/DeleteButton';
 
 export interface IReview {
   comment: string;
   rating: number;
   id: number;
   show_id: number;
-  user?: any;
+  user: IUser;
 }
 
-interface IRemoveReviewParams {
+export interface IRemoveReviewParams {
   id: number;
 }
 
@@ -46,11 +47,7 @@ export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
     await trigger(params);
     mutate(`/api/shows/${review.show_id}`);
   }
-  const onClickHandler = () => {
-    removeReview({
-      id: review.id,
-    });
-  };
+
   return (
     <Flex
       height="50px"
@@ -94,19 +91,7 @@ export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
         </Flex>
       </Flex>
       <Text fontSize="xs">{review.comment}</Text>
-      {localStorage.getItem('tv-shows-uid') == review.user?.id ? (
-        <IconButton
-          backgroundColor="orange.100"
-          _hover={{ backgroundColor: 'red.300' }}
-          marginLeft="auto"
-          aria-label="Delete review"
-          size="sm"
-          icon={<DeleteIcon />}
-          onClick={onClickHandler}
-        />
-      ) : (
-        <></>
-      )}
+      <DeleteButton review={review} removeReview={removeReview} />
     </Flex>
   );
 };

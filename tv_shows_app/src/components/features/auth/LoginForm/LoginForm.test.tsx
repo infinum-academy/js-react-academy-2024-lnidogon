@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { LoginForm } from './LoginForm';
+import { MemoryRouter } from 'react-router-dom';
 /**
  * 1) contain email input
  * 2) contain password input

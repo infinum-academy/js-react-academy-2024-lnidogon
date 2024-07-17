@@ -30,10 +30,6 @@ interface ILoginForm {
 
 export const LoginForm = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const onAuth = (login: boolean) => {
-    if (login) setLoggedIn(true);
-    else setLoggedIn(false);
-  };
   const {
     register,
     handleSubmit,
@@ -46,9 +42,9 @@ export const LoginForm = () => {
     setLoggedIn(true);
   };
   console.log(loggedIn);
+
   return (
     <>
-      <AuthRedirect loginFunc={onAuth} />
       <Flex
         direction="column"
         alignItems="center"
