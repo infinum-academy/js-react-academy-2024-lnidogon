@@ -94,8 +94,8 @@ export const ReviewItem = ({ review, onRemove, onEdit }: IReviewItemProps) => {
       </Flex>
       <Text fontSize="xs">{review.comment}</Text>
       <Flex marginLeft="auto" direction="row" gap="3">
-        <DeleteButton review={review} removeReview={removeReview} />
         <EditReviewSection review={review} onEdit={onEdit} />
+        <DeleteButton review={review} removeReview={removeReview} />
       </Flex>
     </Flex>
   );

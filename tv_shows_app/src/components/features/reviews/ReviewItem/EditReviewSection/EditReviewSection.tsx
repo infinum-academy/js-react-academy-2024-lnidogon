@@ -66,10 +66,10 @@ export const EditReviewSection = ({
   };
 
   const onSubmitHandler = (data: IReviewFormInputs) => {
+    console.log(data.rating);
     if (data.rating == 0) return;
     console.log(data);
     editReview(data);
-    setValue('rating', 0);
   };
 
   const { trigger } = useSWRMutation(
@@ -159,7 +159,12 @@ export const EditReviewSection = ({
             </Flex>
           </ModalBody>
           <ModalFooter>
-            <Button type="submit" form="edit-form" isDisabled={isSubmitting}>
+            <Button
+              type="submit"
+              form="edit-form"
+              isDisabled={isSubmitting}
+              backgroundColor="orange.100"
+            >
               {isSubmitting ? <Spinner /> : 'Edit'}
             </Button>
           </ModalFooter>
