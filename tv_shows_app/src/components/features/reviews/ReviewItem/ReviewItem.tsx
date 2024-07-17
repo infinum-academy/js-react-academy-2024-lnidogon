@@ -35,21 +35,6 @@ export interface IReviewItemProps {
 }
 
 export const ReviewItem = ({ review, onRemove, onEdit }: IReviewItemProps) => {
-  const { trigger } = useSWRMutation(
-    swrKeys.deleteReview(review.id),
-    deleteReviewMutator<IRemoveReviewParams>,
-    {
-      onSuccess: () => {
-        onRemove(review.id);
-      },
-    }
-  );
-  async function removeReview(params: IRemoveReviewParams) {
-    console.log(params);
-    await trigger(params);
-    mutate(`/api/shows/${review.show_id}`);
-  }
-
   return (
     <Flex
       height="50px"
@@ -95,7 +80,7 @@ export const ReviewItem = ({ review, onRemove, onEdit }: IReviewItemProps) => {
       <Text fontSize="xs">{review.comment}</Text>
       <Flex marginLeft="auto" direction="row" gap="3">
         <EditReviewSection review={review} onEdit={onEdit} />
-        <DeleteButton review={review} removeReview={removeReview} />
+        <DeleteButton review={review} onRemove={onRemove} />
       </Flex>
     </Flex>
   );

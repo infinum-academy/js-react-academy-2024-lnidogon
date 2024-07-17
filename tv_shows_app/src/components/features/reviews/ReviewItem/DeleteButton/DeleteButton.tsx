@@ -13,19 +13,38 @@ import {
 } from '@chakra-ui/react';
 import { IRemoveReviewParams, IReview } from '../ReviewItem';
 import { DeleteIcon } from '@chakra-ui/icons';
+import useSWRMutation from 'swr/mutation';
+import { swrKeys } from '@/fetchers/swrKeys';
+import { deleteReviewMutator } from '@/fetchers/mutators';
+import { mutate } from 'swr';
 
 interface IDeleteButtonProps {
   review: IReview;
-  removeReview: (params: IRemoveReviewParams) => {};
+  onRemove: (reviewId: number) => void;
 }
 
-export const DeleteButton = ({ review, removeReview }: IDeleteButtonProps) => {
+export const DeleteButton = ({ review, onRemove }: IDeleteButtonProps) => {
+  const { trigger } = useSWRMutation(
+    swrKeys.deleteReview(review.id),
+    deleteReviewMutator<IRemoveReviewParams>,
+    {
+      onSuccess: () => {
+        onRemove(review.id);
+      },
+    }
+  );
+  async function removeReview(params: IRemoveReviewParams) {
+    console.log(params);
+    await trigger(params);
+    mutate(`/api/shows/${review.show_id}`);
+  }
   const { isOpen, onOpen, onClose } = useDisclosure();
   const onClickHandler = () => {
-    onClose();
+    console.log(review.id);
     removeReview({
       id: review.id,
     });
+    onClose();
   };
   return (
     <>
