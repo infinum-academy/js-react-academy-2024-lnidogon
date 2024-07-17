@@ -9,6 +9,7 @@ interface IShowReviewSectionProps {
   onAdd: (comment: string, rating: number, showId: number) => void;
   showId: number;
   onRemove: (reviewId: number) => void;
+  onEdit: (review: IReview) => void;
 }
 
 export const ShowReviewSection = ({
@@ -16,6 +17,7 @@ export const ShowReviewSection = ({
   onAdd,
   showId,
   onRemove,
+  onEdit,
 }: IShowReviewSectionProps) => {
   return (
     <Flex flexDirection="row" gap="4" width="80%" maxWidth="1000px">
@@ -31,7 +33,7 @@ export const ShowReviewSection = ({
       </Text>
       <Flex flexDirection="column" gap="2" width="100%">
         <ReviewForm onAdd={onAdd} showId={showId} />
-        <ReviewList reviews={reviews} onRemove={onRemove} />
+        <ReviewList reviews={reviews} onRemove={onRemove} onEdit={onEdit} />
       </Flex>
     </Flex>
   );

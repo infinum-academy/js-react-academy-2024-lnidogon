@@ -14,6 +14,7 @@ import { mutate } from 'swr';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { deleteReviewMutator } from '@/fetchers/mutators';
 import { DeleteButton } from './DeleteButton/DeleteButton';
+import { EditReviewSection } from './EditReviewSection/EditReviewSection';
 
 export interface IReview {
   comment: string;
@@ -30,9 +31,10 @@ export interface IRemoveReviewParams {
 interface IReviewItemProps {
   review: IReview;
   onRemove: (reviewId: number) => void;
+  onEdit: (review: IReview) => void;
 }
 
-export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
+export const ReviewItem = ({ review, onRemove, onEdit }: IReviewItemProps) => {
   const { trigger } = useSWRMutation(
     swrKeys.deleteReview(review.id),
     deleteReviewMutator<IRemoveReviewParams>,
@@ -91,7 +93,10 @@ export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
         </Flex>
       </Flex>
       <Text fontSize="xs">{review.comment}</Text>
-      <DeleteButton review={review} removeReview={removeReview} />
+      <Flex marginLeft="auto" direction="row" gap="3">
+        <DeleteButton review={review} removeReview={removeReview} />
+        <EditReviewSection review={review} onEdit={onEdit} />
+      </Flex>
     </Flex>
   );
 };

@@ -1,14 +1,15 @@
 import { Flex, IconButton, Show, Text } from '@chakra-ui/react';
-import { IReview, ReviewItem } from './ReviewItem';
+import { IReview, ReviewItem } from './ReviewItem/ReviewItem';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 
 interface IReviewsList {
   reviews: Array<IReview>;
   onRemove: (reviewId: number) => void;
+  onEdit: (review: IReview) => void;
 }
 
-export const ReviewList = ({ reviews, onRemove }: IReviewsList) => {
+export const ReviewList = ({ reviews, onRemove, onEdit }: IReviewsList) => {
   const [openPage, setOpenPage] = useState(0);
   const maxPage = Math.ceil(reviews.length / 3);
 
@@ -24,7 +25,14 @@ export const ReviewList = ({ reviews, onRemove }: IReviewsList) => {
           (el, index) => index >= openPage * 3 && index < openPage * 3 + 3
         )
         .map((review, index) => {
-          return <ReviewItem key={index} review={review} onRemove={onRemove} />;
+          return (
+            <ReviewItem
+              key={index}
+              review={review}
+              onRemove={onRemove}
+              onEdit={onEdit}
+            />
+          );
         })}
       <Flex
         flexDirection="row"

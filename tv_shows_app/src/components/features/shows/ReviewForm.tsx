@@ -16,7 +16,7 @@ export interface IReviewFormProps {
   showId: number;
 }
 
-interface IReviewFormInputs {
+export interface IReviewFormInputs {
   comment: string;
   rating: number;
 }

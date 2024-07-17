@@ -78,6 +78,12 @@ export const ShowSection = ({ show }: IShowSection) => {
     let newList = reviews.filter((t) => t.id !== reviewId);
     setReviews(newList);
   }
+  async function onEdit(review: IReview) {
+    let newList = reviews.map((cReview) =>
+      cReview.id == review.id ? review : cReview
+    );
+    setReviews(newList);
+  }
 
   return (
     <Box backgroundColor="pink.900" height="100%" padding="4">
@@ -88,6 +94,7 @@ export const ShowSection = ({ show }: IShowSection) => {
           onAdd={onAdd}
           onRemove={onRemove}
           showId={show.id}
+          onEdit={onEdit}
         />
       </Flex>
     </Box>

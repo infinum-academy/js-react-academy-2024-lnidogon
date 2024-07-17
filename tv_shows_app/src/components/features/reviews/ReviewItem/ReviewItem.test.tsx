@@ -23,17 +23,23 @@ describe('ReviewItem', () => {
   };
 
   it('should contain correct email', () => {
-    render(<ReviewItem review={mockReview} onRemove={() => {}} />);
+    render(
+      <ReviewItem review={mockReview} onRemove={() => {}} onEdit={() => {}} />
+    );
     const emailDisplay = screen.getByText(mockReview.user.email);
     expect(emailDisplay).toBeInTheDocument();
   });
   it('should contain correct rating', () => {
-    render(<ReviewItem review={mockReview} onRemove={() => {}} />);
+    render(
+      <ReviewItem review={mockReview} onRemove={() => {}} onEdit={() => {}} />
+    );
     const ratingDisplay = screen.getByText(mockReview.rating + ' / 5');
     expect(ratingDisplay).toBeInTheDocument();
   });
   it('should contain correct review comment', () => {
-    render(<ReviewItem review={mockReview} onRemove={() => {}} />);
+    render(
+      <ReviewItem review={mockReview} onRemove={() => {}} onEdit={() => {}} />
+    );
     const reviewCommentDisplay = screen.getByText(mockReview.comment);
     expect(reviewCommentDisplay).toBeInTheDocument();
   });
