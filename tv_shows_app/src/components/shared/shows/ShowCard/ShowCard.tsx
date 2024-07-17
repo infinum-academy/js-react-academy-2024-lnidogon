@@ -2,7 +2,7 @@ import { IShow } from '@/typings/show';
 import { Container, Flex, Image, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 
-interface IShowCard {
+export interface IShowCard {
   show: IShow;
 }
 

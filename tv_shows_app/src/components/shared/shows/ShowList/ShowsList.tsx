@@ -1,6 +1,6 @@
 import { IShow } from '@/typings/show';
 import { Flex } from '@chakra-ui/react';
-import { ShowCard } from './ShowCard';
+import { ShowCard } from '../ShowCard/ShowCard';
 
 interface IShowsList {
   shows: Array<IShow>;

@@ -28,7 +28,7 @@ export interface IRemoveReviewParams {
   id: number;
 }
 
-interface IReviewItemProps {
+export interface IReviewItemProps {
   review: IReview;
   onRemove: (reviewId: number) => void;
   onEdit: (review: IReview) => void;

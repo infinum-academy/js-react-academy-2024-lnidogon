@@ -1,5 +1,5 @@
 import { Flex, IconButton, Show, Text } from '@chakra-ui/react';
-import { IReview, ReviewItem } from './ReviewItem/ReviewItem';
+import { IReview, ReviewItem } from '../ReviewItem/ReviewItem';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 

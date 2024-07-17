@@ -1,8 +1,7 @@
 import { Flex, Text } from '@chakra-ui/react';
 import { IReview } from '../reviews/ReviewItem/ReviewItem';
-import { ReviewForm } from './ReviewForm';
-import { ReviewList } from '../reviews/ReviewList';
-import next from 'next';
+import { ReviewForm } from '../reviews/ReviewForm/ReviewForm';
+import { ReviewList } from '../reviews/ReviewList/ReviewList';
 
 interface IShowReviewSectionProps {
   reviews: Array<IReview>;

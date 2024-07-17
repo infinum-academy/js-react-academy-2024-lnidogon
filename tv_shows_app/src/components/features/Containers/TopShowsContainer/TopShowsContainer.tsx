@@ -1,6 +1,6 @@
 'use client';
 import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
-import { ShowsList } from '@/components/shared/shows/ShowsList';
+import { ShowsList } from '@/components/shared/shows/ShowList/ShowsList';
 import { SidebarNavigation } from '@/components/shared/SidebarNavigation/SidebarNavigation';
 import { getMutator } from '@/fetchers/mutators';
 import { getTopShows } from '@/fetchers/shows';

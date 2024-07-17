@@ -22,7 +22,7 @@ import { IReview } from '../ReviewItem';
 import { EditIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { IReviewFormInputs } from '@/components/features/shows/ReviewForm';
+import { IReviewFormInputs } from '@/components/features/reviews/ReviewForm/ReviewForm';
 import { register } from 'module';
 import { StarReview } from '../../StarReview';
 import { swrKeys } from '@/fetchers/swrKeys';

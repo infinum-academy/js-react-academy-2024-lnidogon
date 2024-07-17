@@ -1,11 +1,17 @@
 import { IShow } from '@/typings/show';
-import { ShowCard } from './ShowCard';
+import { IShowCard, ShowCard } from '../ShowCard/ShowCard';
 import { render, screen } from '@testing-library/react';
 import { mock } from 'node:test';
 import { ShowsList } from './ShowsList';
 /**
- * 1) renders all shows
+ * 1) render ShowCard with appropriate props
  */
+jest.mock('../ShowCard/ShowCard', () => {
+  return {
+    ShowCard: jest.fn().mockReturnValue(null),
+  };
+});
+
 describe('ShowList', () => {
   const mockShows: Array<IShow> = [
     {
@@ -41,10 +47,24 @@ describe('ShowList', () => {
       average_rating: 15,
     },
   ];
-
+  /*
   it('should render all shows', () => {
     render(<ShowsList shows={mockShows} />);
     const shows = screen.getAllByRole('link');
     expect(shows.length).toEqual(mockShows.length);
+  });
+  */
+
+  it('should render ShowCard with appropriate props', () => {
+    render(<ShowsList shows={mockShows} />);
+    expect(ShowCard).toHaveBeenCalledTimes(4);
+    //toHaveBeenNthCalledWith je indeksiran s 1??????????
+    mockShows.forEach((show, index) => {
+      expect(ShowCard).toHaveBeenNthCalledWith(
+        index + 1,
+        { show } as IShowCard,
+        {}
+      );
+    });
   });
 });
