@@ -10,9 +10,15 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from 'react-router-dom';
 import { StarReview } from '@/components/features/reviews/StarReview';
+import { swrKeys } from '@/fetchers/swrKeys';
+import { createReviewMutator } from '@/fetchers/mutators';
+import useSWR, { mutate } from 'swr';
+import useSWRMutation from 'swr/mutation';
+import { fetcher } from '@/fetchers/fetcher';
+import { IReview } from '../ReviewItem/ReviewItem';
+import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 
 export interface IReviewFormProps {
-  onAdd: (comment: string, rating: number, showId: number) => void;
   showId: number;
 }
 
@@ -21,7 +27,17 @@ export interface IReviewFormInputs {
   rating: number;
 }
 
-export const ReviewForm = ({ onAdd, showId }: IReviewFormProps) => {
+interface ICreateReviewParams {
+  comment: string;
+  rating: number;
+  show_id: number;
+}
+
+interface ICreateResponseParams {
+  review: IReview;
+}
+
+export const ReviewForm = ({ showId }: IReviewFormProps) => {
   const {
     register,
     handleSubmit,
@@ -41,6 +57,36 @@ export const ReviewForm = ({ onAdd, showId }: IReviewFormProps) => {
   const onHover = (index: number) => {
     setHoveredNumberOfStars(index);
   };
+
+  const {
+    data: ogData,
+    mutate,
+    isLoading,
+  } = useSWR<{ reviews: Array<IReview> }>(
+    swrKeys.listReviews(showId),
+    async () =>
+      await fetcher<{ reviews: Array<IReview> }>(swrKeys.listReviews(showId))
+  );
+
+  if (!ogData || isLoading) return <LoadingScreen />;
+
+  const { trigger } = useSWRMutation(
+    swrKeys.createReview,
+    createReviewMutator<ICreateReviewParams>,
+    {
+      onSuccess: (data) => {
+        mutate({ reviews: [...ogData.reviews, data.review] }, false);
+      },
+    }
+  );
+
+  async function onAdd(comment: string, rating: number, showId: number) {
+    await trigger({
+      comment: comment,
+      rating: rating,
+      show_id: showId,
+    });
+  }
 
   const onSubmitHandler = (data: IReviewFormInputs) => {
     console.log(data, selectedNumberOfStars, hoveredNumberOfStars);

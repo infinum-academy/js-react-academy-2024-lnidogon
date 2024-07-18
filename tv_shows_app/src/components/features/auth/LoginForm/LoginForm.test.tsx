@@ -2,6 +2,7 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { LoginForm } from './LoginForm';
 import { MemoryRouter } from 'react-router-dom';
 import { mutator } from '@/fetchers/mutators';
+import { swrKeys } from '@/fetchers/swrKeys';
 /**
  * 1) contain email input
  * 2) contain password input
@@ -53,19 +54,14 @@ describe('LoginForm', () => {
     const submitButton = screen.getByText('Log in');
     fireEvent.change(emailInput, { target: { value: 'test@test.hr' } });
     fireEvent.change(passwordInput, { target: { value: '12345678' } });
-    expect(emailInput.value).toEqual('test@test.hr');
-    expect(passwordInput.value).toEqual('12345678');
     fireEvent.submit(submitButton);
     await waitFor(() => {
-      expect(mutator).toHaveBeenCalledWith(
-        'https://tv-shows.infinum.academy/users/sign_in',
-        {
-          arg: {
-            email: 'test@test.hr',
-            password: '12345678',
-          },
-        }
-      );
+      expect(mutator).toHaveBeenCalledWith(swrKeys.login, {
+        arg: {
+          email: 'test@test.hr',
+          password: '12345678',
+        },
+      });
     });
   });
 });

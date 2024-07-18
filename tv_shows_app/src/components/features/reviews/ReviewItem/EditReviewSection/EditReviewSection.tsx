@@ -30,16 +30,15 @@ import useSWRMutation from 'swr/mutation';
 import { updateReviewMutator } from '@/fetchers/mutators';
 import { ResolvedViewport } from 'next';
 import { error } from 'console';
+import useSWR from 'swr';
+import { fetcher } from '@/fetchers/fetcher';
+import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 
 interface IEditReviewSectionProps {
   review: IReview;
-  onEdit: (review: IReview) => void;
 }
 
-export const EditReviewSection = ({
-  review,
-  onEdit,
-}: IEditReviewSectionProps) => {
+export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const {
     register,
@@ -55,6 +54,35 @@ export const EditReviewSection = ({
     review.rating
   );
 
+  const {
+    data: ogData,
+    isLoading,
+    mutate,
+  } = useSWR<{ reviews: Array<IReview> }>(
+    swrKeys.listReviews(review.show_id),
+    async () =>
+      await fetcher<{ reviews: Array<IReview> }>(
+        swrKeys.listReviews(review.show_id)
+      )
+  );
+  if (!ogData || isLoading) return <></>;
+  const { trigger } = useSWRMutation(
+    swrKeys.updateReview(review.id),
+    updateReviewMutator<IReviewFormInputs>,
+    {
+      onSuccess: (data) => {
+        console.log(data);
+
+        mutate({
+          reviews: ogData.reviews.map((cReview) =>
+            cReview.id == review.id ? review : cReview
+          ),
+        });
+        onClose();
+      },
+    }
+  );
+
   const onClick = (index: number) => {
     setSelectedNumberOfStars(index);
     setValue('rating', index);
@@ -65,27 +93,9 @@ export const EditReviewSection = ({
     setHoveredNumberOfStars(index);
   };
 
-  const onSubmitHandler = (data: IReviewFormInputs) => {
-    console.log(data.rating);
+  const onSubmitHandler = async (data: IReviewFormInputs) => {
     if (data.rating == 0) return;
-    console.log(data);
-    editReview(data);
-  };
-
-  const { trigger } = useSWRMutation(
-    swrKeys.updateReview(review.id),
-    updateReviewMutator<IReviewFormInputs>,
-    {
-      onSuccess: (data) => {
-        console.log(data);
-        onEdit(data.review);
-        onClose();
-      },
-    }
-  );
-  const editReview = async (data: IReviewFormInputs) => {
-    const response = await trigger(data);
-    console.log(response.review);
+    await trigger(data);
   };
 
   return (

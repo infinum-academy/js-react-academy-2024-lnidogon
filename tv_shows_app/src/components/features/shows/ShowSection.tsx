@@ -13,89 +13,27 @@ import {
 import useSWRMutation from 'swr/mutation';
 import useSWR, { mutate } from 'swr';
 import { create } from 'domain';
+import { fetcher } from '@/fetchers/fetcher';
+import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 
 interface IShowSection {
   show: IShow;
 }
 
-interface ICreateReviewParams {
-  comment: string;
-  rating: number;
-  show_id: number;
-}
-
-interface IListReviewsParams {
-  show_id: number;
-}
-
 export const ShowSection = ({ show }: IShowSection) => {
-  const [reviews, setReviews] = useState<IReview[]>([]);
-  useEffect(() => {
-    listReviews({ show_id: show.id });
-  }, []);
-
-  const { trigger: triggerList } = useSWRMutation(
+  const { data } = useSWR<{ reviews: Array<IReview> }>(
     swrKeys.listReviews(show.id),
-    getMutator<IListReviewsParams>,
-    {
-      onSuccess: (data) => {
-        console.log(data);
-        setReviews(data.reviews);
-      },
-    }
+    async () =>
+      await fetcher<{ reviews: Array<IReview> }>(swrKeys.listReviews(show.id))
   );
-  async function listReviews(params: IListReviewsParams) {
-    const data = await triggerList(params);
-    mutate(`/api/shows/${params.show_id}`);
-    return data;
-  }
 
-  const { trigger: triggerCreate } = useSWRMutation(
-    swrKeys.createReview,
-    createReviewMutator<ICreateReviewParams>,
-    {
-      onSuccess: (data) => {
-        const newList = [...reviews, data.review];
-        setReviews(newList);
-      },
-    }
-  );
-  async function createReview(params: ICreateReviewParams) {
-    const data = await triggerCreate(params);
-    console.log(data);
-    mutate(`/api/shows/${params.show_id}`);
-  }
-
-  function onAdd(comment: string, rating: number, showId: number) {
-    createReview({
-      comment: comment,
-      rating: rating,
-      show_id: showId,
-    });
-  }
-
-  async function onRemove(reviewId: number) {
-    let newList = reviews.filter((t) => t.id !== reviewId);
-    setReviews(newList);
-  }
-  async function onEdit(review: IReview) {
-    let newList = reviews.map((cReview) =>
-      cReview.id == review.id ? review : cReview
-    );
-    setReviews(newList);
-  }
+  if (!data) return <LoadingScreen />;
 
   return (
     <Box backgroundColor="pink.900" height="100%" padding="4">
       <Flex flexDirection="column" alignItems="center" gap="5">
         <ShowDetais show={show} />
-        <ShowReviewSection
-          reviews={reviews}
-          onAdd={onAdd}
-          onRemove={onRemove}
-          showId={show.id}
-          onEdit={onEdit}
-        />
+        <ShowReviewSection reviews={data.reviews} showId={show.id} />
       </Flex>
     </Box>
   );

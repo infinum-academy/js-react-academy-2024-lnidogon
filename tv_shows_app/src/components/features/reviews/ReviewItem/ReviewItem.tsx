@@ -30,11 +30,9 @@ export interface IRemoveReviewParams {
 
 export interface IReviewItemProps {
   review: IReview;
-  onRemove: (reviewId: number) => void;
-  onEdit: (review: IReview) => void;
 }
 
-export const ReviewItem = ({ review, onRemove, onEdit }: IReviewItemProps) => {
+export const ReviewItem = ({ review }: IReviewItemProps) => {
   return (
     <Flex
       height="50px"
@@ -79,8 +77,8 @@ export const ReviewItem = ({ review, onRemove, onEdit }: IReviewItemProps) => {
       </Flex>
       <Text fontSize="xs">{review.comment}</Text>
       <Flex marginLeft="auto" direction="row" gap="3">
-        <EditReviewSection review={review} onEdit={onEdit} />
-        <DeleteButton review={review} onRemove={onRemove} />
+        <EditReviewSection review={review} />
+        <DeleteButton review={review} />
       </Flex>
     </Flex>
   );

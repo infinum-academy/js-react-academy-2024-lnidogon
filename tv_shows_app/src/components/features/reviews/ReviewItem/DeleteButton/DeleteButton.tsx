@@ -16,36 +16,40 @@ import { DeleteIcon } from '@chakra-ui/icons';
 import useSWRMutation from 'swr/mutation';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { deleteReviewMutator } from '@/fetchers/mutators';
-import { mutate } from 'swr';
+import useSWR, { mutate } from 'swr';
+import { fetcher } from '@/fetchers/fetcher';
+import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 
 interface IDeleteButtonProps {
   review: IReview;
-  onRemove: (reviewId: number) => void;
 }
 
-export const DeleteButton = ({ review, onRemove }: IDeleteButtonProps) => {
+export const DeleteButton = ({ review }: IDeleteButtonProps) => {
+  const {
+    data: ogData,
+    mutate,
+    isLoading,
+  } = useSWR<{ reviews: Array<IReview> }>(
+    swrKeys.listReviews(review.show_id),
+    async () =>
+      await fetcher<{ reviews: Array<IReview> }>(
+        swrKeys.listReviews(review.show_id)
+      )
+  );
+  if (!ogData || isLoading) return <></>;
   const { trigger } = useSWRMutation(
     swrKeys.deleteReview(review.id),
     deleteReviewMutator<IRemoveReviewParams>,
     {
       onSuccess: () => {
-        onRemove(review.id);
+        mutate({
+          reviews: ogData.reviews.filter((temp) => temp.id !== review.id),
+        });
+        onClose();
       },
     }
   );
-  async function removeReview(params: IRemoveReviewParams) {
-    console.log(params);
-    await trigger(params);
-    mutate(`/api/shows/${review.show_id}`);
-  }
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const onClickHandler = () => {
-    console.log(review.id);
-    removeReview({
-      id: review.id,
-    });
-    onClose();
-  };
   return (
     <>
       {review.user.id == -1 ||
@@ -75,7 +79,10 @@ export const DeleteButton = ({ review, onRemove }: IDeleteButtonProps) => {
           <ModalCloseButton />
           <ModalBody>Are you sure you want to delete this review?</ModalBody>
           <ModalFooter>
-            <Button backgroundColor="orange.100" onClick={onClickHandler}>
+            <Button
+              backgroundColor="orange.100"
+              onClick={async () => await trigger({ id: review.id })}
+            >
               Yes
             </Button>
           </ModalFooter>

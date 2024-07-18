@@ -1,31 +1,15 @@
 'use client';
 import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 import { ShowsList } from '@/components/shared/shows/ShowList/ShowsList';
-import { SidebarNavigation } from '@/components/shared/SidebarNavigation/SidebarNavigation';
-import { getMutator } from '@/fetchers/mutators';
+import { fetcher } from '@/fetchers/fetcher';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { IShow } from '@/typings/show';
-import { Box, cookieStorageManager, Flex, Spinner } from '@chakra-ui/react';
-import { useParams } from 'next/navigation';
-import { title } from 'process';
 import useSWR from 'swr';
-import useSWRMutation from 'swr/mutation';
 
-interface IGetAllShowsParams {
-  page: string;
-  items: string;
-}
 export const AllShowsContainer = () => {
-  const { trigger } = useSWRMutation(
+  const { data, error, isLoading } = useSWR<{ shows: Array<IShow> }>(
     swrKeys.allShows,
-    getMutator<IGetAllShowsParams>
-  );
-  async function getAllShows(params: IGetAllShowsParams) {
-    return await trigger(params);
-  }
-
-  const { data, error, isLoading } = useSWR(`/api/shows`, async () =>
-    getAllShows({ page: '2', items: '5' })
+    async () => await fetcher<{ shows: Array<IShow> }>(swrKeys.allShows)
   );
   const showList = data?.shows || [];
   if (isLoading || !data) {
