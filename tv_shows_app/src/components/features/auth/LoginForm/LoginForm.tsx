@@ -35,14 +35,14 @@ export const LoginForm = () => {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<ILoginForm>();
-  const { trigger } = useSWRMutation(swrKeys.login, mutator<ILoginForm>);
+  const { trigger } = useSWRMutation(swrKeys.login, mutator<ILoginForm>, {
+    onSuccess: () => {
+      setLoggedIn(true);
+    },
+  });
   const onLogin = async (data: ILoginForm) => {
-    const response = await trigger(data);
-    if (response?.data?.user?.id)
-      localStorage.setItem('tv-shows-uid', response.data.user.id);
-    setLoggedIn(true);
+    await trigger(data);
   };
-  console.log(loggedIn);
 
   return (
     <>

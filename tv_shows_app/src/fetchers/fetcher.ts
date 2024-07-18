@@ -6,7 +6,6 @@ export async function fetcher<T>(
   if (headerJSON == null) throw new Error('Problem while accessing user data');
   const header = JSON.parse(headerJSON);
   const response = await fetch(input, {
-    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       Accept: 'aplication/json',
@@ -21,5 +20,6 @@ export async function fetcher<T>(
   if (!response.ok) {
     throw new Error(`Dogodila se greška kod fetchanja`);
   }
-  return await response.json();
+  const data = response.status == 204 ? '' : await response.json();
+  return data;
 }

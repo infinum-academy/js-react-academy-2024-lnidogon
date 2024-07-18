@@ -36,15 +36,16 @@ export const DeleteButton = ({ review }: IDeleteButtonProps) => {
         swrKeys.listReviews(review.show_id)
       )
   );
-  if (!ogData || isLoading) return <></>;
   const { trigger } = useSWRMutation(
-    swrKeys.deleteReview(review.id),
+    swrKeys.alterReview(review.id),
     deleteReviewMutator<IRemoveReviewParams>,
     {
       onSuccess: () => {
-        mutate({
-          reviews: ogData.reviews.filter((temp) => temp.id !== review.id),
-        });
+        if (ogData == undefined) mutate();
+        else
+          mutate({
+            reviews: ogData.reviews.filter((temp) => temp.id !== review.id),
+          });
         onClose();
       },
     }
@@ -52,21 +53,16 @@ export const DeleteButton = ({ review }: IDeleteButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      {review.user.id == -1 ||
-      localStorage.getItem('tv-shows-uid') == review.user?.id + '' ? (
-        <IconButton
-          data-testid="delete-button"
-          backgroundColor="orange.100"
-          _hover={{ backgroundColor: 'red.300' }}
-          marginLeft="auto"
-          aria-label="Delete review"
-          size="sm"
-          icon={<DeleteIcon />}
-          onClick={onOpen}
-        />
-      ) : (
-        <></>
-      )}
+      <IconButton
+        data-testid="delete-button"
+        backgroundColor="orange.100"
+        _hover={{ backgroundColor: 'red.300' }}
+        marginLeft="auto"
+        aria-label="Delete review"
+        size="sm"
+        icon={<DeleteIcon />}
+        onClick={onOpen}
+      />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent
@@ -81,6 +77,7 @@ export const DeleteButton = ({ review }: IDeleteButtonProps) => {
           <ModalFooter>
             <Button
               backgroundColor="orange.100"
+              _hover={{ backgroundColor: 'red.300' }}
               onClick={async () => await trigger({ id: review.id })}
             >
               Yes

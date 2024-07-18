@@ -44,17 +44,13 @@ describe('ReviewList', () => {
   ];
 
   it('should render ReviewItem with appropriate props', () => {
-    render(
-      <ReviewList reviews={mockReviews} onRemove={() => {}} onEdit={() => {}} />
-    );
+    render(<ReviewList reviews={mockReviews} />);
     expect(ReviewItem).toHaveBeenCalledTimes(2);
     mockReviews.forEach((review, index) => {
       expect(ReviewItem).toHaveBeenNthCalledWith(
         index + 1,
         {
           review,
-          onRemove: expect.any(Function),
-          onEdit: expect.any(Function),
         },
         {}
       );

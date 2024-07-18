@@ -68,14 +68,13 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
       await fetcher<{ reviews: Array<IReview> }>(swrKeys.listReviews(showId))
   );
 
-  if (!ogData || isLoading) return <LoadingScreen />;
-
   const { trigger } = useSWRMutation(
     swrKeys.createReview,
     createReviewMutator<ICreateReviewParams>,
     {
       onSuccess: (data) => {
-        mutate({ reviews: [...ogData.reviews, data.review] }, false);
+        if (ogData == undefined) mutate();
+        else mutate({ reviews: [data.review, ...ogData.reviews] }, false);
       },
     }
   );
@@ -89,7 +88,6 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
   }
 
   const onSubmitHandler = (data: IReviewFormInputs) => {
-    console.log(data, selectedNumberOfStars, hoveredNumberOfStars);
     if (data.rating == 0) return;
     onAdd(data.comment, data.rating, showId);
     setSelectedNumberOfStars(0);

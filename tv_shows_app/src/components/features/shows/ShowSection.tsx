@@ -5,12 +5,6 @@ import { useEffect, useState } from 'react';
 import { ShowReviewSection } from './ShowReviewSection';
 import { IShow } from '@/typings/show';
 import { swrKeys } from '@/fetchers/swrKeys';
-import {
-  createReviewMutator,
-  deleteReviewMutator,
-  getMutator,
-} from '@/fetchers/mutators';
-import useSWRMutation from 'swr/mutation';
 import useSWR, { mutate } from 'swr';
 import { create } from 'domain';
 import { fetcher } from '@/fetchers/fetcher';

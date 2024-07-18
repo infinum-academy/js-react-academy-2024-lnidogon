@@ -13,7 +13,6 @@ export const AllShowsContainer = () => {
   );
   const showList = data?.shows || [];
   if (isLoading || !data) {
-    console.log(isLoading + ' ' + data);
     return <LoadingScreen />;
   }
 

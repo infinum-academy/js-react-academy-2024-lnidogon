@@ -49,7 +49,6 @@ export const RegisterForm = () => {
       setErrorMessage('Password mismatch');
       return;
     }
-    console.log(data);
     await trigger(data);
   };
   return (

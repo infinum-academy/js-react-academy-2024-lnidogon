@@ -16,49 +16,23 @@ describe('ShowList', () => {
   const mockShows: Array<IShow> = [
     {
       title: 'test1',
-      description:
-        'ovo je doslovno test show, svejedno bolji love story od Twilighta',
+      description: 'ovo je doslovno test show',
       id: 0,
       image_url: 'https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:(',
       average_rating: 15,
     },
     {
       title: 'test2',
-      description:
-        'ovo je doslovno test show, svejedno bolji love story od Twilighta',
-      id: 0,
-      image_url: 'https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:(',
-      average_rating: 15,
-    },
-    {
-      title: 'test3',
-      description:
-        'ovo je doslovno test show, svejedno bolji love story od Twilighta',
-      id: 0,
-      image_url: 'https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:(',
-      average_rating: 15,
-    },
-    {
-      title: 'test4',
-      description:
-        'ovo je doslovno test show, svejedno bolji love story od Twilighta',
+      description: 'ovo je doslovno test show',
       id: 0,
       image_url: 'https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:(',
       average_rating: 15,
     },
   ];
-  /*
-  it('should render all shows', () => {
-    render(<ShowsList shows={mockShows} />);
-    const shows = screen.getAllByRole('link');
-    expect(shows.length).toEqual(mockShows.length);
-  });
-  */
 
   it('should render ShowCard with appropriate props', () => {
     render(<ShowsList shows={mockShows} />);
-    expect(ShowCard).toHaveBeenCalledTimes(4);
-    //toHaveBeenNthCalledWith je indeksiran s 1??????????
+    expect(ShowCard).toHaveBeenCalledTimes(mockShows.length);
     mockShows.forEach((show, index) => {
       expect(ShowCard).toHaveBeenNthCalledWith(
         index + 1,

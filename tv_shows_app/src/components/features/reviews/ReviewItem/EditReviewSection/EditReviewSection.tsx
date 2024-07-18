@@ -65,19 +65,18 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
         swrKeys.listReviews(review.show_id)
       )
   );
-  if (!ogData || isLoading) return <></>;
   const { trigger } = useSWRMutation(
-    swrKeys.updateReview(review.id),
+    swrKeys.alterReview(review.id),
     updateReviewMutator<IReviewFormInputs>,
     {
       onSuccess: (data) => {
-        console.log(data);
-
-        mutate({
-          reviews: ogData.reviews.map((cReview) =>
-            cReview.id == review.id ? review : cReview
-          ),
-        });
+        if (ogData == undefined) mutate();
+        else
+          mutate({
+            reviews: ogData.reviews.map((cReview) =>
+              cReview.id == review.id ? review : cReview
+            ),
+          });
         onClose();
       },
     }
@@ -100,19 +99,15 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
 
   return (
     <>
-      {localStorage.getItem('tv-shows-uid') == review.user?.id + '' ? (
-        <IconButton
-          backgroundColor="orange.100"
-          _hover={{ backgroundColor: 'blue.300' }}
-          marginLeft="auto"
-          aria-label="Edit review"
-          size="sm"
-          icon={<EditIcon />}
-          onClick={onOpen}
-        />
-      ) : (
-        <></>
-      )}
+      <IconButton
+        backgroundColor="orange.100"
+        _hover={{ backgroundColor: 'blue.300' }}
+        marginLeft="auto"
+        aria-label="Edit review"
+        size="sm"
+        icon={<EditIcon />}
+        onClick={onOpen}
+      />
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent

@@ -8,7 +8,6 @@ import { getShow } from '@/fetchers/shows';
 import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 import useSWRMutation from 'swr/mutation';
 import { IShow } from '@/typings/show';
-import { mutator, getMutator } from '@/fetchers/mutators';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { fetcher } from '@/fetchers/fetcher';
 import { IsFlatObject } from 'react-hook-form';
@@ -28,6 +27,5 @@ export const ShowContainer = () => {
   if (error) {
     return <div> Ajoj čini se da se nešto jaaaako loše desilo... </div>;
   }
-  console.log(data);
   return <ShowSection show={data.show} />;
 };

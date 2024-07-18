@@ -33,6 +33,9 @@ export interface IReviewItemProps {
 }
 
 export const ReviewItem = ({ review }: IReviewItemProps) => {
+  const isMyReview =
+    review.user.id == -1 ||
+    localStorage.getItem('tv-shows-uid') == review.user?.id + '';
   return (
     <Flex
       height="50px"
@@ -76,10 +79,14 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
         </Flex>
       </Flex>
       <Text fontSize="xs">{review.comment}</Text>
-      <Flex marginLeft="auto" direction="row" gap="3">
-        <EditReviewSection review={review} />
-        <DeleteButton review={review} />
-      </Flex>
+      {isMyReview ? (
+        <Flex marginLeft="auto" direction="row" gap="3">
+          <EditReviewSection review={review} />
+          <DeleteButton review={review} />
+        </Flex>
+      ) : (
+        <></>
+      )}
     </Flex>
   );
 };
