@@ -36,7 +36,13 @@ export const StarReview = (starReview: IStarReview) => {
     );
   }
   return (
-    <Flex flexDirection="row" gap="0" width="30%" alignItems="center">
+    <Flex
+      flexDirection="row"
+      gap="0"
+      width="100%"
+      alignItems="center"
+      justifyContent="space-evenly"
+    >
       {tempList}
     </Flex>
   );

@@ -1,91 +1,135 @@
 import {
-  Input,
   Button,
   Flex,
   Textarea,
-  Image,
-  Container,
   Text,
+  FormControl,
+  Spinner,
 } from '@chakra-ui/react';
 import { IReview } from '../reviews/ReviewItem';
 import { useState } from 'react';
-import { StarReview } from '../reviews/StarReview';
+import { useForm } from 'react-hook-form';
+import { Form } from 'react-router-dom';
+import { StarReview } from '@/components/features/reviews/StarReview';
 
 export interface IReviewFormProps {
   onAdd: (review: IReview) => void;
 }
 
+interface IReviewFormInputs {
+  comment: string;
+  rating: number;
+}
+
 export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
   let starArray = [];
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<IReviewFormInputs>({ defaultValues: { comment: '', rating: 0 } });
   const [locked, setLocked] = useState(false);
   const [selectedNumberOfStars, setSelectedNumberOfStars] = useState(0);
   const [hoveredNumberOfStars, setHoveredNumberOfStars] = useState(0);
 
-  const onClickHandler = () => {
-    const reviewInput = document.getElementById(
-      'review-input'
-    ) as HTMLInputElement;
-    if (reviewInput.value == '' || selectedNumberOfStars == 0) return;
-    onAdd({
-      email: '',
-      avatarUrl: '',
-      comment: reviewInput.value,
-      rating: selectedNumberOfStars,
-    });
-    reviewInput.value = '';
-    setSelectedNumberOfStars(0);
-    setLocked(false);
-    setHoveredNumberOfStars(0);
-  };
   const onClick = (index: number) => {
     setSelectedNumberOfStars(index);
+    setValue('rating', index);
+    setLocked(true);
   };
+
   const onHover = (index: number) => {
     setHoveredNumberOfStars(index);
   };
+
+  const onSubmitHandler = (data: IReviewFormInputs) => {
+    console.log(data, selectedNumberOfStars, hoveredNumberOfStars);
+    if (data.rating == 0) return;
+    onAdd({
+      email: '',
+      avatarUrl: '',
+      comment: data.comment,
+      rating: data.rating,
+    });
+    setSelectedNumberOfStars(0);
+    setLocked(false);
+    setHoveredNumberOfStars(0);
+    setValue('rating', 0);
+  };
+
   return (
-    <Flex flexDirection="column" gap="5" width="100%">
-      <Textarea
-        backgroundColor="orange.100"
-        placeholder="Add review..."
-        id="review-input"
-        width="100%"
-        fontSize="14"
-        padding="2"
-        height="40px"
-        minHeight="40px"
-        resize="vertical"
-        borderRadius="7"
-        fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
-      />
+    <Flex
+      flexDirection="column"
+      gap="2"
+      width="100%"
+      overflow="hidden"
+      as="form"
+      onSubmit={handleSubmit(onSubmitHandler)}
+    >
+      <FormControl>
+        <Textarea
+          {...register('comment')}
+          required
+          backgroundColor="orange.100"
+          placeholder="Add review..."
+          id="review-input"
+          width="100%"
+          fontSize="sm"
+          padding="2"
+          height="40px"
+          minHeight="40px"
+          borderRadius="7"
+          fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
+          isDisabled={isSubmitting}
+        />
+      </FormControl>
+
       <Flex
+        flexDirection="row"
         alignItems="center"
         width="100%"
-        onMouseLeave={() => setLocked(true)}
-        onMouseEnter={() => {
-          setLocked(false);
-          setHoveredNumberOfStars(selectedNumberOfStars);
-        }}
+        gap="5"
+        height="8"
       >
-        <Text color="white" fontSize="small">
+        <Text color="white" fontSize="sm">
           Rating:
         </Text>
-        <StarReview
-          noOfStars={locked ? selectedNumberOfStars : hoveredNumberOfStars}
-          isStatic={false}
-          onChange={onClick}
-          onHover={onHover}
-        />
+        <FormControl>
+          <Flex
+            flexDirection="row"
+            width="20%"
+            gap="1"
+            onMouseEnter={() => {
+              setLocked(false);
+            }}
+            onMouseLeave={() => {
+              setLocked(true);
+              setHoveredNumberOfStars(0);
+            }}
+            id="star-input"
+          >
+            <StarReview
+              noOfStars={locked ? selectedNumberOfStars : hoveredNumberOfStars}
+              isStatic={false}
+              onChange={onClick}
+              onHover={onHover}
+            />
+          </Flex>
+        </FormControl>
         <Button
-          onClick={onClickHandler}
+          isDisabled={isSubmitting}
+          type="submit"
+          fontSize="sm"
+          width="100px"
+          onSubmit={handleSubmit(onSubmitHandler)}
           height="30px"
-          width="16%"
           borderRadius="15px"
           _hover={{ backgroundColor: 'green.300' }}
           backgroundColor="orange.100"
           marginLeft="auto"
         >
-          Post
+          {isSubmitting ? <Spinner /> : 'Post'}
         </Button>
       </Flex>
     </Flex>

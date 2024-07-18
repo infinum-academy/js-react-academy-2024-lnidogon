@@ -6,29 +6,31 @@ import useSWR from 'swr';
 import { useParams } from 'next/navigation';
 import { getShow } from '@/fetchers/shows';
 import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
+import useSWRMutation from 'swr/mutation';
+import { IShow } from '@/typings/show';
+import { mutator, getMutator } from '@/fetchers/mutators';
+import { swrKeys } from '@/fetchers/swrKeys';
 
 export const ShowContainer = () => {
   const params = useParams();
-  const { data, error, isLoading } = useSWR(`/api/shows/${params.id}`, () =>
-    getShow(params.id as string)
+  const { trigger } = useSWRMutation(
+    swrKeys.show + `/${params.id}`,
+    getMutator
   );
+  async function getShow() {
+    return await trigger(params);
+  }
+
+  const { data, error, isLoading } = useSWR(
+    `/api/shows/${params.id}`,
+    async () => getShow()
+  );
+
   if (isLoading || !data) {
     return <LoadingScreen />;
   }
   if (error) {
     return <div> Ajoj čini se da se nešto jaaaako loše desilo... </div>;
   }
-  console.log(data);
-  return (
-    <main>
-      <Flex height="100vh">
-        <Box width="15%">
-          <SidebarNavigation />
-        </Box>
-        <Box width="85%">
-          <ShowSection show={data} />
-        </Box>
-      </Flex>
-    </main>
-  );
+  return <ShowSection show={data.show} />;
 };

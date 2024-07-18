@@ -5,8 +5,8 @@ interface IShowResponse {
   shows: Array<IShow>;
 }
 
-export function getAllShows() {
-  return fetcher<IShowResponse>('/api/shows');
+export async function getAllShows() {
+  return fetcher<IShowResponse>('/api/shows/all-shows');
 }
 
 export function getTopShows() {
