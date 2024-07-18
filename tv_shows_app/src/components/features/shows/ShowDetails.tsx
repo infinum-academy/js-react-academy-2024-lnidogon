@@ -6,7 +6,6 @@ interface IShowDetailsProps {
 }
 
 export const ShowDetais = ({ show }: IShowDetailsProps) => {
-  console.log(show);
   return (
     <Flex
       height="fit-content"
@@ -21,7 +20,7 @@ export const ShowDetais = ({ show }: IShowDetailsProps) => {
     >
       <Image
         src={show?.image_url}
-        alt="slika nije učitana"
+        alt="Naslovna slika showa"
         fallbackSrc="https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:("
         objectFit="cover"
         height="40"
