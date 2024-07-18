@@ -1,4 +1,5 @@
-import { Flex, Image, Text } from "@chakra-ui/react";
+import { IShow } from '@/typings/show';
+import { Flex, Image, Text } from '@chakra-ui/react';
 
 interface IShowDetailsProps {
   show: IShow;
@@ -7,33 +8,44 @@ interface IShowDetailsProps {
 export const ShowDetais = ({ show }: IShowDetailsProps) => {
   return (
     <Flex
-      width="50%"
-      maxWidth="500px"
+      height="fit-content"
+      width="80%"
+      maxWidth="1000px"
       flexDirection="column"
       borderRadius="7"
       overflow="hidden"
-      fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
+      fontFamily={
+        "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
+      }
     >
       <Image
-        src={show.image_url}
-        alt="naslovnica showa"
+        src={show?.image_url}
+        alt="Naslovna slika showa"
         fallbackSrc="https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:("
-        width="100%"
+        objectFit="cover"
+        height="40"
       />
       <Flex
-        flexDirection="column"
+        flexDirection="row"
         gap="3"
         color="black"
         backgroundColor="orange.100"
-        padding="5"
+        padding="2"
+        paddingRight="5"
+        paddingLeft="5"
+        overflow="hidden"
+        alignItems="center"
+        borderRadius="7"
       >
-        <Text fontSize="30" fontWeight="700">
-          {show.title}
-        </Text>
-        <Text fontSize="15">{show.description}</Text>
-        <Text fontSize="20" textDecoration="underline">
-          {!show.average_rating ? `no ratings` : show.average_rating + `/5`}
-        </Text>
+        <Flex flexDirection="column" width="fit-content" minWidth="30%">
+          <Text fontSize="lg " fontWeight="700" width="fit-content">
+            {show.title}
+          </Text>
+          <Text fontSize="sm" textDecoration="underline" width="fit-content">
+            {!show.average_rating ? `no ratings` : show.average_rating + `/5`}
+          </Text>
+        </Flex>
+        <Text fontSize="xs">{show.description}</Text>
       </Flex>
     </Flex>
   );

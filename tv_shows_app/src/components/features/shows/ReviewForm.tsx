@@ -6,10 +6,10 @@ import {
   Image,
   Container,
   Text,
-} from "@chakra-ui/react";
-import { IReview } from "../reviews/ReviewItem";
-import { useState } from "react";
-import { StarReview } from "../reviews/StarReview";
+} from '@chakra-ui/react';
+import { IReview } from '../reviews/ReviewItem';
+import { useState } from 'react';
+import { StarReview } from '../reviews/StarReview';
 
 export interface IReviewFormProps {
   onAdd: (review: IReview) => void;
@@ -23,16 +23,19 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
 
   const onClickHandler = () => {
     const reviewInput = document.getElementById(
-      "review-input"
+      'review-input'
     ) as HTMLInputElement;
-    if (reviewInput.value == "" || selectedNumberOfStars == 0) return;
+    if (reviewInput.value == '' || selectedNumberOfStars == 0) return;
     onAdd({
-      email: "",
-      avatarUrl: "",
+      email: '',
+      avatarUrl: '',
       comment: reviewInput.value,
       rating: selectedNumberOfStars,
     });
+    reviewInput.value = '';
     setSelectedNumberOfStars(0);
+    setLocked(false);
+    setHoveredNumberOfStars(0);
   };
   const onClick = (index: number) => {
     setSelectedNumberOfStars(index);
@@ -48,34 +51,43 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
         id="review-input"
         width="100%"
         fontSize="14"
-        padding="5"
-        height="70px"
-        minHeight="70px"
+        padding="2"
+        height="40px"
+        minHeight="40px"
         resize="vertical"
         borderRadius="7"
         fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
       />
       <Flex
+        alignItems="center"
         width="100%"
         onMouseLeave={() => setLocked(true)}
-        onMouseEnter={() => setLocked(false)}
+        onMouseEnter={() => {
+          setLocked(false);
+          setHoveredNumberOfStars(selectedNumberOfStars);
+        }}
       >
+        <Text color="white" fontSize="small">
+          Rating:
+        </Text>
         <StarReview
           noOfStars={locked ? selectedNumberOfStars : hoveredNumberOfStars}
           isStatic={false}
           onChange={onClick}
           onHover={onHover}
         />
+        <Button
+          onClick={onClickHandler}
+          height="30px"
+          width="16%"
+          borderRadius="15px"
+          _hover={{ backgroundColor: 'green.300' }}
+          backgroundColor="orange.100"
+          marginLeft="auto"
+        >
+          Post
+        </Button>
       </Flex>
-      <Button
-        onClick={onClickHandler}
-        width="16%"
-        borderRadius="15px"
-        _hover={{ backgroundColor: "green.300" }}
-        backgroundColor="orange.100"
-      >
-        Post
-      </Button>
     </Flex>
   );
 };

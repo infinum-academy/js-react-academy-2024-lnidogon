@@ -1,5 +1,6 @@
-import { StarIcon } from "@chakra-ui/icons";
-import { Container, Flex, Icon, Image } from "@chakra-ui/react";
+import { StarIcon } from '@chakra-ui/icons';
+import { Container, Flex, Icon, Image } from '@chakra-ui/react';
+import { cursorTo } from 'readline';
 
 interface IStarReview {
   noOfStars: number;
@@ -13,7 +14,8 @@ export const StarReview = (starReview: IStarReview) => {
   for (let i = 1; i <= 5; i++) {
     tempList.push(
       <StarIcon
-        color={i <= starReview.noOfStars ? "yellow" : "gray"}
+        _hover={{ cursor: starReview.isStatic ? '' : 'pointer' }}
+        color={i <= starReview.noOfStars ? 'yellow' : 'gray'}
         width="15%"
         key={i}
         onClick={
@@ -34,13 +36,7 @@ export const StarReview = (starReview: IStarReview) => {
     );
   }
   return (
-    <Flex
-      flexDirection="row"
-      gap="0"
-      width="30%"
-      marginTop="1"
-      marginBottom="3"
-    >
+    <Flex flexDirection="row" gap="0" width="30%" alignItems="center">
       {tempList}
     </Flex>
   );
