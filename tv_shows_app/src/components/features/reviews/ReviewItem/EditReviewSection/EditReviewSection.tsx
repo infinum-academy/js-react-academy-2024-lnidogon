@@ -113,7 +113,7 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
         <ModalContent
           backgroundColor="pink.700"
           color="white"
-          borderColor="pink.900"
+          borderColor="primary"
           borderWidth="2px"
         >
           <ModalHeader>Edit your review</ModalHeader>

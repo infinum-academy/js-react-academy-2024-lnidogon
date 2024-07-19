@@ -118,7 +118,6 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
           height="40px"
           minHeight="40px"
           borderRadius="7"
-          fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
           isDisabled={isSubmitting}
         />
       </FormControl>

@@ -14,9 +14,6 @@ export const ShowDetais = ({ show }: IShowDetailsProps) => {
       flexDirection="column"
       borderRadius="7"
       overflow="hidden"
-      fontFamily={
-        "'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
-      }
     >
       <Image
         src={show?.image_url}

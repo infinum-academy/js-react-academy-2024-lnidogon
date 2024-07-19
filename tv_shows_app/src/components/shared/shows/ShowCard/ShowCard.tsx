@@ -30,7 +30,6 @@ export const ShowCard = ({ show }: IShowCard) => {
         padding="2"
         backgroundColor="orange.100"
         fontSize="xs"
-        fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
         height="fit-content"
         overflow="hidden"
         borderBottomRadius="8px"

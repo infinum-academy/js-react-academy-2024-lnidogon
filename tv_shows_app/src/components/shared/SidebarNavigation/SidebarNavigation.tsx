@@ -1,3 +1,4 @@
+import theme from '@/styles/theme/theme';
 import { Flex, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { useParams, usePathname, useRouter } from 'next/navigation';
@@ -16,10 +17,9 @@ export const SidebarNavigation = () => {
       width="100%"
       flexDirection="column"
       gap="10"
-      backgroundColor="pink.900"
+      backgroundColor="primary"
       height="100%"
       padding="4"
-      fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
     >
       <Text color="white" fontWeight="700" fontSize="xl">
         TV shows APP

@@ -51,7 +51,7 @@ export const LoginForm = () => {
         alignItems="center"
         justifyContent="center"
         gap="4"
-        backgroundColor="pink.900"
+        backgroundColor="primary"
         height="100vh"
       >
         {loggedIn ? (

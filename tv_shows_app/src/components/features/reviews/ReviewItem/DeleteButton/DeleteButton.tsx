@@ -18,7 +18,6 @@ import { swrKeys } from '@/fetchers/swrKeys';
 import { deleteReviewMutator } from '@/fetchers/mutators';
 import useSWR, { mutate } from 'swr';
 import { fetcher } from '@/fetchers/fetcher';
-import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 
 interface IDeleteButtonProps {
   review: IReview;
@@ -68,7 +67,7 @@ export const DeleteButton = ({ review }: IDeleteButtonProps) => {
         <ModalContent
           backgroundColor="pink.700"
           color="white"
-          borderColor="pink.900"
+          borderColor="primary"
           borderWidth="2px"
         >
           <ModalHeader>Delete your review</ModalHeader>

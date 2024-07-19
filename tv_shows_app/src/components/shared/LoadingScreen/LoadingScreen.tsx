@@ -6,7 +6,7 @@ export const LoadingScreen = () => {
       height="100vh"
       alignItems="center"
       justifyContent="space-around"
-      backgroundColor="pink.900"
+      backgroundColor="primary"
     >
       <Spinner color="white" />
     </Flex>

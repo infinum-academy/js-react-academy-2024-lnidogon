@@ -34,11 +34,11 @@ export const ReviewList = ({ reviews }: IReviewsList) => {
         <IconButton
           marginLeft="auto"
           aria-label="Previous comment"
-          backgroundColor="pink.900"
+          backgroundColor="primary"
           color="white"
           icon={<ChevronLeftIcon />}
           size="sm"
-          _hover={{ backgroundColor: 'pink.900' }}
+          _hover={{ backgroundColor: 'primary' }}
           onClick={() => changePage(-1)}
         />
         <Text color="white" fontSize="xs">
@@ -48,11 +48,11 @@ export const ReviewList = ({ reviews }: IReviewsList) => {
         <IconButton
           marginLeft="auto"
           aria-label="Next comment"
-          backgroundColor="pink.900"
+          backgroundColor="primary"
           color="white"
           icon={<ChevronRightIcon />}
           size="sm"
-          _hover={{ backgroundColor: 'pink.900' }}
+          _hover={{ backgroundColor: 'primary' }}
           onClick={() => changePage(1)}
         />
       </Flex>
