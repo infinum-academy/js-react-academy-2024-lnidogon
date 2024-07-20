@@ -31,7 +31,7 @@ export default function RootLayout({
       <AuthRedirect loginFunc={onAuth} />
       {loggedIn ? (
         <Flex height="100vh">
-          <Box width="12.5%">
+          <Box width="15%">
             <SidebarNavigation />
           </Box>
           <Box width="100%">{children}</Box>

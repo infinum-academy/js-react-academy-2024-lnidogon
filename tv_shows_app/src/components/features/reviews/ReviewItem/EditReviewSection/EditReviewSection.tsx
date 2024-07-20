@@ -99,15 +99,16 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
 
   return (
     <>
-      <IconButton
-        backgroundColor="orange.100"
-        _hover={{ backgroundColor: 'blue.300' }}
+      <Button
+        backgroundColor="transparent"
+        _hover={{ backgroundColor: 'transparent' }}
         marginLeft="auto"
-        aria-label="Edit review"
-        size="sm"
-        icon={<EditIcon />}
+        textStyle="button"
+        color="purple2"
         onClick={onOpen}
-      />
+      >
+        EDIT
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent

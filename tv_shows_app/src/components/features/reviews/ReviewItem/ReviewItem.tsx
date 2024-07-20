@@ -6,9 +6,13 @@ import {
   Image,
   Container,
   Box,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
 } from '@chakra-ui/react';
 import { StarReview } from '../StarReview';
-import { DeleteIcon, SearchIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, DeleteIcon, SearchIcon } from '@chakra-ui/icons';
 import useSWRMutation from 'swr/mutation';
 import { mutate } from 'swr';
 import { swrKeys } from '@/fetchers/swrKeys';
@@ -38,10 +42,11 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
     localStorage.getItem('tv-shows-uid') == review.user?.id + '';
   return (
     <Flex
-      height="50px"
+      height="104px"
+      width="870px"
       backgroundColor="purple2"
       color="white"
-      borderRadius="8"
+      borderRadius="20px"
       paddingLeft="4"
       paddingRight="4"
       paddingBottom="2"
@@ -55,7 +60,8 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
         src={review.user.image_url}
         alt="profilna"
         fallbackSrc="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
-        width="30px"
+        width="40px"
+        height="40px"
         maxW="10%"
       />
       <Flex
@@ -65,9 +71,9 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
         height="fit-content"
         minWidth="fit-content"
       >
-        <Text fontSize="10px"> {review.user.email} </Text>
+        <Text textStyle="note"> {review.user.email} </Text>
         <Flex flexDirection="row" alignItems="center" gap="1">
-          <Text>{review.rating} / 5</Text>
+          <Text textStyle="note">{review.rating}/5</Text>
           <Box width="30%">
             <StarReview
               noOfStars={review.rating}
@@ -81,8 +87,26 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
       <Text fontSize="xs">{review.comment}</Text>
       {isMyReview ? (
         <Flex marginLeft="auto" direction="row" gap="3">
-          <EditReviewSection review={review} />
-          <DeleteButton review={review} />
+          <Menu>
+            <MenuButton
+              as={Button}
+              width="24px"
+              height="24px"
+              bg="purple2"
+              color="white"
+              _hover={{ bg: 'purple2' }}
+            >
+              ⋮
+            </MenuButton>
+            <MenuList width="128px">
+              <MenuItem width="128px">
+                <EditReviewSection review={review} />
+              </MenuItem>
+              <MenuItem width="128px">
+                <DeleteButton review={review} />
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </Flex>
       ) : (
         <></>

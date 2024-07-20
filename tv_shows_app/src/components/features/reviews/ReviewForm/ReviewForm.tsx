@@ -99,9 +99,10 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
   return (
     <Flex
       flexDirection="column"
-      gap="2"
+      gap="37px"
       width="100%"
-      overflow="hidden"
+      height="156px"
+      //overflow="hidden"
       as="form"
       onSubmit={handleSubmit(onSubmitHandler)}
     >
@@ -109,26 +110,20 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
         <Textarea
           {...register('comment')}
           required
-          backgroundColor="orange.100"
+          backgroundColor="white"
+          color="lightPurple"
           placeholder="Add review..."
           id="review-input"
           width="100%"
-          fontSize="sm"
           padding="2"
-          height="40px"
-          minHeight="40px"
+          height="80px"
           borderRadius="7"
+          textStyle="body"
           isDisabled={isSubmitting}
         />
       </FormControl>
 
-      <Flex
-        flexDirection="row"
-        alignItems="center"
-        width="100%"
-        gap="5"
-        height="8"
-      >
+      <Flex flexDirection="row" alignItems="center" width="870px" gap="5">
         <Text color="white" fontSize="sm">
           Rating:
         </Text>
@@ -158,12 +153,7 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
           isDisabled={isSubmitting}
           type="submit"
           fontSize="sm"
-          width="100px"
           onSubmit={handleSubmit(onSubmitHandler)}
-          height="30px"
-          borderRadius="15px"
-          _hover={{ backgroundColor: 'green.300' }}
-          backgroundColor="orange.100"
           marginLeft="auto"
         >
           {isSubmitting ? <Spinner /> : 'Post'}

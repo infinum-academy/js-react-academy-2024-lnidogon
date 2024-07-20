@@ -13,11 +13,11 @@ export const ShowReviewSection = ({
   showId,
 }: IShowReviewSectionProps) => {
   return (
-    <Flex flexDirection="row" gap="4" width="80%" maxWidth="1000px">
-      <Text color="white" fontWeight="700" fontSize="md">
+    <Flex flexDirection="row" gap="26px" width="1052px">
+      <Text color="white" width="175px" textStyle="body">
         Reviews
       </Text>
-      <Flex flexDirection="column" gap="2" width="100%">
+      <Flex flexDirection="column" gap="61px" width="100%">
         <ReviewForm showId={showId} />
         <ReviewList reviews={reviews} />
       </Flex>

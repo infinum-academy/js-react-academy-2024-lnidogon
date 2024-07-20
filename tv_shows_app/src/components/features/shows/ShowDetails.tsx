@@ -1,5 +1,6 @@
 import { IShow } from '@/typings/show';
-import { Flex, Image, Text } from '@chakra-ui/react';
+import { StarIcon } from '@chakra-ui/icons';
+import { Flex, Heading, Image, Text } from '@chakra-ui/react';
 
 interface IShowDetailsProps {
   show: IShow;
@@ -7,22 +8,16 @@ interface IShowDetailsProps {
 
 export const ShowDetais = ({ show }: IShowDetailsProps) => {
   return (
-    <Flex
-      height="fit-content"
-      width="80%"
-      maxWidth="1000px"
-      flexDirection="column"
-      borderRadius="7"
-      overflow="hidden"
-    >
+    <Flex height="608px" width="1052px" flexDirection="column" borderRadius="7">
       <Image
         src={show?.image_url}
         alt="Naslovna slika showa"
         fallbackSrc="https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:("
         objectFit="cover"
-        height="40"
+        height="440px"
       />
       <Flex
+        height="168px"
         flexDirection="row"
         gap="3"
         color="black"
@@ -33,16 +28,28 @@ export const ShowDetais = ({ show }: IShowDetailsProps) => {
         overflow="hidden"
         alignItems="center"
         borderBottomRadius="7"
+        bgColor="white"
       >
         <Flex flexDirection="column" width="fit-content" minWidth="30%">
-          <Text fontSize="lg " fontWeight="700" width="fit-content">
+          <Heading textStyle="heading" color="purple2">
             {show.title}
-          </Text>
-          <Text fontSize="sm" textDecoration="underline" width="fit-content">
-            {!show.average_rating ? `no ratings` : show.average_rating + `/5`}
-          </Text>
+          </Heading>
+          <Flex alignItems="center" gap="4px">
+            <StarIcon width="24px" color="purple2" />
+            <Text textStyle="title" color="purple2">
+              {!show.average_rating ? `no ratings` : show.average_rating + `/5`}
+            </Text>
+          </Flex>
         </Flex>
-        <Text fontSize="xs">{show.description}</Text>
+        <Text
+          ml="auto"
+          mr="50px"
+          width="477px"
+          textStyle="body"
+          color="purple2"
+        >
+          {show.description}
+        </Text>
       </Flex>
     </Flex>
   );

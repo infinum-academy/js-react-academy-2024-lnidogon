@@ -9,7 +9,7 @@ interface IReviewsList {
 
 export const ReviewList = ({ reviews }: IReviewsList) => {
   const [openPage, setOpenPage] = useState(0);
-  const maxPage = Math.ceil(reviews.length / 3);
+  const maxPage = Math.ceil(reviews.length / 5);
 
   const changePage = (increment: number) => {
     if (openPage + increment >= maxPage) setOpenPage(0);
@@ -17,10 +17,10 @@ export const ReviewList = ({ reviews }: IReviewsList) => {
     else setOpenPage(openPage + increment);
   };
   return (
-    <Flex flexDirection="column" gap="2" width="100%" marginBottom="3">
+    <Flex flexDirection="column" gap="24px" width="100%" marginBottom="3">
       {reviews
         .filter(
-          (el, index) => index >= openPage * 3 && index < openPage * 3 + 3
+          (el, index) => index >= openPage * 5 && index < openPage * 5 + 5
         )
         .map((review, index) => {
           return <ReviewItem key={index} review={review} />;
@@ -42,7 +42,7 @@ export const ReviewList = ({ reviews }: IReviewsList) => {
           onClick={() => changePage(-1)}
         />
         <Text color="white" fontSize="xs">
-          {maxPage ? openPage + 1 + ' od ' + maxPage : 'no reviews'}
+          {maxPage ? openPage + 1 + ' of ' + maxPage : 'no reviews'}
         </Text>
 
         <IconButton

@@ -52,16 +52,16 @@ export const DeleteButton = ({ review }: IDeleteButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <IconButton
+      <Button
         data-testid="delete-button"
-        backgroundColor="orange.100"
-        _hover={{ backgroundColor: 'red.300' }}
+        backgroundColor="transparent"
+        _hover={{ backgroundColor: 'transparent' }}
         marginLeft="auto"
-        aria-label="Delete review"
-        size="sm"
-        icon={<DeleteIcon />}
+        textStyle="button"
         onClick={onOpen}
-      />
+      >
+        DELETE
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent
