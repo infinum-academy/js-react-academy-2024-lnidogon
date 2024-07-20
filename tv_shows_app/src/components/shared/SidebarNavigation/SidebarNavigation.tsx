@@ -17,7 +17,7 @@ export const SidebarNavigation = () => {
       width="100%"
       flexDirection="column"
       gap="10"
-      backgroundColor="primary"
+      backgroundColor="darkPurple"
       height="100%"
       padding="4"
     >

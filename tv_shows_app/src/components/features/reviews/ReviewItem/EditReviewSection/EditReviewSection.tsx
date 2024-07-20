@@ -111,9 +111,9 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent
-          backgroundColor="pink.700"
+          backgroundColor="purple2"
           color="white"
-          borderColor="primary"
+          borderColor="darkPurple"
           borderWidth="2px"
         >
           <ModalHeader>Edit your review</ModalHeader>

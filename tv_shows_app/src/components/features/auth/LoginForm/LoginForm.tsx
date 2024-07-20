@@ -5,6 +5,7 @@ import { SuccessWindow } from '@/components/shared/auth/SuccessWindow';
 import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 import { mutator } from '@/fetchers/mutators';
 import { swrKeys } from '@/fetchers/swrKeys';
+import theme from '@/styles/theme/theme';
 import { EmailIcon, LockIcon } from '@chakra-ui/icons';
 import {
   Button,
@@ -14,11 +15,14 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  Show,
   Spinner,
   Text,
+  typography,
 } from '@chakra-ui/react';
 import { log } from 'console';
 import NextLink from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useSWRMutation from 'swr/mutation';
@@ -29,7 +33,7 @@ interface ILoginForm {
 }
 
 export const LoginForm = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -37,7 +41,7 @@ export const LoginForm = () => {
   } = useForm<ILoginForm>();
   const { trigger } = useSWRMutation(swrKeys.login, mutator<ILoginForm>, {
     onSuccess: () => {
-      setLoggedIn(true);
+      router.push('/shows');
     },
   });
   const onLogin = async (data: ILoginForm) => {
@@ -51,72 +55,72 @@ export const LoginForm = () => {
         alignItems="center"
         justifyContent="center"
         gap="4"
-        backgroundColor="primary"
+        backgroundColor="darkPurple"
         height="100vh"
       >
-        {loggedIn ? (
-          <SuccessWindow link="/shows" message="Logged in!" />
-        ) : (
-          <Flex
-            backgroundColor="pink.800"
-            direction="column"
-            alignItems="center"
-            as="form"
-            gap="4"
-            padding="10"
-            borderRadius="10"
-            onSubmit={handleSubmit(onLogin)}
+        <Flex
+          width="500px"
+          height="500px"
+          backgroundColor="purple2"
+          direction="column"
+          alignItems="center"
+          as="form"
+          gap="30px"
+          py="10"
+          borderRadius="10"
+          onSubmit={handleSubmit(onLogin)}
+          boxShadow="customShadow"
+        >
+          <Heading
+            textStyle="headline"
+            size="md"
+            marginBottom="8"
+            color="white"
           >
-            <Heading color="white" size="md" marginBottom="8">
-              TV shows APP
-            </Heading>
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                children={<EmailIcon color="gray.300" />}
-                fontSize="md"
-              />
-              <FormControl textColor="white">
-                <Input
-                  isDisabled={isSubmitting}
-                  {...register('email')}
-                  paddingLeft="35px"
-                  placeholder="Email"
-                  type="email"
-                  color="white"
-                  _placeholder={{ color: 'white' }}
-                  borderRadius="20px"
-                  size="md"
-                  data-testid="email"
-                />
-              </FormControl>
-            </InputGroup>
-            <PasswordInput
-              disable={isSubmitting}
-              thatPart={register('password')}
-              placeholder="Password"
-              icon={<LockIcon color="gray.300" />}
-              testId="password"
+            TV shows APP
+          </Heading>
+          <InputGroup>
+            <InputLeftElement
+              pointerEvents="none"
+              children={<EmailIcon color="gray.300" width="24px" />}
+              fontSize="md"
+              ml="56px"
             />
-            <Button
-              isLoading={isSubmitting}
-              loadingText="Logging in"
-              type="submit"
-              marginTop="8"
-              backgroundColor="orange.100"
-              _hover={{ bg: 'green.200' }}
-              borderRadius="20px"
-            >
-              Log in
-            </Button>
-            <Flex flexDirection="row" color="white" gap="1" fontSize="xs">
-              <Text> Don't have an account? </Text>
-              <Text as={NextLink} href="/register" textDecoration="underline">
-                Register
-              </Text>
-            </Flex>
+            <FormControl textColor="white">
+              <Input
+                isDisabled={isSubmitting}
+                {...register('email')}
+                placeholder="Email"
+                type="email"
+                color="white"
+                _placeholder={{ color: 'white' }}
+                size="md"
+                data-testid="email"
+              />
+            </FormControl>
+          </InputGroup>
+          <PasswordInput
+            disable={isSubmitting}
+            thatPart={register('password')}
+            placeholder="Password"
+            testId="password"
+          />
+          <Button
+            isLoading={isSubmitting}
+            loadingText="Logging in"
+            type="submit"
+            textStyle="button"
+            variant="default"
+          >
+            LOG IN
+          </Button>
+          <Flex flexDirection="row" color="white" gap="1" fontSize="xs">
+            <Text textStyle="smallCaption"> Don't have an account? </Text>
+            <Text as={NextLink} href="/register" textStyle="smallCaptionBold">
+              Register
+            </Text>
           </Flex>
-        )}
+        </Flex>
       </Flex>
     </>
   );

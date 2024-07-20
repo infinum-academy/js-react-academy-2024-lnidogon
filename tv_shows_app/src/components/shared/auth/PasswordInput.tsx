@@ -1,5 +1,5 @@
 'use client';
-import { EmailIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { EmailIcon, LockIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
   Button,
   FormControl,
@@ -17,7 +17,6 @@ interface IPasswordInput {
   thatPart: any;
   disable: any;
   placeholder: string;
-  icon: any;
   testId: string;
 }
 
@@ -27,26 +26,24 @@ export const PasswordInput = (params: IPasswordInput) => {
     <InputGroup>
       <InputLeftElement
         pointerEvents="none"
-        children={params.icon}
-        fontSize="md"
+        children={<LockIcon color="white" width="24px" />}
+        ml="56px"
       />
       <FormControl textColor="white">
         <Input
           isDisabled={params.disable}
-          paddingLeft="35px"
           {...params.thatPart}
           required
           placeholder={params.placeholder}
           type={hidden ? 'password' : 'text'}
-          color="white"
           _placeholder={{ color: 'white' }}
-          borderRadius="20px"
           size="md"
           data-testid={params.testId}
         />
       </FormControl>
       <InputRightElement fontSize="md">
         <IconButton
+          marginRight="120px"
           color="white"
           aria-label="Search database"
           icon={hidden ? <ViewIcon /> : <ViewOffIcon />}

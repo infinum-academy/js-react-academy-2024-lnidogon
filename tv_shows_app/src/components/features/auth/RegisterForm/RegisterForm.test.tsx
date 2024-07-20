@@ -31,7 +31,7 @@ describe('RegisterForm', () => {
 
     const submitButton = screen
       .getAllByRole('button')
-      .filter((button) => button.innerHTML == 'Register');
+      .filter((button) => button.innerHTML == 'SIGN UP');
 
     expect(submitButton.length).toEqual(1);
   });

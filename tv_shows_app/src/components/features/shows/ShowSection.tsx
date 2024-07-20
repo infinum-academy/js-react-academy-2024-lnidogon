@@ -24,7 +24,7 @@ export const ShowSection = ({ show }: IShowSection) => {
   if (!data) return <LoadingScreen />;
 
   return (
-    <Box backgroundColor="primary" height="100%" padding="4">
+    <Box backgroundColor="darkPurple" height="100%" padding="4">
       <Flex flexDirection="column" alignItems="center" gap="5">
         <ShowDetais show={show} />
         <ShowReviewSection reviews={data.reviews} showId={show.id} />

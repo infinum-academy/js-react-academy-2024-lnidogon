@@ -39,7 +39,7 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
   return (
     <Flex
       height="50px"
-      backgroundColor="pink.800"
+      backgroundColor="purple2"
       color="white"
       borderRadius="8"
       paddingLeft="4"

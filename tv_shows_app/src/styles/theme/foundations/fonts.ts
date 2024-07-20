@@ -1,6 +1,7 @@
+import '@fontsource/roboto';
 const fonts = {
-  body: 'Inter, sans-serif',
-  heading: 'Inter, sans-serif',
+  body: 'Roboto, sans-serif',
+  heading: 'Roboto, sans-serif',
 };
 
 export default fonts;

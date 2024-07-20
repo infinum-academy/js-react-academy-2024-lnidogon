@@ -8,7 +8,7 @@ interface ISuccessWindow {
 
 export const SuccessWindow = ({ link, message }: ISuccessWindow) => (
   <Flex
-    backgroundColor="pink.800"
+    backgroundColor="purple2"
     color="white"
     direction="column"
     alignItems="center"

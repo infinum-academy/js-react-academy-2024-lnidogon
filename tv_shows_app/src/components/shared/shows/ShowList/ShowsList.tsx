@@ -11,7 +11,7 @@ export const ShowsList = ({ shows }: IShowsList) => {
     <Flex
       flexDirection="row"
       flexWrap="wrap"
-      backgroundColor="primary"
+      backgroundColor="darkPurple"
       width="100%"
       height="100%"
       padding="8"
