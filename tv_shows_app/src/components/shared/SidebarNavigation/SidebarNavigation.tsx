@@ -26,22 +26,44 @@ export const SidebarNavigation = () => {
       </Text>
       <Flex flexDirection="column" fontSize="md" color="white" gap="2">
         <Text
+          pt="10px"
+          borderRadius="full"
+          width="140px"
+          height="44px"
+          textAlign="center"
           as={NextLink}
           href="/shows"
-          textDecoration={path == '/shows' ? 'underline' : ''}
+          backgroundColor={path == '/shows' ? 'purple2' : 'darkPurple'}
         >
           All shows
         </Text>
         <Text
+          pt="10px"
+          borderRadius="full"
+          width="140px"
+          height="44px"
+          textAlign="center"
           as={NextLink}
           href="/top-rated"
-          textDecoration={path == '/top-rated' ? 'underline' : ''}
+          backgroundColor={path == '/top-rated' ? 'purple2' : 'darkPurple'}
         >
           Top rated
         </Text>
-        <Text>My profile</Text>
+        <Text
+          pt="10px"
+          borderRadius="full"
+          width="140px"
+          height="44px"
+          textAlign="center"
+          as={NextLink}
+          href="/my-profile"
+          backgroundColor={path == '/my-profile' ? 'purple2' : 'darkPurple'}
+        >
+          My profile
+        </Text>
       </Flex>
       <Text
+        width="90px"
         marginTop="auto"
         color="white"
         as="button"

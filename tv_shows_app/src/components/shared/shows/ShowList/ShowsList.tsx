@@ -14,8 +14,9 @@ export const ShowsList = ({ shows }: IShowsList) => {
       backgroundColor="darkPurple"
       width="100%"
       height="100%"
-      padding="8"
-      gap="7"
+      padding="31px"
+      rowGap="31px"
+      columnGap="31px"
       overflow="auto"
     >
       {shows.map((show, index) => (

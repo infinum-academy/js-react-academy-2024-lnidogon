@@ -1,5 +1,14 @@
 import { IShow } from '@/typings/show';
-import { Container, Flex, Image, Text } from '@chakra-ui/react';
+import { StarIcon } from '@chakra-ui/icons';
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Container,
+  Flex,
+  Image,
+  Text,
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
 
 export interface IShowCard {
@@ -8,37 +17,30 @@ export interface IShowCard {
 
 export const ShowCard = ({ show }: IShowCard) => {
   return (
-    <Flex
-      flexDirection="column"
-      width="300px"
-      maxWidth="20%"
-      height="30%"
+    <Card
+      width="240px"
+      height="375px"
       minHeight="200px"
       borderRadius="8px"
       overflow="hidden"
       as={NextLink}
       href={`/shows/${show.id}`}
     >
-      <Image
-        src={show.image_url}
-        objectFit="cover"
-        height="70%"
-        alt="Slika showa"
-      />
-      <Flex
-        flexDirection="column"
-        padding="2"
-        backgroundColor="orange.100"
-        fontSize="xs"
-        height="fit-content"
-        overflow="hidden"
-        borderBottomRadius="8px"
-      >
-        <Text> {show.title} </Text>
-        <Text>
-          {!show.average_rating ? 'no rating' : show.average_rating + '/5'}
+      <CardHeader w="100%" padding="0" height="300px">
+        <Image src={show.image_url} objectFit="cover" alt="Slika showa" />
+      </CardHeader>
+      <CardBody backgroundColor="white" py="18px">
+        <Text textStyle="subtitle" color="purple2">
+          {' '}
+          {show.title}{' '}
         </Text>
-      </Flex>
-    </Flex>
+        <Flex direction="row" alignItems="center" gap="4px">
+          <StarIcon width="16px" color="purple2" />
+          <Text textStyle="smallCaption" color="purple2">
+            {!show.average_rating ? 'no rating' : show.average_rating + '/5'}
+          </Text>
+        </Flex>
+      </CardBody>
+    </Card>
   );
 };
