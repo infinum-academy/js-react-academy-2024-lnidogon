@@ -110,6 +110,7 @@ export const LoginFormDesktop = () => {
             loadingText="Logging in"
             type="submit"
             variant="default"
+            textStyle="button"
           >
             LOG IN
           </Button>

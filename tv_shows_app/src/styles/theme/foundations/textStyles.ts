@@ -20,8 +20,8 @@ const textStyles = {
     fontWeight: '400',
   },
   bodyBold: {
-    fontSize: '24px',
-    lineHeight: '32px',
+    fontSize: '20px',
+    lineHeight: '30px',
     fontWeight: '700',
   },
   subtitle: {
