@@ -11,4 +11,5 @@ export const swrKeys = {
   listReviews: (show_id: string | number) =>
     `${apiUrl}/shows/${show_id}/reviews`,
   alterReview: (show_id: string | number) => `${apiUrl}/reviews/${show_id}`,
+  me: `${apiUrl}/users/me`,
 };

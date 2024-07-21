@@ -109,7 +109,6 @@ export const LoginForm = () => {
             isLoading={isSubmitting}
             loadingText="Logging in"
             type="submit"
-            textStyle="button"
             variant="default"
           >
             LOG IN

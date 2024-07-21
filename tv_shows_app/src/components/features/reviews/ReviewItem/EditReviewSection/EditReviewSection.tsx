@@ -169,7 +169,7 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
               type="submit"
               form="edit-form"
               isDisabled={isSubmitting}
-              backgroundColor="orange.100"
+              variant="default"
             >
               {isSubmitting ? <Spinner /> : 'Edit'}
             </Button>

@@ -21,7 +21,7 @@ export const ShowDetais = ({ show }: IShowDetailsProps) => {
         flexDirection="row"
         gap="3"
         color="black"
-        backgroundColor="orange.100"
+        backgroundColor="white"
         padding="2"
         paddingRight="5"
         paddingLeft="5"

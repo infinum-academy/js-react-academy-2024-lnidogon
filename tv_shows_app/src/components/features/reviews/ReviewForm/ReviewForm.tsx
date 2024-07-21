@@ -152,7 +152,7 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
         <Button
           isDisabled={isSubmitting}
           type="submit"
-          fontSize="sm"
+          variant="default"
           onSubmit={handleSubmit(onSubmitHandler)}
           marginLeft="auto"
         >

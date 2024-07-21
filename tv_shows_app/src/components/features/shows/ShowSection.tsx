@@ -28,7 +28,7 @@ export const ShowSection = ({ show }: IShowSection) => {
       backgroundColor="darkPurple"
       height="100%"
       padding="31px"
-      overflow="auto"
+      overflowY="auto"
     >
       <Flex flexDirection="column" alignItems="center" gap="61px">
         <ShowDetais show={show} />

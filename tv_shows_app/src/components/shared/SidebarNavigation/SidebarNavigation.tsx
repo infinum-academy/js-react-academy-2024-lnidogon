@@ -21,11 +21,12 @@ export const SidebarNavigation = () => {
       height="100%"
       padding="4"
     >
-      <Text color="white" fontWeight="700" fontSize="xl">
+      <Text color="white" fontWeight="700" textStyle="title">
         TV shows APP
       </Text>
-      <Flex flexDirection="column" fontSize="md" color="white" gap="2">
+      <Flex flexDirection="column" color="white" gap="2">
         <Text
+          textStyle="smallCaption"
           pt="10px"
           borderRadius="full"
           width="140px"
@@ -38,6 +39,7 @@ export const SidebarNavigation = () => {
           All shows
         </Text>
         <Text
+          textStyle="smallCaption"
           pt="10px"
           borderRadius="full"
           width="140px"
@@ -50,6 +52,7 @@ export const SidebarNavigation = () => {
           Top rated
         </Text>
         <Text
+          textStyle="smallCaption"
           pt="10px"
           borderRadius="full"
           width="140px"
