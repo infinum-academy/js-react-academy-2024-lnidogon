@@ -6,6 +6,10 @@ const Button = defineStyleConfig({
     textStyle: 'button',
   },
   sizes: {
+    sm: {
+      width: '97px',
+      height: '38px',
+    },
     md: {
       width: '144px',
       height: '52px',
@@ -20,6 +24,10 @@ const Button = defineStyleConfig({
         bg: 'lightPurple',
       },
     },
+  },
+  defaultProps: {
+    variant: 'default',
+    size: 'md',
   },
 });
 

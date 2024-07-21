@@ -17,7 +17,7 @@ export const ReviewList = ({ reviews }: IReviewsList) => {
     else setOpenPage(openPage + increment);
   };
   return (
-    <Flex flexDirection="column" gap="24px" width="100%" marginBottom="3">
+    <Flex flexDirection="column" gap="16px" width="100%" marginBottom="3">
       {reviews
         .filter(
           (el, index) => index >= openPage * 5 && index < openPage * 5 + 5

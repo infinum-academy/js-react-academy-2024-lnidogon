@@ -45,6 +45,7 @@ export const SidebarNavigationMobile = () => {
         <IconButton
           ml="auto"
           backgroundColor="transparent"
+          color="white"
           _hover={{ backgroundColor: 'transparent' }}
           colorScheme="teal"
           onClick={onOpen}

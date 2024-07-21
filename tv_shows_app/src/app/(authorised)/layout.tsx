@@ -42,8 +42,8 @@ export default function RootLayout({
           </Show>
           <Hide above="1024px">
             <Flex height="100vh" direction="column">
-              <Box>{children}</Box>
-              <Box height="15%" width="100%" position="fixed">
+              <Box pt="10%">{children}</Box>
+              <Box height="10 %" width="100%" position="fixed">
                 <SidebarNavigation />
               </Box>
             </Flex>

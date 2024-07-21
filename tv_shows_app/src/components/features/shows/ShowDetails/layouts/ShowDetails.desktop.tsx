@@ -6,9 +6,15 @@ interface IShowDetailsProps {
   show: IShow;
 }
 
-export const ShowDetais = ({ show }: IShowDetailsProps) => {
+export const ShowDetailsDesktop = ({ show }: IShowDetailsProps) => {
   return (
-    <Flex height="608px" width="1052px" flexDirection="column" borderRadius="7">
+    <Flex
+      height="608px"
+      width="1052px"
+      flexDirection="column"
+      borderRadius="20px"
+      overflow="hidden"
+    >
       <Image
         src={show?.image_url}
         alt="Naslovna slika showa"
