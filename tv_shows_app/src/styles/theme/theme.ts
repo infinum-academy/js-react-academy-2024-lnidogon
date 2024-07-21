@@ -5,11 +5,13 @@ import textStyles from './foundations/textStyles';
 import shadows from './foundations/shadows';
 import Button from './components/button';
 import Input from './components/inputs';
+import Card from './components/card';
 
 const theme = extendTheme({
   components: {
     Button,
     Input,
+    Card,
   },
   colors,
   fonts,

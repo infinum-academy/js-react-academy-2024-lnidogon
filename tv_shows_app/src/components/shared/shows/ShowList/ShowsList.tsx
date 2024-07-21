@@ -15,9 +15,8 @@ export const ShowsList = ({ shows }: IShowsList) => {
       width="100%"
       height="100%"
       padding="31px"
-      rowGap="31px"
-      columnGap="31px"
       overflow="auto"
+      justifyContent="space-evenly"
     >
       {shows.map((show, index) => (
         <ShowCard show={show} key={index} />

@@ -87,7 +87,7 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
       <Text fontSize="xs">{review.comment}</Text>
       {isMyReview ? (
         <Flex marginLeft="auto" direction="row" gap="3">
-          <Menu>
+          <Menu size="xs">
             <MenuButton
               as={Button}
               width="24px"
@@ -98,11 +98,18 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
             >
               ⋮
             </MenuButton>
-            <MenuList width="128px">
-              <MenuItem width="128px">
+            <MenuList
+              minW="0"
+              w="128px"
+              height="82px"
+              p="0"
+              borderRadius="8px"
+              overflow="hidden"
+            >
+              <MenuItem w="128px" h="41px">
                 <EditReviewSection review={review} />
               </MenuItem>
-              <MenuItem width="128px">
+              <MenuItem w="128px" h="41px">
                 <DeleteButton review={review} />
               </MenuItem>
             </MenuList>
