@@ -11,6 +11,13 @@ const Input = defineStyleConfig({
     },
   },
   sizes: {
+    sm: {
+      field: {
+        px: '50px',
+        width: '288px',
+        height: '56px',
+      },
+    },
     md: {
       field: {
         px: '50px',
