@@ -28,6 +28,7 @@ const theme = extendTheme({
   colors,
   fonts,
   fontSize,
+  fontWeight,
   shadows,
 });
 
