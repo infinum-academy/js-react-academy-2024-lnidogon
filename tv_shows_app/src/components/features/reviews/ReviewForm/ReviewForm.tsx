@@ -5,8 +5,6 @@ import {
   Text,
   FormControl,
   Spinner,
-  Show,
-  Hide,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -19,8 +17,6 @@ import useSWRMutation from 'swr/mutation';
 import { fetcher } from '@/fetchers/fetcher';
 import { IReview } from '../ReviewItem/ReviewItem';
 import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
-import { ReviewFormMobile } from './layouts/ReviewForm.mobile';
-import { ReviewFormDesktop } from './layouts/ReviewForm.desktop';
 
 export interface IReviewFormProps {
   showId: number;
@@ -42,14 +38,132 @@ interface ICreateResponseParams {
 }
 
 export const ReviewForm = ({ showId }: IReviewFormProps) => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<IReviewFormInputs>({ defaultValues: { comment: '', rating: 0 } });
+  const [locked, setLocked] = useState(false);
+  const [selectedNumberOfStars, setSelectedNumberOfStars] = useState(0);
+  const [hoveredNumberOfStars, setHoveredNumberOfStars] = useState(0);
+
+  const onClick = (index: number) => {
+    setSelectedNumberOfStars(index);
+    setValue('rating', index);
+    setLocked(true);
+  };
+
+  const onHover = (index: number) => {
+    setHoveredNumberOfStars(index);
+  };
+
+  const {
+    data: ogData,
+    mutate,
+    isLoading,
+  } = useSWR<{ reviews: Array<IReview> }>(
+    swrKeys.listReviews(showId),
+    async () =>
+      await fetcher<{ reviews: Array<IReview> }>(swrKeys.listReviews(showId))
+  );
+
+  const { trigger } = useSWRMutation(
+    swrKeys.createReview,
+    createReviewMutator<ICreateReviewParams>,
+    {
+      onSuccess: (data) => {
+        if (ogData == undefined) mutate();
+        else mutate({ reviews: [data.review, ...ogData.reviews] }, false);
+      },
+    }
+  );
+
+  async function onAdd(comment: string, rating: number, showId: number) {
+    await trigger({
+      comment: comment,
+      rating: rating,
+      show_id: showId,
+    });
+  }
+
+  const onSubmitHandler = (data: IReviewFormInputs) => {
+    if (data.rating == 0) return;
+    onAdd(data.comment, data.rating, showId);
+    setSelectedNumberOfStars(0);
+    setLocked(false);
+    setHoveredNumberOfStars(0);
+    setValue('rating', 0);
+  };
+
   return (
-    <>
-      <Show above="1024px">
-        <ReviewFormDesktop showId={showId} />
-      </Show>
-      <Hide above="1024px">
-        <ReviewFormMobile showId={showId} />
-      </Hide>
-    </>
+    <Flex
+      flexDirection="column"
+      gap={{ base: '40px', lg: '38px' }}
+      width="100%"
+      height="156px"
+      as="form"
+      onSubmit={handleSubmit(onSubmitHandler)}
+    >
+      <FormControl>
+        <Textarea
+          {...register('comment')}
+          required
+          backgroundColor="white"
+          color="lightPurple"
+          placeholder="Add review..."
+          id="review-input"
+          width={{ base: '344px', lg: '100%' }}
+          padding={2}
+          height={{ base: '52px', lg: '80px' }}
+          minHeight={{ base: '52px', lg: '80px' }}
+          borderRadius={{ base: 'full', lg: 7 }}
+          textStyle="body"
+          isDisabled={isSubmitting}
+        />
+      </FormControl>
+
+      <Flex
+        flexDirection="row"
+        alignItems="center"
+        width={{ base: '344px', lg: '870px' }}
+        gap={5}
+      >
+        <Text color="white" fontSize="sm">
+          Rating:
+        </Text>
+        <FormControl>
+          <Flex
+            flexDirection="row"
+            width={{ base: '50%', lg: '20%' }}
+            gap={1}
+            onMouseEnter={() => {
+              setLocked(false);
+            }}
+            onMouseLeave={() => {
+              setLocked(true);
+              setHoveredNumberOfStars(0);
+            }}
+            id="star-input"
+          >
+            <StarReview
+              noOfStars={locked ? selectedNumberOfStars : hoveredNumberOfStars}
+              isStatic={false}
+              onChange={onClick}
+              onHover={onHover}
+            />
+          </Flex>
+        </FormControl>
+        <Button
+          isDisabled={isSubmitting}
+          type="submit"
+          onSubmit={handleSubmit(onSubmitHandler)}
+          marginLeft="auto"
+          size={{ base: 'sm', lg: 'md' }}
+        >
+          {isSubmitting ? <Spinner /> : 'Post'}
+        </Button>
+      </Flex>
+    </Flex>
   );
 };

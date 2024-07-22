@@ -1,44 +1,134 @@
 'use client';
-import { AuthRedirect } from '@/components/shared/auth/AuthRedirect';
-import { PasswordInput } from '@/components/shared/auth/PasswordInput';
-import { SuccessWindow } from '@/components/shared/auth/SuccessWindow';
-import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 import { mutator } from '@/fetchers/mutators';
-import { swrKeys } from '@/fetchers/swrKeys';
-import theme from '@/styles/theme/theme';
-import { EmailIcon, LockIcon } from '@chakra-ui/icons';
+import { EmailIcon, LockIcon, RepeatIcon } from '@chakra-ui/icons';
+import NextLink from 'next/link';
 import {
+  Box,
   Button,
   Flex,
   FormControl,
   Heading,
-  Hide,
   Input,
   InputGroup,
   InputLeftElement,
-  Show,
   Spinner,
   Text,
-  typography,
 } from '@chakra-ui/react';
-import { log } from 'console';
-import NextLink from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Fragment, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useSWRMutation from 'swr/mutation';
-import { RegisterFormMobile } from './layouts/RegisterForm.mobile';
-import { RegisterFormDesktop } from './layouts/RegisterForm.desktop';
+import { useState } from 'react';
+import { SuccessWindow } from '@/components/shared/auth/SuccessWindow';
+import { PasswordInput } from '@/components/shared/auth/PasswordInput';
+import { swrKeys } from '@/fetchers/swrKeys';
+import { useRouter } from 'next/navigation';
+
+interface IRegisterForm {
+  email: string;
+  password: string;
+  password_confirmation: string;
+}
 
 export const RegisterForm = () => {
+  const router = useRouter();
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<IRegisterForm>();
+  const [errorMesssage, setErrorMessage] = useState('');
+  const { trigger } = useSWRMutation(swrKeys.register, mutator<IRegisterForm>, {
+    onSuccess: () => {
+      router.push('/shows');
+    },
+  });
+  const onRegister = async (data: IRegisterForm) => {
+    if (data.password.length < 8) {
+      setErrorMessage('Password must be at least 8 characters');
+      return;
+    }
+    if (data.password != data.password_confirmation) {
+      setErrorMessage('Password mismatch');
+      return;
+    }
+    await trigger(data);
+  };
   return (
-    <>
-      <Hide above="1024px">
-        <RegisterFormMobile />
-      </Hide>
-      <Show above="1024px">
-        <RegisterFormDesktop />
-      </Show>
-    </>
+    <Flex
+      direction="column"
+      alignItems="center"
+      justifyContent="center"
+      gap={4}
+      backgroundColor={{ base: 'purple2', lg: 'darkPurple' }}
+      height="100vh"
+    >
+      <Flex
+        borderRadius={{ base: 0, lg: 10 }}
+        backgroundColor={{ base: 'transparent', lg: 'purple2' }}
+        width={{ base: '288px', lg: '494px' }}
+        height={{ base: '100%', lg: '564px' }}
+        direction="column"
+        alignItems="center"
+        as="form"
+        gap="30px"
+        py={10}
+        onSubmit={handleSubmit(onRegister)}
+      >
+        <Heading color="white" size="md" marginBottom={8} textStyle="heading">
+          TV shows APP
+        </Heading>
+        <InputGroup>
+          <InputLeftElement
+            pointerEvents="none"
+            children={<EmailIcon color="white" />}
+            ml={{ base: 0, lg: '56px' }}
+            fontSize="md"
+          />
+          <FormControl textColor="white">
+            <Input
+              isDisabled={isSubmitting}
+              {...register('email')}
+              placeholder="Email"
+              type="email"
+              _placeholder={{ color: 'white' }}
+              size={{ base: 'sm', lg: 'md' }}
+              data-testid="email"
+              mx={{ base: '0', lg: '56px' }}
+            />
+          </FormControl>
+        </InputGroup>
+        <PasswordInput
+          disable={isSubmitting}
+          thatPart={register('password')}
+          placeholder="Password"
+          testId="password"
+        />
+        <PasswordInput
+          disable={isSubmitting}
+          thatPart={register('password_confirmation')}
+          placeholder="Confirm password"
+          testId="password-confirmation"
+        />
+        {errorMesssage && (
+          <Text color="error" textStyle="smallCaption">
+            {errorMesssage}
+          </Text>
+        )}
+        <Button
+          type="submit"
+          isLoading={isSubmitting}
+          loadingText="Registering"
+          variant="default"
+        >
+          SIGN UP
+        </Button>
+        <Flex flexDirection="row" color="white" gap={1} fontSize="xs">
+          <Text textStyle="smallCaption"> Already have an account? </Text>
+          <Text as={NextLink} href="/login" textStyle="smallCaptionBold">
+            Log in
+          </Text>
+        </Flex>
+      </Flex>
+    </Flex>
   );
+  //
 };

@@ -1,8 +1,6 @@
 import { IShow } from '@/typings/show';
 import { StarIcon } from '@chakra-ui/icons';
-import { Flex, Heading, Hide, Image, Show, Text } from '@chakra-ui/react';
-import { ShowDetailsDesktop } from './layouts/ShowDetails.desktop';
-import { ShowDetailsMobile } from './layouts/ShowDetails.mobile';
+import { Flex, Heading, Image, Text } from '@chakra-ui/react';
 
 interface IShowDetailsProps {
   show: IShow;
@@ -10,13 +8,54 @@ interface IShowDetailsProps {
 
 export const ShowDetails = ({ show }: IShowDetailsProps) => {
   return (
-    <>
-      <Show above="1024px">
-        <ShowDetailsDesktop show={show} />
-      </Show>
-      <Hide above="1024px">
-        <ShowDetailsMobile show={show} />
-      </Hide>
-    </>
+    <Flex
+      height={{ base: '544px', lg: '608px' }}
+      width={{ base: '344px', lg: '1052px' }}
+      flexDirection="column"
+      borderRadius="20px"
+      overflow="hidden"
+    >
+      <Image
+        src={show?.image_url}
+        alt="Naslovna slika showa"
+        fallbackSrc="https://fakeimg.pl/600x400/ff0000/ffffff?text=Nema+slike+:("
+        objectFit="cover"
+        height={{ base: '344px', lg: '440px' }}
+      />
+      <Flex
+        height={{ base: '200px', lg: '168px' }}
+        flexDirection={{ base: 'column', lg: 'row' }}
+        gap={3}
+        color="black"
+        backgroundColor="white"
+        padding={2}
+        px={5}
+        overflow="hidden"
+        borderBottomRadius={7}
+        bgColor="white"
+        alignItems={{ base: 'none', lg: 'center' }}
+      >
+        <Flex flexDirection="column" width="fit-content" minWidth="30%">
+          <Heading textStyle="body" color="purple2">
+            {show.title}
+          </Heading>
+          <Flex alignItems="center" gap={1}>
+            <StarIcon width="24px" color="purple2" />
+            <Text textStyle="body" color="purple2">
+              {!show.average_rating ? `no ratings` : show.average_rating + `/5`}
+            </Text>
+          </Flex>
+        </Flex>
+        <Text
+          ml="auto"
+          mr="50px"
+          width={{ bas: '300px', lg: '478px' }}
+          textStyle="smallCaption"
+          color="purple2"
+        >
+          {show.description}
+        </Text>
+      </Flex>
+    </Flex>
   );
 };
