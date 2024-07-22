@@ -33,10 +33,10 @@ import { SidebarNavigationMobile } from './layouts/SidebarNavigation.mobile';
 export const SidebarNavigation = () => {
   return (
     <>
-      <Hide above="1024px">
+      <Hide above="lg">
         <SidebarNavigationMobile />
       </Hide>
-      <Show above="1024px">
+      <Show above="lg">
         <SidebarNavigationDesktop />
       </Show>
     </>

@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body style={{ backgroundColor: 'darkPurple', height: 'fit-content' }}>
+      <body>
         <Providers>{children}</Providers>
       </body>
     </html>

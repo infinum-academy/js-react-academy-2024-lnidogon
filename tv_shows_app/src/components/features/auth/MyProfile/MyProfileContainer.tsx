@@ -64,7 +64,7 @@ export const MyProfileContainer = () => {
           width={{ base: '270px', lg: '600px' }}
           height={{ base: '270px', lg: '400px' }}
           backgroundColor="purple2"
-          borderRadius="20px"
+          borderRadius="xlRadius"
           padding="0"
           margin="0"
           border="dashed"

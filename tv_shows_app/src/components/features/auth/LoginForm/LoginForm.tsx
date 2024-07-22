@@ -67,7 +67,7 @@ export const LoginForm = () => {
           as="form"
           gap="30px"
           py="10"
-          borderRadius="10"
+          borderRadius="lgRadius"
           onSubmit={handleSubmit(onLogin)}
           boxShadow={{ base: 'none', lg: 'customShadow' }}
         >

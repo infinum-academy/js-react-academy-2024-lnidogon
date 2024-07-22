@@ -46,7 +46,7 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
       width={{ base: '344px', lg: '870px' }}
       backgroundColor="purple2"
       color="white"
-      borderRadius="20px"
+      borderRadius="xlRadius"
       padding={{ base: '24px', lg: '4 4 2 2' }}
       flexDirection={{ base: 'column', lg: 'row' }}
       gap={2}
@@ -107,7 +107,7 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
                 w="128px"
                 height="82px"
                 p={0}
-                borderRadius="8px"
+                borderRadius="smRadius"
                 overflow="hidden"
               >
                 <MenuItem w="128px" h="41px">

@@ -12,7 +12,7 @@ export const ShowDetails = ({ show }: IShowDetailsProps) => {
       height={{ base: '544px', lg: '608px' }}
       width={{ base: '344px', lg: '1052px' }}
       flexDirection="column"
-      borderRadius="20px"
+      borderRadius="xlRadius"
       overflow="hidden"
     >
       <Image

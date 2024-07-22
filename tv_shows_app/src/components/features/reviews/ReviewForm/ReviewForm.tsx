@@ -117,7 +117,7 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
           padding={2}
           height={{ base: '52px', lg: '80px' }}
           minHeight={{ base: '52px', lg: '80px' }}
-          borderRadius={{ base: 'full', lg: 7 }}
+          borderRadius={{ base: 'full', lg: 'mdRadius' }}
           textStyle="body"
           isDisabled={isSubmitting}
         />

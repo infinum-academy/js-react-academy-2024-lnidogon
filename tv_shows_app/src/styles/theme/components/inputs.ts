@@ -5,7 +5,7 @@ const Input = defineStyleConfig({
     field: {
       bg: 'purple2',
       color: 'white',
-      borderRadius: '40px',
+      borderRadius: 'xxlRadius',
       textStyle: 'button',
       mx: '56px',
     },

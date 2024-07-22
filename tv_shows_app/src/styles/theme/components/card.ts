@@ -12,12 +12,12 @@ const helpers = createMultiStyleConfigHelpers([
 const Card = helpers.defineMultiStyleConfig({
   baseStyle: {
     body: {
-      borderRadiusBotton: '8px',
+      borderRadiusBotton: 'smRadius',
       overflow: 'hidden',
     },
     container: {
       boxShadow: 'customShadow',
-      borderRadius: '8px',
+      borderRadius: 'smRadius',
       overflow: 'hidden',
     },
   },

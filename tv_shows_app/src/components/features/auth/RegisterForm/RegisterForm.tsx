@@ -62,7 +62,7 @@ export const RegisterForm = () => {
       height="100vh"
     >
       <Flex
-        borderRadius={{ base: 0, lg: 10 }}
+        borderRadius={{ base: 0, lg: 'lgRadius' }}
         backgroundColor={{ base: 'transparent', lg: 'purple2' }}
         width={{ base: '288px', lg: '494px' }}
         height={{ base: '100%', lg: '564px' }}
