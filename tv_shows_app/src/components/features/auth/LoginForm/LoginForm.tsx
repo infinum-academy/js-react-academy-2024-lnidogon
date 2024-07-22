@@ -69,14 +69,9 @@ export const LoginForm = () => {
           py="10"
           borderRadius="lgRadius"
           onSubmit={handleSubmit(onLogin)}
-          boxShadow={{ base: 'none', lg: 'customShadow' }}
+          boxShadow={{ base: 'none', lg: 'sm' }}
         >
-          <Heading
-            textStyle="headline"
-            size="md"
-            marginBottom="8"
-            color="white"
-          >
+          <Heading fontSize="headline" size="md" marginBottom="8" color="white">
             TV shows APP
           </Heading>
           <InputGroup>
@@ -110,14 +105,20 @@ export const LoginForm = () => {
             isLoading={isSubmitting}
             loadingText="Logging in"
             type="submit"
-            variant="default"
-            textStyle="button"
+            width="144px"
+            fontSize="button"
+            fontWeight="bold"
           >
             LOG IN
           </Button>
           <Flex flexDirection="row" color="white" gap="1" fontSize="xs">
-            <Text textStyle="smallCaption"> Don't have an account? </Text>
-            <Text as={NextLink} href="/register" textStyle="smallCaptionBold">
+            <Text fontSize="smallCaption"> Don't have an account? </Text>
+            <Text
+              as={NextLink}
+              href="/register"
+              fontSize="smallCaptionBold"
+              fontWeight="bold"
+            >
               Register
             </Text>
           </Flex>

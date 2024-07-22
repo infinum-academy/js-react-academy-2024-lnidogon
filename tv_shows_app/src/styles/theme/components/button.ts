@@ -3,15 +3,14 @@ import { defineStyleConfig, StyleFunctionProps } from '@chakra-ui/react';
 const Button = defineStyleConfig({
   baseStyle: {
     borderRadius: 'full',
-    textStyle: 'button',
+    fontSize: 'button',
+    fontWeight: 'bold',
   },
   sizes: {
     sm: {
-      width: '97px',
       height: '38px',
     },
     md: {
-      width: '144px',
       height: '52px',
     },
   },

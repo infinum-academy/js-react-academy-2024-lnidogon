@@ -73,7 +73,7 @@ export const RegisterForm = () => {
         py={10}
         onSubmit={handleSubmit(onRegister)}
       >
-        <Heading color="white" size="md" marginBottom={8} textStyle="heading">
+        <Heading color="white" size="md" marginBottom={8} fontSize="heading">
           TV shows APP
         </Heading>
         <InputGroup>
@@ -109,7 +109,7 @@ export const RegisterForm = () => {
           testId="password-confirmation"
         />
         {errorMesssage && (
-          <Text color="error" textStyle="smallCaption">
+          <Text color="error" fontSize="smallCaption">
             {errorMesssage}
           </Text>
         )}
@@ -117,13 +117,13 @@ export const RegisterForm = () => {
           type="submit"
           isLoading={isSubmitting}
           loadingText="Registering"
-          variant="default"
+          width="144px"
         >
           SIGN UP
         </Button>
         <Flex flexDirection="row" color="white" gap={1} fontSize="xs">
-          <Text textStyle="smallCaption"> Already have an account? </Text>
-          <Text as={NextLink} href="/login" textStyle="smallCaptionBold">
+          <Text fontSize="smallCaption"> Already have an account? </Text>
+          <Text as={NextLink} href="/login" fontSize="smallCaptionBold">
             Log in
           </Text>
         </Flex>

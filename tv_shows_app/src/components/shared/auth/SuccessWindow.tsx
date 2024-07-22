@@ -19,7 +19,7 @@ export const SuccessWindow = ({ link, message }: ISuccessWindow) => (
     gap="5"
   >
     <Text>{message}</Text>
-    <Button as={NextLink} href={link} variant="default">
+    <Button as={NextLink} href={link} width="144px">
       Proceed
     </Button>
   </Flex>

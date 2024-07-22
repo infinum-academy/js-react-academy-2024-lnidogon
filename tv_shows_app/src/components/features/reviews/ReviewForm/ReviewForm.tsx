@@ -118,7 +118,7 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
           height={{ base: '52px', lg: '80px' }}
           minHeight={{ base: '52px', lg: '80px' }}
           borderRadius={{ base: 'full', lg: 'mdRadius' }}
-          textStyle="body"
+          fontSize="body"
           isDisabled={isSubmitting}
         />
       </FormControl>
@@ -160,6 +160,7 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
           onSubmit={handleSubmit(onSubmitHandler)}
           marginLeft="auto"
           size={{ base: 'sm', lg: 'md' }}
+          width={{ base: '98px', lg: '144px' }}
         >
           {isSubmitting ? <Spinner /> : 'Post'}
         </Button>

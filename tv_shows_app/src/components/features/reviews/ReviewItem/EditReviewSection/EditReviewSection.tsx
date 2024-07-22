@@ -103,9 +103,11 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
         backgroundColor="transparent"
         _hover={{ backgroundColor: 'transparent' }}
         marginLeft="auto"
-        textStyle="button"
+        fontSize="button"
+        fontWeight="bold"
         color="purple2"
         onClick={onOpen}
+        width="144px"
       >
         EDIT
       </Button>
@@ -169,7 +171,7 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
               type="submit"
               form="edit-form"
               isDisabled={isSubmitting}
-              variant="default"
+              width="144px"
             >
               {isSubmitting ? <Spinner /> : 'Edit'}
             </Button>

@@ -19,10 +19,12 @@ export const ShowCard = ({ show }: IShowCard) => {
   return (
     <Card
       size={{ base: 'sm', lg: 'md' }}
+      width={{ base: '342px', lg: '240px' }}
+      margin={{ base: '32px', lg: ' 18px' }}
       as={NextLink}
       href={`/shows/${show.id}`}
     >
-      <CardHeader>
+      <CardHeader w="100%">
         <Image src={show.image_url} objectFit="cover" alt="Slika showa" />
       </CardHeader>
       <CardBody>
@@ -30,7 +32,7 @@ export const ShowCard = ({ show }: IShowCard) => {
           direction={{ base: 'row', lg: 'column' }}
           alignItems={{ base: 'center', lg: 'start' }}
         >
-          <Text hideBelow="lg" textStyle="subtitle" color="purple2">
+          <Text fontSize="subtitle" color="purple2">
             {show.title}
           </Text>
           <Flex
@@ -40,11 +42,8 @@ export const ShowCard = ({ show }: IShowCard) => {
             ml={{ base: 'auto', lg: '0' }}
             mr={{ base: '20px', lg: 'auto' }}
           >
-            <Text hideFrom="lg" textStyle="subtitle" color="purple2">
-              {show.title}
-            </Text>
             <StarIcon width="16px" color="purple2" />
-            <Text textStyle="smallCaption" color="purple2">
+            <Text fontSize="smallCaption" color="purple2">
               {!show.average_rating ? 'no rating' : show.average_rating + '/5'}
             </Text>
           </Flex>

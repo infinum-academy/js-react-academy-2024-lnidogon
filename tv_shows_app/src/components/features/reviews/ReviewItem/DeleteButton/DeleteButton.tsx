@@ -58,6 +58,7 @@ export const DeleteButton = ({ review }: IDeleteButtonProps) => {
         _hover={{ backgroundColor: 'transparent' }}
         marginLeft="auto"
         onClick={onOpen}
+        width="144px"
       >
         DELETE
       </Button>
@@ -74,7 +75,7 @@ export const DeleteButton = ({ review }: IDeleteButtonProps) => {
           <ModalBody>Are you sure you want to delete this review?</ModalBody>
           <ModalFooter>
             <Button
-              variant="default"
+              width="144px"
               onClick={async () => await trigger({ id: review.id })}
             >
               Yes

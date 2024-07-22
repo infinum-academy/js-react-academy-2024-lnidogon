@@ -1,12 +1,13 @@
 import { extendTheme } from '@chakra-ui/react';
 import colors from './foundations/colors';
 import fonts from './foundations/fonts';
-import textStyles from './foundations/textStyles';
 import shadows from './foundations/shadows';
 import Button from './components/button';
 import Input from './components/inputs';
 import Card from './components/card';
 import radii from './foundations/radius';
+import fontSize from './foundations/fontSize';
+import fontWeight from './foundations/fontWeight';
 
 const theme = extendTheme({
   styles: {
@@ -14,6 +15,7 @@ const theme = extendTheme({
       body: {
         backgroundColor: 'darkPurple',
         height: 'fit-content',
+        fontWeight: 'default',
       },
     },
   },
@@ -25,7 +27,7 @@ const theme = extendTheme({
   radii,
   colors,
   fonts,
-  textStyles,
+  fontSize,
   shadows,
 });
 

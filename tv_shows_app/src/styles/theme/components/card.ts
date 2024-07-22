@@ -16,7 +16,7 @@ const Card = helpers.defineMultiStyleConfig({
       overflow: 'hidden',
     },
     container: {
-      boxShadow: 'customShadow',
+      boxShadow: 'sm',
       borderRadius: 'smRadius',
       overflow: 'hidden',
     },
@@ -24,16 +24,12 @@ const Card = helpers.defineMultiStyleConfig({
   sizes: {
     sm: {
       card: {
-        width: '342px',
         height: '480px',
       },
       container: {
-        margin: '32px',
-        width: '342px',
         height: '480px',
       },
       header: {
-        w: '100%',
         padding: '0',
         height: '428px',
       },
@@ -43,17 +39,13 @@ const Card = helpers.defineMultiStyleConfig({
     },
     md: {
       card: {
-        width: '240px',
         height: '375px',
       },
       container: {
-        margin: '18px',
-        width: '240px',
         height: '375px',
       },
       header: {
-        w: '100%',
-        padding: '0',
+        padding: 0,
         height: '300px',
       },
       body: {

@@ -18,7 +18,7 @@ export const ShowReviewSection = ({
       gap={{ base: '32px', lg: '26px' }}
       width={{ base: '344px', lg: '1052px' }}
     >
-      <Text color="white" width="175px" textStyle="body">
+      <Text color="white" width="175px" fontSize="body">
         Reviews
       </Text>
       <Flex flexDirection="column" gap={{ base: '0', lg: '61px' }} width="100%">

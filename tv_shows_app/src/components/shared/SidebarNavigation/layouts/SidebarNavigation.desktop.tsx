@@ -22,12 +22,12 @@ export const SidebarNavigationDesktop = () => {
       height="100%"
       padding="4"
     >
-      <Text color="white" fontWeight="700" textStyle="title">
+      <Text color="white" fontWeight="700" fontSize="title">
         TV shows APP
       </Text>
       <Flex flexDirection="column" color="white" gap="2">
         <Text
-          textStyle="smallCaption"
+          fontSize="smallCaption"
           pt="10px"
           borderRadius="full"
           width="140px"
@@ -40,7 +40,7 @@ export const SidebarNavigationDesktop = () => {
           All shows
         </Text>
         <Text
-          textStyle="smallCaption"
+          fontSize="smallCaption"
           pt="10px"
           borderRadius="full"
           width="140px"
@@ -53,7 +53,7 @@ export const SidebarNavigationDesktop = () => {
           Top rated
         </Text>
         <Text
-          textStyle="smallCaption"
+          fontSize="smallCaption"
           pt="10px"
           borderRadius="full"
           width="140px"

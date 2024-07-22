@@ -52,10 +52,10 @@ export const MyProfileContainer = () => {
       gap="40px"
     >
       <Flex flexDirection="column" alignItems="center">
-        <Text textStyle="smallCaption" color="white">
+        <Text fontSize="smallCaption" color="white">
           EMAIL
         </Text>
-        <Text textStyle="subtitle" color="white">
+        <Text fontSize="subtitle" color="white">
           {data.user.email}
         </Text>
       </Flex>
@@ -95,7 +95,7 @@ export const MyProfileContainer = () => {
               height="100%"
             />
           </Box>
-          <Button size="md" variant="default">
+          <Button size="md" width="144px">
             UPLOAD IMAGE
           </Button>
         </>

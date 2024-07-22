@@ -72,9 +72,9 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
           height="fit-content"
           minWidth="fit-content"
         >
-          <Text textStyle="note"> {review.user.email} </Text>
+          <Text fontSize="note"> {review.user.email} </Text>
           <Flex flexDirection="row" alignItems="center" gap="1">
-            <Text textStyle="note">{review.rating}/5</Text>
+            <Text fontSize="note">{review.rating}/5</Text>
             <Box width={{ base: '50%', lg: '30%' }}>
               <StarReview
                 noOfStars={review.rating}
