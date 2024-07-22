@@ -1,4 +1,8 @@
 import useSWRMutation from 'swr/mutation';
+import { fetcher } from './fetcher';
+import { swrKeys } from './swrKeys';
+import { IReview } from '@/components/features/reviews/ReviewItem/ReviewItem';
+import { Artifika } from 'next/font/google';
 export async function mutator<T>(url: string, { arg }: { arg: T }) {
   const response = await fetch(url, {
     method: 'POST',
@@ -28,29 +32,30 @@ export async function mutator<T>(url: string, { arg }: { arg: T }) {
       uid: uid,
     })
   );
+  localStorage.setItem('tv-shows-uid', responseData.user.id);
+
   return {
     data: responseData,
   };
 }
 
-export async function getMutator<T>(url: string, { arg }: { arg: T }) {
-  const headerJSON = localStorage.getItem('tv-shows-header');
-  if (headerJSON == null) throw new Error('Problem while accessing user data');
-  const header = JSON.parse(headerJSON);
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'aplication/json',
-      'access-token': header.accessToken,
-      client: header.client,
-      'token-type': header.tokenType,
-      uid: header.uid,
-      expiry: header.expiry,
-    },
+export async function createReviewMutator<T>(url: string, { arg }: { arg: T }) {
+  return await fetcher<{ review: IReview }>(url, {
+    method: 'POST',
+    body: JSON.stringify(arg),
   });
-  if (!response.ok) {
-    throw new Error(`Dogodila se greška kod mutiranja na url: ${url}`);
-  }
-  return await response.json();
+}
+
+export async function deleteReviewMutator<T>(url: string, { arg }: { arg: T }) {
+  return await fetcher<{ review: IReview }>(url, {
+    method: 'DELETE',
+    body: JSON.stringify(arg),
+  });
+}
+
+export async function updateReviewMutator<T>(url: string, { arg }: { arg: T }) {
+  return await fetcher<{ review: IReview }>(url, {
+    method: 'PATCH',
+    body: JSON.stringify(arg),
+  });
 }

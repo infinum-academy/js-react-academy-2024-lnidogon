@@ -14,6 +14,7 @@ export const StarReview = (starReview: IStarReview) => {
   for (let i = 1; i <= 5; i++) {
     tempList.push(
       <StarIcon
+        data-testid="star-fragment"
         _hover={{ cursor: starReview.isStatic ? '' : 'pointer' }}
         color={i <= starReview.noOfStars ? 'yellow' : 'gray'}
         width="15%"

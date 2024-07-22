@@ -9,19 +9,19 @@ import { ReviewForm } from './ReviewForm';
  */
 describe('ReviewForm', () => {
   it('should contain comment input', () => {
-    render(<ReviewForm onAdd={() => {}} />);
+    render(<ReviewForm showId={0} />);
     const commentInput = screen.getByRole('textbox');
     expect(commentInput).toBeInTheDocument();
   });
 
   it('should contain rating input', () => {
-    render(<ReviewForm onAdd={() => {}} />);
-    const reviewInput = screen.getAllByRole('img');
+    render(<ReviewForm showId={0} />);
+    const reviewInput = screen.getAllByTestId('star-fragment');
     expect(reviewInput).toHaveLength(5);
   });
 
   it('should contain button input', () => {
-    render(<ReviewForm onAdd={() => {}} />);
+    render(<ReviewForm showId={0} />);
     const buttonInput = screen.getByRole('button');
     expect(buttonInput).toBeInTheDocument();
   });

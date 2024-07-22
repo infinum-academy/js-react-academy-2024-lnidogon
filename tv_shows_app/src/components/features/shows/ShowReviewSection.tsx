@@ -1,19 +1,16 @@
 import { Flex, Text } from '@chakra-ui/react';
-import { IReview } from '../reviews/ReviewItem';
-import { ReviewForm } from './ReviewForm';
-import { ReviewList } from '../reviews/ReviewList';
-import next from 'next';
+import { IReview } from '../reviews/ReviewItem/ReviewItem';
+import { ReviewForm } from '../reviews/ReviewForm/ReviewForm';
+import { ReviewList } from '../reviews/ReviewList/ReviewList';
 
 interface IShowReviewSectionProps {
   reviews: Array<IReview>;
-  onAdd: (review: IReview) => void;
-  onRemove: (review: IReview) => void;
+  showId: number;
 }
 
 export const ShowReviewSection = ({
   reviews,
-  onAdd,
-  onRemove,
+  showId,
 }: IShowReviewSectionProps) => {
   return (
     <Flex flexDirection="row" gap="4" width="80%" maxWidth="1000px">
@@ -28,8 +25,8 @@ export const ShowReviewSection = ({
         Reviews
       </Text>
       <Flex flexDirection="column" gap="2" width="100%">
-        <ReviewForm onAdd={onAdd} />
-        <ReviewList reviews={reviews} onRemove={onRemove} />
+        <ReviewForm showId={showId} />
+        <ReviewList reviews={reviews} />
       </Flex>
     </Flex>
   );

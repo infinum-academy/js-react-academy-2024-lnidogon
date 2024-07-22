@@ -35,7 +35,7 @@ export const ShowDetais = ({ show }: IShowDetailsProps) => {
         paddingLeft="5"
         overflow="hidden"
         alignItems="center"
-        borderRadius="7"
+        borderBottomRadius="7"
       >
         <Flex flexDirection="column" width="fit-content" minWidth="30%">
           <Text fontSize="lg " fontWeight="700" width="fit-content">

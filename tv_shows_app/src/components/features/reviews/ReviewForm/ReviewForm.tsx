@@ -6,23 +6,38 @@ import {
   FormControl,
   Spinner,
 } from '@chakra-ui/react';
-import { IReview } from '../reviews/ReviewItem';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form } from 'react-router-dom';
 import { StarReview } from '@/components/features/reviews/StarReview';
+import { swrKeys } from '@/fetchers/swrKeys';
+import { createReviewMutator } from '@/fetchers/mutators';
+import useSWR, { mutate } from 'swr';
+import useSWRMutation from 'swr/mutation';
+import { fetcher } from '@/fetchers/fetcher';
+import { IReview } from '../ReviewItem/ReviewItem';
+import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 
 export interface IReviewFormProps {
-  onAdd: (review: IReview) => void;
+  showId: number;
 }
 
-interface IReviewFormInputs {
+export interface IReviewFormInputs {
   comment: string;
   rating: number;
 }
 
-export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
-  let starArray = [];
+interface ICreateReviewParams {
+  comment: string;
+  rating: number;
+  show_id: number;
+}
+
+interface ICreateResponseParams {
+  review: IReview;
+}
+
+export const ReviewForm = ({ showId }: IReviewFormProps) => {
   const {
     register,
     handleSubmit,
@@ -43,15 +58,38 @@ export const ReviewForm = ({ onAdd }: IReviewFormProps) => {
     setHoveredNumberOfStars(index);
   };
 
-  const onSubmitHandler = (data: IReviewFormInputs) => {
-    console.log(data, selectedNumberOfStars, hoveredNumberOfStars);
-    if (data.rating == 0) return;
-    onAdd({
-      email: '',
-      avatarUrl: '',
-      comment: data.comment,
-      rating: data.rating,
+  const {
+    data: ogData,
+    mutate,
+    isLoading,
+  } = useSWR<{ reviews: Array<IReview> }>(
+    swrKeys.listReviews(showId),
+    async () =>
+      await fetcher<{ reviews: Array<IReview> }>(swrKeys.listReviews(showId))
+  );
+
+  const { trigger } = useSWRMutation(
+    swrKeys.createReview,
+    createReviewMutator<ICreateReviewParams>,
+    {
+      onSuccess: (data) => {
+        if (ogData == undefined) mutate();
+        else mutate({ reviews: [data.review, ...ogData.reviews] }, false);
+      },
+    }
+  );
+
+  async function onAdd(comment: string, rating: number, showId: number) {
+    await trigger({
+      comment: comment,
+      rating: rating,
+      show_id: showId,
     });
+  }
+
+  const onSubmitHandler = (data: IReviewFormInputs) => {
+    if (data.rating == 0) return;
+    onAdd(data.comment, data.rating, showId);
     setSelectedNumberOfStars(0);
     setLocked(false);
     setHoveredNumberOfStars(0);

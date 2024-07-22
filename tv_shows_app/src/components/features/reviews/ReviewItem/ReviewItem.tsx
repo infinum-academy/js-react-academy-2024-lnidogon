@@ -7,25 +7,35 @@ import {
   Container,
   Box,
 } from '@chakra-ui/react';
-import { StarReview } from './StarReview';
+import { StarReview } from '../StarReview';
 import { DeleteIcon, SearchIcon } from '@chakra-ui/icons';
+import useSWRMutation from 'swr/mutation';
+import { mutate } from 'swr';
+import { swrKeys } from '@/fetchers/swrKeys';
+import { deleteReviewMutator } from '@/fetchers/mutators';
+import { DeleteButton } from './DeleteButton/DeleteButton';
+import { EditReviewSection } from './EditReviewSection/EditReviewSection';
 
 export interface IReview {
-  email: string;
-  avatarUrl: string;
   comment: string;
   rating: number;
+  id: number;
+  show_id: number;
+  user: IUser;
 }
 
-interface IReviewItemProps {
+export interface IRemoveReviewParams {
+  id: number;
+}
+
+export interface IReviewItemProps {
   review: IReview;
-  onRemove: (review: IReview) => void;
 }
 
-export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
-  const onClickHandler = () => {
-    onRemove(review);
-  };
+export const ReviewItem = ({ review }: IReviewItemProps) => {
+  const isMyReview =
+    review.user.id == -1 ||
+    localStorage.getItem('tv-shows-uid') == review.user?.id + '';
   return (
     <Flex
       height="50px"
@@ -42,7 +52,7 @@ export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
     >
       <Image
         borderRadius="full"
-        src={review.avatarUrl}
+        src={review.user.image_url}
         alt="profilna"
         fallbackSrc="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
         width="30px"
@@ -55,7 +65,7 @@ export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
         height="fit-content"
         minWidth="fit-content"
       >
-        <Text fontSize="10px"> {review.email} </Text>
+        <Text fontSize="10px"> {review.user.email} </Text>
         <Flex flexDirection="row" alignItems="center" gap="1">
           <Text>{review.rating} / 5</Text>
           <Box width="30%">
@@ -69,15 +79,14 @@ export const ReviewItem = ({ review, onRemove }: IReviewItemProps) => {
         </Flex>
       </Flex>
       <Text fontSize="xs">{review.comment}</Text>
-      <IconButton
-        backgroundColor="orange.100"
-        _hover={{ backgroundColor: 'red.300' }}
-        marginLeft="auto"
-        aria-label="Delete review"
-        size="sm"
-        icon={<DeleteIcon />}
-        onClick={onClickHandler}
-      />
+      {isMyReview ? (
+        <Flex marginLeft="auto" direction="row" gap="3">
+          <EditReviewSection review={review} />
+          <DeleteButton review={review} />
+        </Flex>
+      ) : (
+        <></>
+      )}
     </Flex>
   );
 };

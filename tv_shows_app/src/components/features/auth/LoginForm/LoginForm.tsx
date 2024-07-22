@@ -30,25 +30,22 @@ interface ILoginForm {
 
 export const LoginForm = () => {
   const [loggedIn, setLoggedIn] = useState(false);
-  const onAuth = (login: boolean) => {
-    if (login) setLoggedIn(true);
-    else setLoggedIn(false);
-  };
   const {
     register,
     handleSubmit,
     formState: { isSubmitting },
   } = useForm<ILoginForm>();
-  const { trigger } = useSWRMutation(swrKeys.login, mutator<ILoginForm>);
+  const { trigger } = useSWRMutation(swrKeys.login, mutator<ILoginForm>, {
+    onSuccess: () => {
+      setLoggedIn(true);
+    },
+  });
   const onLogin = async (data: ILoginForm) => {
-    const response = await trigger(data);
-    localStorage.setItem('tv-shows-uid', response.data.user.id);
-    setLoggedIn(true);
+    await trigger(data);
   };
-  console.log(loggedIn);
+
   return (
     <>
-      <AuthRedirect loginFunc={onAuth} />
       <Flex
         direction="column"
         alignItems="center"

@@ -6,5 +6,9 @@ export const swrKeys = {
   login: `${apiUrl}/users/sign_in`,
   allShows: `${apiUrl}/shows`,
   topRated: `${apiUrl}/shows/top_rated`,
-  show: `${apiUrl}/shows`,
+  show: (show_id: string | number) => `${apiUrl}/shows/${show_id}`,
+  createReview: `${apiUrl}/reviews`,
+  listReviews: (show_id: string | number) =>
+    `${apiUrl}/shows/${show_id}/reviews`,
+  alterReview: (show_id: string | number) => `${apiUrl}/reviews/${show_id}`,
 };

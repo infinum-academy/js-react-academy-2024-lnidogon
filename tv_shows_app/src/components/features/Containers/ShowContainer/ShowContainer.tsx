@@ -8,22 +8,17 @@ import { getShow } from '@/fetchers/shows';
 import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 import useSWRMutation from 'swr/mutation';
 import { IShow } from '@/typings/show';
-import { mutator, getMutator } from '@/fetchers/mutators';
 import { swrKeys } from '@/fetchers/swrKeys';
+import { fetcher } from '@/fetchers/fetcher';
+import { IsFlatObject } from 'react-hook-form';
 
 export const ShowContainer = () => {
   const params = useParams();
-  const { trigger } = useSWRMutation(
-    swrKeys.show + `/${params.id}`,
-    getMutator
-  );
-  async function getShow() {
-    return await trigger(params);
-  }
 
-  const { data, error, isLoading } = useSWR(
-    `/api/shows/${params.id}`,
-    async () => getShow()
+  const { data, error, isLoading } = useSWR<{ show: IShow }>(
+    swrKeys.show(params.id as string),
+    async () =>
+      await fetcher<{ show: IShow }>(swrKeys.show(params.id as string))
   );
 
   if (isLoading || !data) {
