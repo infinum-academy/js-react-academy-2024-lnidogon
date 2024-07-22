@@ -73,7 +73,13 @@ export const RegisterForm = () => {
         py={10}
         onSubmit={handleSubmit(onRegister)}
       >
-        <Heading color="white" size="md" marginBottom={8} fontSize="heading">
+        <Heading
+          color="white"
+          size="md"
+          marginBottom={8}
+          fontSize="heading"
+          fontWeight="bold"
+        >
           TV shows APP
         </Heading>
         <InputGroup>
