@@ -96,8 +96,8 @@ export const LoginForm = () => {
             </FormControl>
           </InputGroup>
           <PasswordInput
-            disable={isSubmitting}
-            thatPart={register('password')}
+            isDisabled={isSubmitting}
+            {...register('password')}
             placeholder="Password"
             testId="password"
           />

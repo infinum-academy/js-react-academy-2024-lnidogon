@@ -68,6 +68,7 @@ export const RegisterForm = () => {
         height={{ base: '100%', lg: '564px' }}
         direction="column"
         alignItems="center"
+        id="register-form"
         as="form"
         gap="30px"
         py={10}
@@ -103,14 +104,14 @@ export const RegisterForm = () => {
           </FormControl>
         </InputGroup>
         <PasswordInput
-          disable={isSubmitting}
-          thatPart={register('password')}
+          isDisabled={isSubmitting}
+          {...register('password')}
           placeholder="Password"
           testId="password"
         />
         <PasswordInput
-          disable={isSubmitting}
-          thatPart={register('password_confirmation')}
+          isDisabled={isSubmitting}
+          {...register('password_confirmation')}
           placeholder="Confirm password"
           testId="password-confirmation"
         />
@@ -129,7 +130,12 @@ export const RegisterForm = () => {
         </Button>
         <Flex flexDirection="row" color="white" gap={1} fontSize="xs">
           <Text fontSize="smallCaption"> Already have an account? </Text>
-          <Text as={NextLink} href="/login" fontSize="smallCaptionBold">
+          <Text
+            as={NextLink}
+            href="/login"
+            fontSize="smallCaption"
+            fontWeight="bold"
+          >
             Log in
           </Text>
         </Flex>
