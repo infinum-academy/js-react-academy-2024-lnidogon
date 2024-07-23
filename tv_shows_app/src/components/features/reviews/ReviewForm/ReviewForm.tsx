@@ -110,7 +110,7 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
           {...register('comment')}
           required
           backgroundColor="white"
-          color="lightPurple"
+          color="purple.300"
           placeholder="Add review..."
           id="review-input"
           width={{ base: '344px', lg: '100%' }}

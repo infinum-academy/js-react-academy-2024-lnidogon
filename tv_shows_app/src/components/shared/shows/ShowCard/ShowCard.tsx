@@ -32,7 +32,7 @@ export const ShowCard = ({ show }: IShowCard) => {
           direction={{ base: 'row', lg: 'column' }}
           alignItems={{ base: 'center', lg: 'start' }}
         >
-          <Text fontSize="subtitle" color="purple2">
+          <Text fontSize="subtitle" color="purple.500">
             {show.title}
           </Text>
           <Flex
@@ -42,8 +42,8 @@ export const ShowCard = ({ show }: IShowCard) => {
             ml={{ base: 'auto', lg: '0' }}
             mr={{ base: '20px', lg: 'auto' }}
           >
-            <StarIcon width="16px" color="purple2" />
-            <Text fontSize="smallCaption" color="purple2">
+            <StarIcon width="16px" color="purple.500" />
+            <Text fontSize="smallCaption" color="purple.500">
               {!show.average_rating ? 'no rating' : show.average_rating + '/5'}
             </Text>
           </Flex>

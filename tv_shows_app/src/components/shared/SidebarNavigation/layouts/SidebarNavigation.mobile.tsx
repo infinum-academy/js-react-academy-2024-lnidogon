@@ -34,7 +34,7 @@ export const SidebarNavigationMobile = () => {
       width="100%"
       flexDirection="row"
       gap="10"
-      backgroundColor="darkPurple"
+      backgroundColor="purple.700"
       height="100%"
       padding="4"
     >
@@ -57,7 +57,7 @@ export const SidebarNavigationMobile = () => {
         </IconButton>
         <Drawer isOpen={isOpen} placement="right" onClose={onClose} size="xs">
           <DrawerOverlay />
-          <DrawerContent backgroundColor="purple2">
+          <DrawerContent backgroundColor="purple.500">
             <DrawerCloseButton color="white" border="1px" borderRadius="full" />
 
             <DrawerBody mt="84px">
@@ -72,7 +72,7 @@ export const SidebarNavigationMobile = () => {
                   as={NextLink}
                   href="/shows"
                   backgroundColor={
-                    path == '/shows' ? 'lightPurple' : 'transparent'
+                    path == '/shows' ? 'purple.300' : 'transparent'
                   }
                 >
                   All shows
@@ -87,7 +87,7 @@ export const SidebarNavigationMobile = () => {
                   as={NextLink}
                   href="/top-rated"
                   backgroundColor={
-                    path == '/top-rated' ? 'lightPurple' : 'transparent'
+                    path == '/top-rated' ? 'purple.300' : 'transparent'
                   }
                 >
                   Top rated
@@ -102,7 +102,7 @@ export const SidebarNavigationMobile = () => {
                   as={NextLink}
                   href="/my-profile"
                   backgroundColor={
-                    path == '/my-profile' ? 'lightPurple' : 'transparent'
+                    path == '/my-profile' ? 'purple.300' : 'transparent'
                   }
                 >
                   My profile

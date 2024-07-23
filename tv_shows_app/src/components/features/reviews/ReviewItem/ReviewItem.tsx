@@ -44,7 +44,7 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
     <Flex
       height={{ base: '120px', lg: '104px' }}
       width={{ base: '344px', lg: '870px' }}
-      backgroundColor="purple2"
+      backgroundColor="purple.500"
       color="white"
       borderRadius="xlRadius"
       padding={{ base: '24px', lg: '4 4 2 2' }}
@@ -96,7 +96,7 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
                 as={Button}
                 width="24px"
                 height="24px"
-                bg="purple2"
+                bg="purple.500"
                 color="white"
                 _hover={{ bg: 'purple2' }}
               >

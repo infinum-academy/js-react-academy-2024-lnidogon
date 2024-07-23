@@ -65,9 +65,9 @@ export const DeleteButton = ({ review }: IDeleteButtonProps) => {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent
-          backgroundColor="purple2"
+          backgroundColor="purple.500"
           color="white"
-          borderColor="darkPurple"
+          borderColor="purple.700"
           borderWidth="2px"
         >
           <ModalHeader>Delete your review</ModalHeader>

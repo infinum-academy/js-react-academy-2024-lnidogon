@@ -55,13 +55,13 @@ export const LoginForm = () => {
         alignItems="center"
         justifyContent="center"
         gap="4"
-        backgroundColor={{ base: 'purple2', lg: 'darkPurple' }}
+        backgroundColor={{ base: 'purple.500', lg: 'purple.700' }}
         height="100vh"
       >
         <Flex
           width={{ base: '288px', lg: '500px' }}
           height={{ base: '100%', lg: '500px' }}
-          backgroundColor={{ base: 'transparent', lg: 'purple2' }}
+          backgroundColor={{ base: 'transparent', lg: 'purple.500' }}
           direction="column"
           alignItems="center"
           as="form"

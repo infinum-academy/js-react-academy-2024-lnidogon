@@ -25,7 +25,7 @@ export const ShowSection = ({ show }: IShowSection) => {
 
   return (
     <Box
-      backgroundColor="darkPurple"
+      backgroundColor="purple.700"
       height="100%"
       padding="31px"
       overflow="auto"

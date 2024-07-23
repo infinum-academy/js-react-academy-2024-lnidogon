@@ -13,7 +13,7 @@ const theme = extendTheme({
   styles: {
     global: {
       body: {
-        backgroundColor: 'darkPurple',
+        backgroundColor: 'purple.700',
         height: 'fit-content',
         fontWeight: 'default',
       },

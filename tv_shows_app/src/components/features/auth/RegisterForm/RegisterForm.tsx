@@ -58,12 +58,12 @@ export const RegisterForm = () => {
       alignItems="center"
       justifyContent="center"
       gap={4}
-      backgroundColor={{ base: 'purple2', lg: 'darkPurple' }}
+      backgroundColor={{ base: 'purple.500', lg: 'purple.700' }}
       height="100vh"
     >
       <Flex
         borderRadius={{ base: 0, lg: 'lgRadius' }}
-        backgroundColor={{ base: 'transparent', lg: 'purple2' }}
+        backgroundColor={{ base: 'transparent', lg: 'purple.500' }}
         width={{ base: '288px', lg: '494px' }}
         height={{ base: '100%', lg: '564px' }}
         direction="column"

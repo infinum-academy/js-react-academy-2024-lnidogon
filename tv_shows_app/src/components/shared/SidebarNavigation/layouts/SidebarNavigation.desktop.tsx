@@ -18,7 +18,7 @@ export const SidebarNavigationDesktop = () => {
       width="100%"
       flexDirection="column"
       gap="10"
-      backgroundColor="darkPurple"
+      backgroundColor="purple.700"
       height="100%"
       padding="4"
     >
@@ -35,7 +35,7 @@ export const SidebarNavigationDesktop = () => {
           textAlign="center"
           as={NextLink}
           href="/shows"
-          backgroundColor={path == '/shows' ? 'purple2' : 'darkPurple'}
+          backgroundColor={path == '/shows' ? 'purple.500' : 'purple.700'}
         >
           All shows
         </Text>
@@ -48,7 +48,7 @@ export const SidebarNavigationDesktop = () => {
           textAlign="center"
           as={NextLink}
           href="/top-rated"
-          backgroundColor={path == '/top-rated' ? 'purple2' : 'darkPurple'}
+          backgroundColor={path == '/top-rated' ? 'purple.500' : 'purple.700'}
         >
           Top rated
         </Text>
@@ -61,7 +61,7 @@ export const SidebarNavigationDesktop = () => {
           textAlign="center"
           as={NextLink}
           href="/my-profile"
-          backgroundColor={path == '/my-profile' ? 'purple2' : 'darkPurple'}
+          backgroundColor={path == '/my-profile' ? 'purple.500' : 'purple.700'}
         >
           My profile
         </Text>

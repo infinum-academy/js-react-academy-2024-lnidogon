@@ -3,7 +3,7 @@ import { defineStyleConfig } from '@chakra-ui/react';
 const Input = defineStyleConfig({
   baseStyle: {
     field: {
-      bg: 'purple2',
+      bg: 'purple.500',
       color: 'white',
       borderRadius: 'xxlRadius',
       fontSize: 'button',

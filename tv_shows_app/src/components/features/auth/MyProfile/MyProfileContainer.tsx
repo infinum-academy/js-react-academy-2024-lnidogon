@@ -48,7 +48,7 @@ export const MyProfileContainer = () => {
       flexDirection="column"
       height="100vh"
       justifyContent="center"
-      backgroundColor="darkPurple"
+      backgroundColor="purple.700"
       gap="40px"
     >
       <Flex flexDirection="column" alignItems="center">
@@ -63,12 +63,12 @@ export const MyProfileContainer = () => {
         <InputGroup
           width={{ base: '270px', lg: '600px' }}
           height={{ base: '270px', lg: '400px' }}
-          backgroundColor="purple2"
+          backgroundColor="purple.500"
           borderRadius="xlRadius"
           padding="0"
           margin="0"
           border="dashed"
-          borderColor="lightPurple"
+          borderColor="purple.300"
           transform="unset"
         >
           <Input

@@ -18,9 +18,9 @@ const Button = defineStyleConfig({
   variants: {
     default: {
       bg: 'white',
-      color: 'purple2',
+      color: 'purple.500',
       _hover: {
-        bg: 'lightPurple',
+        bg: 'purple.300',
       },
     },
   },

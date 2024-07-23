@@ -36,12 +36,12 @@ export const ShowDetails = ({ show }: IShowDetailsProps) => {
         alignItems={{ base: 'none', lg: 'center' }}
       >
         <Flex flexDirection="column" width="fit-content" minWidth="30%">
-          <Heading fontSize="body" color="purple2">
+          <Heading fontSize="body" color="purple.500">
             {show.title}
           </Heading>
           <Flex alignItems="center" gap={1}>
-            <StarIcon width="24px" color="purple2" />
-            <Text fontSize="body" color="purple2">
+            <StarIcon width="24px" color="purple.500" />
+            <Text fontSize="body" color="purple.500">
               {!show.average_rating ? `no ratings` : show.average_rating + `/5`}
             </Text>
           </Flex>
@@ -51,7 +51,7 @@ export const ShowDetails = ({ show }: IShowDetailsProps) => {
           mr="50px"
           width={{ bas: '300px', lg: '478px' }}
           fontSize="smallCaption"
-          color="purple2"
+          color="purple.500"
         >
           {show.description}
         </Text>
