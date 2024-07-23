@@ -75,14 +75,11 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
           <Text fontSize="note"> {review.user.email} </Text>
           <Flex flexDirection="row" alignItems="center" gap="1">
             <Text fontSize="note">{review.rating}/5</Text>
-            <Box width={{ base: '50%', lg: '30%' }}>
-              <StarReview
-                noOfStars={review.rating}
-                isStatic={true}
-                onChange={() => {}}
-                onHover={() => {}}
-              />
-            </Box>
+            <StarReview
+              isStatic={true}
+              startNoOfStars={review.rating}
+              onChange={() => {}}
+            />
           </Flex>
         </Flex>
         <Text fontSize="xs" hideBelow="lg">
@@ -98,7 +95,7 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
                 height="24px"
                 bg="purple.500"
                 color="white"
-                _hover={{ bg: 'purple2' }}
+                _hover={{ bg: 'purple.500' }}
               >
                 ⋮
               </MenuButton>

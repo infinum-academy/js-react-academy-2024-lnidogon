@@ -21,7 +21,7 @@ import {
 import { IReview } from '../ReviewItem';
 import { EditIcon } from '@chakra-ui/icons';
 import { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { IReviewFormInputs } from '@/components/features/reviews/ReviewForm/ReviewForm';
 import { register } from 'module';
 import { StarReview } from '../../StarReview';
@@ -43,16 +43,9 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
   const {
     register,
     handleSubmit,
-    setValue,
+    control,
     formState: { isSubmitting, errors },
   } = useForm<IReviewFormInputs>();
-  const [locked, setLocked] = useState(true);
-  const [selectedNumberOfStars, setSelectedNumberOfStars] = useState(
-    review.rating
-  );
-  const [hoveredNumberOfStars, setHoveredNumberOfStars] = useState(
-    review.rating
-  );
 
   const {
     data: ogData,
@@ -81,16 +74,6 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
       },
     }
   );
-
-  const onClick = (index: number) => {
-    setSelectedNumberOfStars(index);
-    setValue('rating', index);
-    setLocked(true);
-  };
-
-  const onHover = (index: number) => {
-    setHoveredNumberOfStars(index);
-  };
 
   const onSubmitHandler = async (data: IReviewFormInputs) => {
     if (data.rating == 0) return;
@@ -137,33 +120,21 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
                   isDisabled={isSubmitting}
                   defaultValue={review.comment}
                 />
-                <FormErrorMessage color="white">
+                <FormErrorMessage color="error">
                   {errors.comment?.message}
                 </FormErrorMessage>
               </FormControl>
-              <Flex
-                flexDirection="row"
-                width="50%"
-                gap="1"
-                onMouseEnter={() => {
-                  setLocked(false);
-                }}
-                onMouseLeave={() => {
-                  setLocked(true);
-                  setHoveredNumberOfStars(0);
-                }}
-                id="star-input"
-              >
-                <Text>Rating:</Text>
-                <StarReview
-                  noOfStars={
-                    locked ? selectedNumberOfStars : hoveredNumberOfStars
-                  }
-                  isStatic={false}
-                  onChange={onClick}
-                  onHover={onHover}
-                />
-              </Flex>
+              <Controller
+                name="rating"
+                control={control}
+                render={({ field: { onChange } }) => (
+                  <StarReview
+                    isStatic={false}
+                    onChange={onChange}
+                    startNoOfStars={review.rating}
+                  />
+                )}
+              ></Controller>
             </Flex>
           </ModalBody>
           <ModalFooter>

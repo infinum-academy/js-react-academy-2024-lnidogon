@@ -7,7 +7,7 @@ import {
   Spinner,
 } from '@chakra-ui/react';
 import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { Form } from 'react-router-dom';
 import { StarReview } from '@/components/features/reviews/StarReview';
 import { swrKeys } from '@/fetchers/swrKeys';
@@ -41,22 +41,9 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
   const {
     register,
     handleSubmit,
-    setValue,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<IReviewFormInputs>({ defaultValues: { comment: '', rating: 0 } });
-  const [locked, setLocked] = useState(false);
-  const [selectedNumberOfStars, setSelectedNumberOfStars] = useState(0);
-  const [hoveredNumberOfStars, setHoveredNumberOfStars] = useState(0);
-
-  const onClick = (index: number) => {
-    setSelectedNumberOfStars(index);
-    setValue('rating', index);
-    setLocked(true);
-  };
-
-  const onHover = (index: number) => {
-    setHoveredNumberOfStars(index);
-  };
 
   const {
     data: ogData,
@@ -90,10 +77,6 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
   const onSubmitHandler = (data: IReviewFormInputs) => {
     if (data.rating == 0) return;
     onAdd(data.comment, data.rating, showId);
-    setSelectedNumberOfStars(0);
-    setLocked(false);
-    setHoveredNumberOfStars(0);
-    setValue('rating', 0);
   };
 
   return (
@@ -132,28 +115,17 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
         <Text color="white" fontSize="sm">
           Rating:
         </Text>
-        <FormControl>
-          <Flex
-            flexDirection="row"
-            width={{ base: '50%', lg: '20%' }}
-            gap={1}
-            onMouseEnter={() => {
-              setLocked(false);
-            }}
-            onMouseLeave={() => {
-              setLocked(true);
-              setHoveredNumberOfStars(0);
-            }}
-            id="star-input"
-          >
+        <Controller
+          name="rating"
+          control={control}
+          render={({ field: { onChange } }) => (
             <StarReview
-              noOfStars={locked ? selectedNumberOfStars : hoveredNumberOfStars}
               isStatic={false}
-              onChange={onClick}
-              onHover={onHover}
+              onChange={onChange}
+              startNoOfStars={0}
             />
-          </Flex>
-        </FormControl>
+          )}
+        ></Controller>
         <Button
           isDisabled={isSubmitting}
           type="submit"
