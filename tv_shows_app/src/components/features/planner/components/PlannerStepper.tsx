@@ -11,10 +11,10 @@ export const PlannerStepper = () => {
     setTourSize,
     setRankedShows,
     setCurrentStep,
+    setFinalRanking,
   } = useContext(PlannerContext);
   useEffect(() => {
     if (tourSize == 0) {
-      console.log('lol');
       let bn = 0;
       const n = allShows.length;
       for (bn = 1; bn < n; bn *= 2);
@@ -24,6 +24,7 @@ export const PlannerStepper = () => {
       setTourSize(bn);
       setCurrentStep(bn - 1);
       setRankedShows(tempArr as IShow[]);
+      setFinalRanking([]);
     }
   }, []);
 

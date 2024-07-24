@@ -23,14 +23,19 @@ export const Planner = () => {
       </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent backgroundColor="purple.300">
+        <ModalContent
+          backgroundColor="purple.300"
+          width={{ base: '400px', lg: '600px' }}
+          minWidth={{ base: '400px', lg: '600px' }}
+          height="450px"
+        >
           <ModalHeader color="white">Planner</ModalHeader>
           <ModalBody>
             <PlannerStepper />
           </ModalBody>
           <ModalFooter>
             <Flex direction="column" width="100%" gap={3}>
-              <PlannerButtons />
+              <PlannerButtons onClose={onClose} />
             </Flex>
           </ModalFooter>
         </ModalContent>

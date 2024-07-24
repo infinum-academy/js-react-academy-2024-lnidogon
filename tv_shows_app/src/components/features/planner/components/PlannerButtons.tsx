@@ -1,8 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 import { PlannerContext } from './PlannerContextProvider';
 import { Button, Flex } from '@chakra-ui/react';
+import { IpcNetConnectOpts } from 'net';
 
-export const PlannerButtons = () => {
+interface IPlannerButtons {
+  onClose: () => void;
+}
+
+export const PlannerButtons = ({ onClose }: IPlannerButtons) => {
   const {
     finalRanking,
     setFinalRanking,
@@ -10,6 +15,7 @@ export const PlannerButtons = () => {
     setCurrentStep,
     rankedShows,
     tourSize,
+    setTourSize,
     setRankedShows,
   } = useContext(PlannerContext);
 
@@ -18,7 +24,7 @@ export const PlannerButtons = () => {
       setFinalRanking([...finalRanking, rankedShows[1]]);
       setCurrentStep(0);
     } else if (currentStep > 0) setCurrentStep(currentStep - 1);
-    else if (currentStep < 0) setCurrentStep(Math.floor(currentStep / 2));
+    else if (currentStep < 0) setCurrentStep(Math.ceil(currentStep / 2));
   }
 
   function findBestRoot(index: number, bestShow: IShow) {
@@ -33,14 +39,11 @@ export const PlannerButtons = () => {
     let tempArr = rankedShows.map((show) =>
       show == rankedShows[1] ? undefined : show
     );
+
     setRankedShows(tempArr as IShow[]);
-    setCurrentStep(Math.floor(-rootIndex / 2));
+    setCurrentStep(Math.ceil(-rootIndex / 2));
   }
-  useEffect(() => {
-    console.log('hi\n');
-  }, [rankedShows]);
   const selected = rankedShows[Math.abs(currentStep)];
-  console.log(currentStep);
   return (
     <Flex>
       {currentStep && selected ? (
@@ -49,7 +52,18 @@ export const PlannerButtons = () => {
         <></>
       )}
       {!currentStep ? (
-        <Button onClick={() => nextRound()}> Add show </Button>
+        <>
+          <Button onClick={() => nextRound()}> Add show </Button>
+          <Button
+            ml="auto"
+            onClick={() => {
+              setTourSize(0);
+              onClose();
+            }}
+          >
+            Done
+          </Button>
+        </>
       ) : (
         <></>
       )}
