@@ -1,6 +1,6 @@
 import { fetcher } from '@/fetchers/fetcher';
 import { swrKeys } from '@/fetchers/swrKeys';
-import { createContext, ReactNode, useEffect, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 import useSWR from 'swr';
 
 interface IPlannerContext {

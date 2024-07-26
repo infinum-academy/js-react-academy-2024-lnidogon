@@ -1,10 +1,8 @@
 'use client';
-import theme from '@/styles/theme/theme';
 import { Flex, Text } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
 export const SidebarNavigationDesktop = () => {
   const router = useRouter();

@@ -1,20 +1,15 @@
 'use client';
-import { EmailIcon, LockIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { LockIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
-  Button,
   FormControl,
-  Hide,
   IconButton,
   Input,
   InputGroup,
   InputLeftElement,
   InputProps,
   InputRightElement,
-  Show,
-  Text,
 } from '@chakra-ui/react';
 import { forwardRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
 
 interface IPasswordInput extends InputProps {
   placeholder: string;

@@ -1,13 +1,10 @@
 'use client';
-import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Box, Divider, Flex, Hide, Show } from '@chakra-ui/react';
-import { SWRConfig } from 'swr';
+import { Box, Flex, Hide, Show } from '@chakra-ui/react';
 import { AuthRedirect } from '@/components/shared/auth/AuthRedirect';
 import { useState } from 'react';
 import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 import { SidebarNavigation } from '@/components/shared/SidebarNavigation/SidebarNavigation';
-import { Router } from 'react-router-dom';
 
 const inter = Inter({ subsets: ['latin'] });
 /*

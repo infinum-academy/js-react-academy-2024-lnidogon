@@ -1,25 +1,20 @@
-import theme from '@/styles/theme/theme';
 import { HamburgerIcon } from '@chakra-ui/icons';
 import {
-  Button,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
   DrawerFooter,
-  DrawerHeader,
   DrawerOverlay,
   Flex,
   IconButton,
-  Input,
   Text,
   useDisclosure,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { useParams, usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
 export const SidebarNavigationMobile = () => {
   const router = useRouter();

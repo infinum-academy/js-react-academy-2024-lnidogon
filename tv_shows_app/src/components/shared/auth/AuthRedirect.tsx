@@ -1,7 +1,6 @@
 'use client';
 import { useRouter } from 'next/navigation';
-import { LoadingScreen } from '../LoadingScreen/LoadingScreen';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 interface IAuthRedirect {
   loginFunc: (login: boolean) => void;

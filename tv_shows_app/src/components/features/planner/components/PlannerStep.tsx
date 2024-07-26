@@ -1,17 +1,10 @@
 import { useContext, useEffect, useState } from 'react';
 import { PlannerContext } from './PlannerContextProvider';
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
-import { UNSAFE_DataRouterContext } from 'react-router-dom';
 
 export const PlannerStep = () => {
-  const {
-    rankedShows,
-    currentStep,
-    setRankedShows,
-    tourSize,
-    setCurrentStep,
-    setFinalRanking,
-  } = useContext(PlannerContext);
+  const { rankedShows, currentStep, setRankedShows, setCurrentStep } =
+    useContext(PlannerContext);
   let targetIndex = Math.abs(currentStep);
   let shows = [rankedShows[targetIndex * 2], rankedShows[targetIndex * 2 + 1]];
   let startState = 2;

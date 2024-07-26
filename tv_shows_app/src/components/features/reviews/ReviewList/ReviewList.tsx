@@ -1,7 +1,7 @@
-import { Flex, IconButton, Show, Text } from '@chakra-ui/react';
+import { Flex, IconButton, Text } from '@chakra-ui/react';
 import { IReview, ReviewItem } from '../ReviewItem/ReviewItem';
 import { ChevronLeftIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface IReviewsList {
   reviews: Array<IReview>;

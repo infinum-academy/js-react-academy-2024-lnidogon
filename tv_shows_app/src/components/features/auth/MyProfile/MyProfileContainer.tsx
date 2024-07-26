@@ -12,7 +12,7 @@ import {
   Button,
 } from '@chakra-ui/react';
 import useSWR from 'swr';
-import { ChangeEvent, SetStateAction, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 
 export const MyProfileContainer = () => {
   const { data } = useSWR<{ user: IUser }>(

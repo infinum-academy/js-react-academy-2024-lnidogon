@@ -1,8 +1,6 @@
 import { StarIcon } from '@chakra-ui/icons';
-import { Container, Flex, Icon, Image } from '@chakra-ui/react';
-import { color } from 'framer-motion';
+import { Flex } from '@chakra-ui/react';
 import { useState } from 'react';
-import { cursorTo } from 'readline';
 
 interface IStarReview {
   value: number;

@@ -1,9 +1,8 @@
 'use client';
 import { mutator } from '@/fetchers/mutators';
-import { EmailIcon, LockIcon, RepeatIcon } from '@chakra-ui/icons';
+import { EmailIcon } from '@chakra-ui/icons';
 import NextLink from 'next/link';
 import {
-  Box,
   Button,
   Flex,
   FormControl,
@@ -11,13 +10,11 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
-  Spinner,
   Text,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import useSWRMutation from 'swr/mutation';
 import { useState } from 'react';
-import { SuccessWindow } from '@/components/shared/auth/SuccessWindow';
 import { PasswordInput } from '@/components/shared/auth/PasswordInput';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { useRouter } from 'next/navigation';

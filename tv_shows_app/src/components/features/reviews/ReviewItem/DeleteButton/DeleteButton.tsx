@@ -8,15 +8,13 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Spinner,
   useDisclosure,
 } from '@chakra-ui/react';
 import { IRemoveReviewParams, IReview } from '../ReviewItem';
-import { DeleteIcon } from '@chakra-ui/icons';
 import useSWRMutation from 'swr/mutation';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { deleteReviewMutator } from '@/fetchers/mutators';
-import useSWR, { mutate } from 'swr';
+import useSWR from 'swr';
 import { fetcher } from '@/fetchers/fetcher';
 
 interface IDeleteButtonProps {

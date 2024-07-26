@@ -1,22 +1,14 @@
 import {
   Button,
   Flex,
-  IconButton,
   Text,
   Image,
-  Container,
-  Box,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
 } from '@chakra-ui/react';
 import { StarReview } from '../StarReview';
-import { ChevronDownIcon, DeleteIcon, SearchIcon } from '@chakra-ui/icons';
-import useSWRMutation from 'swr/mutation';
-import { mutate } from 'swr';
-import { swrKeys } from '@/fetchers/swrKeys';
-import { deleteReviewMutator } from '@/fetchers/mutators';
 import { DeleteButton } from './DeleteButton/DeleteButton';
 import { EditReviewSection } from './EditReviewSection/EditReviewSection';
 

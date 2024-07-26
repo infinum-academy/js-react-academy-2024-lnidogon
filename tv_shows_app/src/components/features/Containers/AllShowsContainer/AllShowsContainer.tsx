@@ -4,7 +4,6 @@ import { ShowsList } from '@/components/shared/shows/ShowList/ShowsList';
 import { fetcher } from '@/fetchers/fetcher';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { IShow } from '@/typings/show';
-import { Box } from '@chakra-ui/react';
 import useSWR from 'swr';
 import { Planner } from '@/components/features/planner/Planner';
 
