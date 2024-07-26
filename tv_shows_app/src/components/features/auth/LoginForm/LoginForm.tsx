@@ -97,7 +97,7 @@ export const LoginForm = () => {
           </InputGroup>
           <PasswordInput
             isDisabled={isSubmitting}
-            {...register('password')}
+            {...register('password', { required: true })}
             placeholder="Password"
             testId="password"
           />

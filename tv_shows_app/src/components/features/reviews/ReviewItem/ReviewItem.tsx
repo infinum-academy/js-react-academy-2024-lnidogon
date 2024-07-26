@@ -75,11 +75,7 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
           <Text fontSize="note"> {review.user.email} </Text>
           <Flex flexDirection="row" alignItems="center" gap="1">
             <Text fontSize="note">{review.rating}/5</Text>
-            <StarReview
-              isStatic={true}
-              startNoOfStars={review.rating}
-              onChange={() => {}}
-            />
+            <StarReview value={review.rating} />
           </Flex>
         </Flex>
         <Text fontSize="xs" hideBelow="lg">

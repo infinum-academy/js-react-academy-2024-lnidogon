@@ -34,7 +34,7 @@ export const PlannerContextProvider = ({
     fetcher
   );
 
-  if (isLoading || !allShows) return <></>;
+  if (isLoading || !allShows) return null;
 
   return (
     <PlannerContext.Provider

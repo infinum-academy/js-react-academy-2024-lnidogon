@@ -14,14 +14,11 @@ export const PlannerStep = () => {
   } = useContext(PlannerContext);
   let targetIndex = Math.abs(currentStep);
   let shows = [rankedShows[targetIndex * 2], rankedShows[targetIndex * 2 + 1]];
-  const [selected, setSelected] = useState(
-    rankedShows[targetIndex] == undefined
-      ? 2
-      : rankedShows[targetIndex] != rankedShows[targetIndex * 2]
-        ? 1
-        : 0
-  );
-
+  let startState = 2;
+  if (rankedShows[targetIndex] == rankedShows[targetIndex * 2]) startState = 0;
+  else if (rankedShows[targetIndex] != rankedShows[targetIndex * 2 + 1])
+    startState = 1;
+  const [selected, setSelected] = useState(startState);
   function updateRankings(index: number) {
     const tempArr = [...rankedShows];
     tempArr[targetIndex] = tempArr[targetIndex * 2 + index];
@@ -31,17 +28,18 @@ export const PlannerStep = () => {
 
   useEffect(() => {
     setSelected(2);
-    if (shows[0] == undefined) updateRankings(1);
-    else if (shows[1] == undefined) updateRankings(0);
-    if (shows[0] == undefined || shows[1] == undefined) {
+    if (!shows[0]) updateRankings(1);
+    else if (!shows[1]) updateRankings(0);
+    if (!shows[0] || !shows[1]) {
       if (currentStep > 0) setCurrentStep(currentStep - 1);
       else setCurrentStep(Math.ceil(currentStep / 2));
       return;
     }
   }, [currentStep]);
+  const shouldSkip = !shows[0] || !shows[1];
   return (
     <>
-      {shows[0] != undefined && shows[1] != undefined ? (
+      {!shouldSkip && (
         <Flex
           px="20px"
           justifyContent="space-around"
@@ -75,8 +73,6 @@ export const PlannerStep = () => {
             </Flex>
           ))}
         </Flex>
-      ) : (
-        <></>
       )}
     </>
   );

@@ -6,7 +6,7 @@ import { swrKeys } from '@/fetchers/swrKeys';
 import { IShow } from '@/typings/show';
 import { Box } from '@chakra-ui/react';
 import useSWR from 'swr';
-import { Planner } from '../../planner/Planner';
+import { Planner } from '@/components/features/planner/Planner';
 
 export const AllShowsContainer = () => {
   const { data, error, isLoading } = useSWR<{ shows: Array<IShow> }>(

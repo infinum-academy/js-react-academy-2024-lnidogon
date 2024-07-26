@@ -93,7 +93,7 @@ export const RegisterForm = () => {
           <FormControl textColor="white">
             <Input
               isDisabled={isSubmitting}
-              {...register('email')}
+              {...register('email', { required: true })}
               placeholder="Email"
               type="email"
               _placeholder={{ color: 'white' }}

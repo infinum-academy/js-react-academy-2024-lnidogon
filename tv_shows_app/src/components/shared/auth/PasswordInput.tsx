@@ -36,7 +36,6 @@ export const PasswordInput = forwardRef(
             <Input
               ref={ref}
               {...rest}
-              required
               placeholder={placeholder}
               type={hidden ? 'password' : 'text'}
               _placeholder={{ color: 'white' }}

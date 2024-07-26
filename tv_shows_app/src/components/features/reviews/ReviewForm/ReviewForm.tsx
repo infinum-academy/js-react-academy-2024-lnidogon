@@ -60,7 +60,7 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
     createReviewMutator<ICreateReviewParams>,
     {
       onSuccess: (data) => {
-        if (ogData == undefined) mutate();
+        if (!ogData) mutate();
         else mutate({ reviews: [data.review, ...ogData.reviews] }, false);
       },
     }
@@ -118,14 +118,10 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
         <Controller
           name="rating"
           control={control}
-          render={({ field: { onChange } }) => (
-            <StarReview
-              isStatic={false}
-              onChange={onChange}
-              startNoOfStars={0}
-            />
+          render={({ field: { onChange, value } }) => (
+            <StarReview onChange={onChange} value={value} />
           )}
-        ></Controller>
+        />
         <Button
           isDisabled={isSubmitting}
           type="submit"

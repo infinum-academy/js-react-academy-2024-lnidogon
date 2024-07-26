@@ -45,7 +45,12 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
     handleSubmit,
     control,
     formState: { isSubmitting, errors },
-  } = useForm<IReviewFormInputs>();
+  } = useForm<IReviewFormInputs>({
+    defaultValues: {
+      comment: review.comment,
+      rating: review.rating,
+    },
+  });
 
   const {
     data: ogData,
@@ -118,7 +123,6 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
                     required: "Comment can't be empty!",
                   })}
                   isDisabled={isSubmitting}
-                  defaultValue={review.comment}
                 />
                 <FormErrorMessage color="error">
                   {errors.comment?.message}
@@ -127,14 +131,10 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
               <Controller
                 name="rating"
                 control={control}
-                render={({ field: { onChange } }) => (
-                  <StarReview
-                    isStatic={false}
-                    onChange={onChange}
-                    startNoOfStars={review.rating}
-                  />
+                render={({ field: { onChange, value } }) => (
+                  <StarReview onChange={onChange} value={value} />
                 )}
-              ></Controller>
+              />
             </Flex>
           </ModalBody>
           <ModalFooter>

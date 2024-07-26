@@ -44,14 +44,11 @@ export const PlannerButtons = ({ onClose }: IPlannerButtons) => {
     setCurrentStep(Math.ceil(-rootIndex / 2));
   }
   const selected = rankedShows[Math.abs(currentStep)];
+  const showNextButton = Boolean(currentStep && selected);
   return (
     <Flex>
-      {currentStep && selected ? (
-        <Button onClick={() => nextStep()}> Next </Button>
-      ) : (
-        <></>
-      )}
-      {!currentStep ? (
+      {showNextButton && <Button onClick={() => nextStep()}> Next </Button>}
+      {!currentStep && (
         <>
           <Button onClick={() => nextRound()}> Add show </Button>
           <Button
@@ -64,8 +61,6 @@ export const PlannerButtons = ({ onClose }: IPlannerButtons) => {
             Done
           </Button>
         </>
-      ) : (
-        <></>
       )}
     </Flex>
   );
