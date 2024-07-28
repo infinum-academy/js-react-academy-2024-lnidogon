@@ -30,16 +30,13 @@ interface ICreateReviewParams {
   show_id: number;
 }
 
-interface ICreateResponseParams {
-  review: IReview;
-}
-
 export const ReviewForm = ({ showId }: IReviewFormProps) => {
   const {
     register,
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm<IReviewFormInputs>({ defaultValues: { comment: '', rating: 0 } });
 
   const {
@@ -59,6 +56,10 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
       onSuccess: (data) => {
         if (!ogData) mutate();
         else mutate({ reviews: [data.review, ...ogData.reviews] }, false);
+        reset({
+          rating: 0,
+          comment: '',
+        });
       },
     }
   );

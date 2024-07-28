@@ -2,7 +2,7 @@
 import { PasswordInput } from '@/components/shared/auth/PasswordInput';
 import { mutator } from '@/fetchers/mutators';
 import { swrKeys } from '@/fetchers/swrKeys';
-import { EmailIcon, LockIcon } from '@chakra-ui/icons';
+import { EmailIcon } from '@chakra-ui/icons';
 import {
   Button,
   Flex,
