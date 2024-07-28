@@ -16,7 +16,13 @@ export const StarReview = (starReview: IStarReview) => {
       <StarIcon
         data-testid="star-fragment"
         _hover={{ cursor: starReview.isStatic ? '' : 'pointer' }}
-        color={i <= starReview.noOfStars ? 'yellow' : 'gray'}
+        color={
+          i <= starReview.noOfStars
+            ? 'white'
+            : starReview.isStatic
+              ? 'transparent'
+              : 'gray'
+        }
         width="15%"
         key={i}
         onClick={

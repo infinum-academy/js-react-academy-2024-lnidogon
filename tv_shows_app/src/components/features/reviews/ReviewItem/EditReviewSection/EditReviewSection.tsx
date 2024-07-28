@@ -99,21 +99,24 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
 
   return (
     <>
-      <IconButton
-        backgroundColor="orange.100"
-        _hover={{ backgroundColor: 'blue.300' }}
+      <Button
+        backgroundColor="transparent"
+        _hover={{ backgroundColor: 'transparent' }}
         marginLeft="auto"
-        aria-label="Edit review"
-        size="sm"
-        icon={<EditIcon />}
+        fontSize="button"
+        fontWeight="bold"
+        color="purple.500"
         onClick={onOpen}
-      />
+        width="144px"
+      >
+        EDIT
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent
-          backgroundColor="pink.700"
+          backgroundColor="purple.500"
           color="white"
-          borderColor="pink.900"
+          borderColor="purple.700"
           borderWidth="2px"
         >
           <ModalHeader>Edit your review</ModalHeader>
@@ -168,7 +171,7 @@ export const EditReviewSection = ({ review }: IEditReviewSectionProps) => {
               type="submit"
               form="edit-form"
               isDisabled={isSubmitting}
-              backgroundColor="orange.100"
+              width="144px"
             >
               {isSubmitting ? <Spinner /> : 'Edit'}
             </Button>

@@ -18,7 +18,11 @@ jest.mock('@/fetchers/mutators', () => {
     deleteReviewMutator: jest.fn().mockResolvedValue(null),
   };
 });
+
 /*
+
+Kako mockati mutate koji nije defaultni? Našao sam neke stvari na internetu
+
 jest.mock('swr', () => {
   return {
     mutate: jest.fn(),

@@ -6,9 +6,13 @@ import {
   Image,
   Container,
   Box,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
 } from '@chakra-ui/react';
 import { StarReview } from '../StarReview';
-import { DeleteIcon, SearchIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon, DeleteIcon, SearchIcon } from '@chakra-ui/icons';
 import useSWRMutation from 'swr/mutation';
 import { mutate } from 'swr';
 import { swrKeys } from '@/fetchers/swrKeys';
@@ -38,55 +42,90 @@ export const ReviewItem = ({ review }: IReviewItemProps) => {
     localStorage.getItem('tv-shows-uid') == review.user?.id + '';
   return (
     <Flex
-      height="50px"
-      backgroundColor="pink.800"
+      height={{ base: '120px', lg: '104px' }}
+      width={{ base: '344px', lg: '870px' }}
+      backgroundColor="purple.500"
       color="white"
-      borderRadius="8"
-      paddingLeft="4"
-      paddingRight="4"
-      paddingBottom="2"
-      paddingTop="2"
-      flexDirection="row"
-      gap="2"
-      alignItems="center"
+      borderRadius="xlRadius"
+      padding={{ base: '24px', lg: '4 4 2 2' }}
+      flexDirection={{ base: 'column', lg: 'row' }}
+      gap={2}
     >
-      <Image
-        borderRadius="full"
-        src={review.user.image_url}
-        alt="profilna"
-        fallbackSrc="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
-        width="30px"
-        maxW="10%"
-      />
       <Flex
-        flexDirection="column"
-        fontSize="xs"
-        width="20%"
-        height="fit-content"
-        minWidth="fit-content"
+        gap={{ base: '24px', lg: 2 }}
+        flexDirection={{ base: 'row', lg: 'row' }}
+        alignItems={{ base: 'none', lg: 'center' }}
+        width="100%"
       >
-        <Text fontSize="10px"> {review.user.email} </Text>
-        <Flex flexDirection="row" alignItems="center" gap="1">
-          <Text>{review.rating} / 5</Text>
-          <Box width="30%">
-            <StarReview
-              noOfStars={review.rating}
-              isStatic={true}
-              onChange={() => {}}
-              onHover={() => {}}
-            />
-          </Box>
+        <Image
+          borderRadius="full"
+          src={review.user.image_url}
+          alt="profilna"
+          fallbackSrc="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"
+          width="40px"
+          height="40px"
+        />
+        <Flex
+          flexDirection="column"
+          fontSize="xs"
+          width="20%"
+          height="fit-content"
+          minWidth="fit-content"
+        >
+          <Text fontSize="note"> {review.user.email} </Text>
+          <Flex flexDirection="row" alignItems="center" gap="1">
+            <Text fontSize="note">{review.rating}/5</Text>
+            <Box width={{ base: '50%', lg: '30%' }}>
+              <StarReview
+                noOfStars={review.rating}
+                isStatic={true}
+                onChange={() => {}}
+                onHover={() => {}}
+              />
+            </Box>
+          </Flex>
         </Flex>
+        <Text fontSize="xs" hideBelow="lg">
+          {review.comment}
+        </Text>
+
+        {isMyReview ? (
+          <Flex marginLeft="auto" direction="row" gap={3}>
+            <Menu size="xs">
+              <MenuButton
+                as={Button}
+                width="24px"
+                height="24px"
+                bg="purple.500"
+                color="white"
+                _hover={{ bg: 'purple2' }}
+              >
+                ⋮
+              </MenuButton>
+              <MenuList
+                minW={0}
+                w="128px"
+                height="82px"
+                p={0}
+                borderRadius="smRadius"
+                overflow="hidden"
+              >
+                <MenuItem w="128px" h="41px">
+                  <EditReviewSection review={review} />
+                </MenuItem>
+                <MenuItem w="128px" h="41px">
+                  <DeleteButton review={review} />
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </Flex>
+        ) : (
+          <></>
+        )}
       </Flex>
-      <Text fontSize="xs">{review.comment}</Text>
-      {isMyReview ? (
-        <Flex marginLeft="auto" direction="row" gap="3">
-          <EditReviewSection review={review} />
-          <DeleteButton review={review} />
-        </Flex>
-      ) : (
-        <></>
-      )}
+      <Text fontSize="xs" hideFrom="lg">
+        {review.comment}
+      </Text>
     </Flex>
   );
 };

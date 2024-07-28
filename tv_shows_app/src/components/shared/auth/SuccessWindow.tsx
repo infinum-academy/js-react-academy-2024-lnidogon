@@ -8,7 +8,7 @@ interface ISuccessWindow {
 
 export const SuccessWindow = ({ link, message }: ISuccessWindow) => (
   <Flex
-    backgroundColor="pink.800"
+    backgroundColor="purple.500"
     color="white"
     direction="column"
     alignItems="center"
@@ -19,12 +19,7 @@ export const SuccessWindow = ({ link, message }: ISuccessWindow) => (
     gap="5"
   >
     <Text>{message}</Text>
-    <Button
-      as={NextLink}
-      href={link}
-      backgroundColor="orange.100"
-      _hover={{ backgroundColor: 'green.300' }}
-    >
+    <Button as={NextLink} href={link} width="144px">
       Proceed
     </Button>
   </Flex>

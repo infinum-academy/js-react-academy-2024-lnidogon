@@ -1,5 +1,14 @@
 import { IShow } from '@/typings/show';
-import { Container, Flex, Image, Text } from '@chakra-ui/react';
+import { StarIcon } from '@chakra-ui/icons';
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Container,
+  Flex,
+  Image,
+  Text,
+} from '@chakra-ui/react';
 import NextLink from 'next/link';
 
 export interface IShowCard {
@@ -8,38 +17,38 @@ export interface IShowCard {
 
 export const ShowCard = ({ show }: IShowCard) => {
   return (
-    <Flex
-      flexDirection="column"
-      width="300px"
-      maxWidth="20%"
-      height="30%"
-      minHeight="200px"
-      borderRadius="8px"
-      overflow="hidden"
+    <Card
+      size={{ base: 'sm', lg: 'md' }}
+      width={{ base: '342px', lg: '240px' }}
+      margin={{ base: '32px', lg: ' 18px' }}
       as={NextLink}
       href={`/shows/${show.id}`}
     >
-      <Image
-        src={show.image_url}
-        objectFit="cover"
-        height="70%"
-        alt="Slika showa"
-      />
-      <Flex
-        flexDirection="column"
-        padding="2"
-        backgroundColor="orange.100"
-        fontSize="xs"
-        fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
-        height="fit-content"
-        overflow="hidden"
-        borderBottomRadius="8px"
-      >
-        <Text> {show.title} </Text>
-        <Text>
-          {!show.average_rating ? 'no rating' : show.average_rating + '/5'}
-        </Text>
-      </Flex>
-    </Flex>
+      <CardHeader w="100%">
+        <Image src={show.image_url} objectFit="cover" alt="Slika showa" />
+      </CardHeader>
+      <CardBody>
+        <Flex
+          direction={{ base: 'row', lg: 'column' }}
+          alignItems={{ base: 'center', lg: 'start' }}
+        >
+          <Text fontSize="subtitle" color="purple.500">
+            {show.title}
+          </Text>
+          <Flex
+            direction="row"
+            alignItems="center"
+            gap="4px"
+            ml={{ base: 'auto', lg: '0' }}
+            mr={{ base: '20px', lg: 'auto' }}
+          >
+            <StarIcon width="16px" color="purple.500" />
+            <Text fontSize="smallCaption" color="purple.500">
+              {!show.average_rating ? 'no rating' : show.average_rating + '/5'}
+            </Text>
+          </Flex>
+        </Flex>
+      </CardBody>
+    </Card>
   );
 };

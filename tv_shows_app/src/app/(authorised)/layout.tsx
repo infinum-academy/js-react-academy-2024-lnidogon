@@ -1,7 +1,7 @@
 'use client';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { Box, Divider, Flex } from '@chakra-ui/react';
+import { Box, Divider, Flex, Hide, Show } from '@chakra-ui/react';
 import { SWRConfig } from 'swr';
 import { AuthRedirect } from '@/components/shared/auth/AuthRedirect';
 import { useState } from 'react';
@@ -29,13 +29,26 @@ export default function RootLayout({
   return (
     <>
       <AuthRedirect loginFunc={onAuth} />
+
       {loggedIn ? (
-        <Flex height="100vh">
-          <Box width="15%">
-            <SidebarNavigation />
-          </Box>
-          <Box width="85%">{children}</Box>
-        </Flex>
+        <>
+          <Show above="1024px">
+            <Flex height="100vh">
+              <Box width="15%">
+                <SidebarNavigation />
+              </Box>
+              <Box width="100%">{children}</Box>
+            </Flex>
+          </Show>
+          <Hide above="1024px">
+            <Flex height="100vh" direction="column">
+              <Box pt="10%">{children}</Box>
+              <Box height="10 %" width="100%" position="fixed">
+                <SidebarNavigation />
+              </Box>
+            </Flex>
+          </Hide>
+        </>
       ) : (
         <LoadingScreen />
       )}

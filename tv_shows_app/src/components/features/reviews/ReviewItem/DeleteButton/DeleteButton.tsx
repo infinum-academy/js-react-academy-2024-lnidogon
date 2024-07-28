@@ -18,7 +18,6 @@ import { swrKeys } from '@/fetchers/swrKeys';
 import { deleteReviewMutator } from '@/fetchers/mutators';
 import useSWR, { mutate } from 'swr';
 import { fetcher } from '@/fetchers/fetcher';
-import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 
 interface IDeleteButtonProps {
   review: IReview;
@@ -53,22 +52,22 @@ export const DeleteButton = ({ review }: IDeleteButtonProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <IconButton
+      <Button
         data-testid="delete-button"
-        backgroundColor="orange.100"
-        _hover={{ backgroundColor: 'red.300' }}
+        backgroundColor="transparent"
+        _hover={{ backgroundColor: 'transparent' }}
         marginLeft="auto"
-        aria-label="Delete review"
-        size="sm"
-        icon={<DeleteIcon />}
         onClick={onOpen}
-      />
+        width="144px"
+      >
+        DELETE
+      </Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent
-          backgroundColor="pink.700"
+          backgroundColor="purple.500"
           color="white"
-          borderColor="pink.900"
+          borderColor="purple.700"
           borderWidth="2px"
         >
           <ModalHeader>Delete your review</ModalHeader>
@@ -76,8 +75,7 @@ export const DeleteButton = ({ review }: IDeleteButtonProps) => {
           <ModalBody>Are you sure you want to delete this review?</ModalBody>
           <ModalFooter>
             <Button
-              backgroundColor="orange.100"
-              _hover={{ backgroundColor: 'red.300' }}
+              width="144px"
               onClick={async () => await trigger({ id: review.id })}
             >
               Yes

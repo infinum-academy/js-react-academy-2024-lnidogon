@@ -99,9 +99,9 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
   return (
     <Flex
       flexDirection="column"
-      gap="2"
+      gap={{ base: '40px', lg: '38px' }}
       width="100%"
-      overflow="hidden"
+      height="156px"
       as="form"
       onSubmit={handleSubmit(onSubmitHandler)}
     >
@@ -109,16 +109,16 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
         <Textarea
           {...register('comment')}
           required
-          backgroundColor="orange.100"
+          backgroundColor="white"
+          color="purple.300"
           placeholder="Add review..."
           id="review-input"
-          width="100%"
-          fontSize="sm"
-          padding="2"
-          height="40px"
-          minHeight="40px"
-          borderRadius="7"
-          fontFamily="'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif"
+          width={{ base: '344px', lg: '100%' }}
+          padding={2}
+          height={{ base: '52px', lg: '80px' }}
+          minHeight={{ base: '52px', lg: '80px' }}
+          borderRadius={{ base: 'full', lg: 'mdRadius' }}
+          fontSize="body"
           isDisabled={isSubmitting}
         />
       </FormControl>
@@ -126,9 +126,8 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
       <Flex
         flexDirection="row"
         alignItems="center"
-        width="100%"
-        gap="5"
-        height="8"
+        width={{ base: '344px', lg: '870px' }}
+        gap={5}
       >
         <Text color="white" fontSize="sm">
           Rating:
@@ -136,8 +135,8 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
         <FormControl>
           <Flex
             flexDirection="row"
-            width="20%"
-            gap="1"
+            width={{ base: '50%', lg: '20%' }}
+            gap={1}
             onMouseEnter={() => {
               setLocked(false);
             }}
@@ -158,14 +157,10 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
         <Button
           isDisabled={isSubmitting}
           type="submit"
-          fontSize="sm"
-          width="100px"
           onSubmit={handleSubmit(onSubmitHandler)}
-          height="30px"
-          borderRadius="15px"
-          _hover={{ backgroundColor: 'green.300' }}
-          backgroundColor="orange.100"
           marginLeft="auto"
+          size={{ base: 'sm', lg: 'md' }}
+          width={{ base: '98px', lg: '144px' }}
         >
           {isSubmitting ? <Spinner /> : 'Post'}
         </Button>

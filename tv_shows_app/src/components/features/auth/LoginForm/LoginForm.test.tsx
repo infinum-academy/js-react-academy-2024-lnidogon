@@ -38,7 +38,7 @@ describe('LoginForm', () => {
     render(<LoginForm />);
     const submitButton = screen
       .getAllByRole('button')
-      .filter((button) => button.innerHTML == 'Log in');
+      .filter((button) => button.innerHTML == 'LOG IN');
     expect(submitButton.length).toEqual(1);
   });
   it('should contain register link', () => {
