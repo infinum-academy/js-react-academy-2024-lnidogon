@@ -1,42 +1,54 @@
 import { StarIcon } from '@chakra-ui/icons';
 import { Container, Flex, Icon, Image } from '@chakra-ui/react';
+import { color } from 'framer-motion';
+import { useState } from 'react';
 import { cursorTo } from 'readline';
 
 interface IStarReview {
-  noOfStars: number;
-  isStatic: boolean;
-  onChange: (index: number) => void;
-  onHover: (index: number) => void;
+  value: number;
+  onChange?: (newValue: number) => void;
 }
 
-export const StarReview = (starReview: IStarReview) => {
+export const StarReview = ({ value, onChange }: IStarReview) => {
+  const [locked, setLocked] = useState(false);
+  const [hoveredNumberOfStars, setHoveredNumberOfStars] = useState(value);
+
+  const noOfStars = !onChange ? value : locked ? value : hoveredNumberOfStars;
+  const onClick = (index: number) => {
+    if (onChange) onChange(index);
+    setLocked(true);
+  };
+
+  const onHover = (index: number) => {
+    setHoveredNumberOfStars(index);
+  };
+
+  console.log(value);
+  console.log(noOfStars);
   let tempList = [];
   for (let i = 1; i <= 5; i++) {
+    let buttonColor = 'gray';
+    if (i <= noOfStars) buttonColor = 'white';
+    else if (!onChange) buttonColor = 'transparent';
     tempList.push(
       <StarIcon
         data-testid="star-fragment"
-        _hover={{ cursor: starReview.isStatic ? '' : 'pointer' }}
-        color={
-          i <= starReview.noOfStars
-            ? 'white'
-            : starReview.isStatic
-              ? 'transparent'
-              : 'gray'
-        }
+        _hover={{ cursor: !onChange ? '' : 'pointer' }}
+        color={buttonColor}
         width="15%"
         key={i}
         onClick={
-          starReview.isStatic
+          !onChange
             ? () => {}
             : () => {
-                starReview.onChange(i);
+                onClick(i);
               }
         }
         onMouseOver={
-          starReview.isStatic
+          !onChange
             ? () => {}
             : () => {
-                starReview.onHover(i);
+                onHover(i);
               }
         }
       />
@@ -45,12 +57,26 @@ export const StarReview = (starReview: IStarReview) => {
   return (
     <Flex
       flexDirection="row"
-      gap="0"
-      width="100%"
-      alignItems="center"
-      justifyContent="space-evenly"
+      width={!onChange ? '50%' : { base: '50%', lg: '20%' }}
+      gap={1}
+      onMouseEnter={() => {
+        setLocked(false);
+      }}
+      onMouseLeave={() => {
+        setLocked(true);
+        setHoveredNumberOfStars(0);
+      }}
+      id="star-input"
     >
-      {tempList}
+      <Flex
+        flexDirection="row"
+        gap="0"
+        width="100%"
+        alignItems="center"
+        justifyContent="space-evenly"
+      >
+        {tempList}
+      </Flex>
     </Flex>
   );
 };

@@ -72,7 +72,7 @@ export const SidebarNavigationDesktop = () => {
         color="white"
         as="button"
         marginRight="auto"
-        _hover={{ color: 'red' }}
+        _hover={{ color: 'purple.300' }}
         onClick={() => {
           localStorage.removeItem('tv-shows-uid'),
             localStorage.removeItem('tv-shows-header');

@@ -6,6 +6,7 @@ import { swrKeys } from '@/fetchers/swrKeys';
 import { IShow } from '@/typings/show';
 import { Box } from '@chakra-ui/react';
 import useSWR from 'swr';
+import { Planner } from '@/components/features/planner/Planner';
 
 export const AllShowsContainer = () => {
   const { data, error, isLoading } = useSWR<{ shows: Array<IShow> }>(
@@ -20,5 +21,10 @@ export const AllShowsContainer = () => {
   if (error) {
     return <div> Ajoj čini se da se nešto jaaaako loše desilo... </div>;
   }
-  return <ShowsList shows={showList} />;
+  return (
+    <>
+      <ShowsList shows={showList} />
+      <Planner />
+    </>
+  );
 };
