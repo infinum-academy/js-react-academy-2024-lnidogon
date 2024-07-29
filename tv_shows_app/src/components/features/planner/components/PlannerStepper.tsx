@@ -5,9 +5,9 @@ import { PlannerResult } from './PlannerResult';
 
 export const PlannerStepper = () => {
   const {
+    allShows,
     currentStep,
     tourSize,
-    allShows,
     setTourSize,
     setRankedShows,
     setCurrentStep,

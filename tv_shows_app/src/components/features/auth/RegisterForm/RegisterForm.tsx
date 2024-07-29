@@ -103,7 +103,7 @@ export const RegisterForm = () => {
               data-testid="email"
               mx={{ base: '0', lg: '56px' }}
             />
-            <FormErrorMessage mx={{ base: '0', lg: '80px' }}>
+            <FormErrorMessage color="error" mx={{ base: '0', lg: '80px' }}>
               {errors.email?.message}
             </FormErrorMessage>
           </FormControl>

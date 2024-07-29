@@ -3,9 +3,7 @@ import {
   Button,
   Flex,
   FormControl,
-  FormErrorIcon,
   FormErrorMessage,
-  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -16,7 +14,6 @@ import {
   Spinner,
   Textarea,
   useDisclosure,
-  Text,
 } from '@chakra-ui/react';
 import { IReview } from '../ReviewItem';
 import { Controller, useForm } from 'react-hook-form';

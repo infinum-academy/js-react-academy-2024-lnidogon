@@ -88,7 +88,7 @@ export const LoginForm = () => {
                 data-testid="email"
                 mx={{ base: 'auto', lg: '56px' }}
               />
-              <FormErrorMessage mx={{ base: 'auto', lg: '80px' }}>
+              <FormErrorMessage color="error" mx={{ base: 'auto', lg: '80px' }}>
                 {errors.email?.message}
               </FormErrorMessage>
             </FormControl>

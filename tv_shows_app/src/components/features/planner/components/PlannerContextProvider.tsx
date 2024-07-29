@@ -13,6 +13,8 @@ interface IPlannerContext {
   setTourSize: (newTourSize: number) => void;
   finalRanking: Array<IShow>;
   setFinalRanking: (newFinalRanking: Array<IShow>) => void;
+  allShows: Array<IShow>;
+  setAllShows: (newAllShows: Array<IShow>) => void;
 }
 export const PlannerContext = createContext<IPlannerContext>(
   {} as IPlannerContext
@@ -29,7 +31,7 @@ export const PlannerContextProvider = ({
   const [finalRanking, setFinalRanking] = useState<Array<IShow>>([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [tourSize, setTourSize] = useState(0);
-
+  const [allShows, setAllShows] = useState<Array<IShow>>([]);
   return (
     <PlannerContext.Provider
       value={{
@@ -41,6 +43,8 @@ export const PlannerContextProvider = ({
         setRankedShows,
         finalRanking,
         setFinalRanking,
+        allShows: allShows,
+        setAllShows,
       }}
     >
       {children}

@@ -40,7 +40,7 @@ export const PasswordInput = forwardRef(
               mx={{ base: 'auto', lg: '56px' }}
               data-testid={testId}
             />
-            <FormErrorMessage mx={{ base: 'auto', lg: '80px' }}>
+            <FormErrorMessage color="error" mx={{ base: 'auto', lg: '80px' }}>
               {error}
             </FormErrorMessage>
           </FormControl>
