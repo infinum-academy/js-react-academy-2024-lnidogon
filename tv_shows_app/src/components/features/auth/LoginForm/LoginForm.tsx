@@ -7,6 +7,7 @@ import {
   Button,
   Flex,
   FormControl,
+  FormErrorMessage,
   Heading,
   Input,
   InputGroup,
@@ -28,7 +29,7 @@ export const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm<ILoginForm>();
   const { trigger } = useSWRMutation(swrKeys.login, mutator<ILoginForm>, {
     onSuccess: () => {
@@ -72,10 +73,13 @@ export const LoginForm = () => {
               fontSize="md"
               ml={{ base: 0, lg: '56px' }}
             />
-            <FormControl textColor="white">
+            <FormControl
+              textColor="white"
+              isInvalid={errors.email?.message != ''}
+            >
               <Input
                 isDisabled={isSubmitting}
-                {...register('email', { required: true })}
+                {...register('email', { required: 'Email is required' })}
                 placeholder="Email"
                 type="email"
                 color="white"
@@ -84,11 +88,15 @@ export const LoginForm = () => {
                 data-testid="email"
                 mx={{ base: 'auto', lg: '56px' }}
               />
+              <FormErrorMessage mx={{ base: 'auto', lg: '80px' }}>
+                {errors.email?.message}
+              </FormErrorMessage>
             </FormControl>
           </InputGroup>
           <PasswordInput
             isDisabled={isSubmitting}
-            {...register('password', { required: true })}
+            error={errors.password?.message}
+            {...register('password', { required: 'Password is required' })}
             placeholder="Password"
             testId="password"
           />

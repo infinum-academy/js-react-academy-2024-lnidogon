@@ -1,3 +1,4 @@
+import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 import { fetcher } from '@/fetchers/fetcher';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { createContext, ReactNode, useState } from 'react';
@@ -12,7 +13,6 @@ interface IPlannerContext {
   setTourSize: (newTourSize: number) => void;
   finalRanking: Array<IShow>;
   setFinalRanking: (newFinalRanking: Array<IShow>) => void;
-  allShows: Array<IShow>;
 }
 export const PlannerContext = createContext<IPlannerContext>(
   {} as IPlannerContext
@@ -29,12 +29,6 @@ export const PlannerContextProvider = ({
   const [finalRanking, setFinalRanking] = useState<Array<IShow>>([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [tourSize, setTourSize] = useState(0);
-  const { data: allShows, isLoading } = useSWR<{ shows: Array<IShow> }>(
-    swrKeys.allShows,
-    fetcher
-  );
-
-  if (isLoading || !allShows) return null;
 
   return (
     <PlannerContext.Provider
@@ -47,7 +41,6 @@ export const PlannerContextProvider = ({
         setRankedShows,
         finalRanking,
         setFinalRanking,
-        allShows: allShows.shows,
       }}
     >
       {children}

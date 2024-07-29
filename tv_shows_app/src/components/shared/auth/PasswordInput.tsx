@@ -2,6 +2,7 @@
 import { LockIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
   FormControl,
+  FormErrorMessage,
   IconButton,
   Input,
   InputGroup,
@@ -12,12 +13,13 @@ import {
 import { forwardRef, useState } from 'react';
 
 interface IPasswordInput extends InputProps {
+  error: string | undefined;
   placeholder: string;
   testId: string;
 }
 
 export const PasswordInput = forwardRef(
-  ({ placeholder, testId, ...rest }: IPasswordInput, ref) => {
+  ({ placeholder, testId, error, ...rest }: IPasswordInput, ref) => {
     const [hidden, setHidden] = useState(true);
     return (
       <>
@@ -27,7 +29,7 @@ export const PasswordInput = forwardRef(
             children={<LockIcon color="white" width="24px" />}
             ml={{ base: 0, lg: '56px' }}
           />
-          <FormControl textColor="white">
+          <FormControl textColor="white" isInvalid={error != ''}>
             <Input
               ref={ref}
               {...rest}
@@ -38,6 +40,9 @@ export const PasswordInput = forwardRef(
               mx={{ base: 'auto', lg: '56px' }}
               data-testid={testId}
             />
+            <FormErrorMessage mx={{ base: 'auto', lg: '80px' }}>
+              {error}
+            </FormErrorMessage>
           </FormControl>
           <InputRightElement fontSize="md">
             <IconButton
