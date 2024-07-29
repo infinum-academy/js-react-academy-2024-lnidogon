@@ -43,8 +43,6 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
   } = useForm<IReviewFormInputs>({ defaultValues: { comment: '', rating: 0 } });
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
   watch(() => {
-    console.log('hua');
-
     setIsSubmitButtonDisabled(
       isSubmitting || getValues('comment') == '' || getValues('rating') == 0
     );
