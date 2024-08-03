@@ -1,9 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Providers } from './providers';
-import { Box } from '@chakra-ui/react';
-import { SWRConfig } from 'swr';
-import { AuthRedirect } from '@/components/shared/auth/AuthRedirect';
 
 const inter = Inter({ subsets: ['latin'] });
 

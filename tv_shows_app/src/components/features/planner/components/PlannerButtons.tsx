@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { PlannerContext } from './PlannerContextProvider';
 import { Button, Flex } from '@chakra-ui/react';
-import { IpcNetConnectOpts } from 'net';
 
 interface IPlannerButtons {
   onClose: () => void;

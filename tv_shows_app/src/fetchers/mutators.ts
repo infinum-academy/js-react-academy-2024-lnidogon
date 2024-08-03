@@ -1,8 +1,5 @@
-import useSWRMutation from 'swr/mutation';
 import { fetcher } from './fetcher';
-import { swrKeys } from './swrKeys';
 import { IReview } from '@/components/features/reviews/ReviewItem/ReviewItem';
-import { Artifika } from 'next/font/google';
 export async function mutator<T>(url: string, { arg }: { arg: T }) {
   const response = await fetch(url, {
     method: 'POST',

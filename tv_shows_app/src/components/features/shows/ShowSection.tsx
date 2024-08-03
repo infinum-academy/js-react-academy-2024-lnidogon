@@ -1,14 +1,12 @@
-import { Flex, Image, Text, Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import { IReview } from '../reviews/ReviewItem/ReviewItem';
-import { useEffect, useState } from 'react';
 import { IShow } from '@/typings/show';
 import { swrKeys } from '@/fetchers/swrKeys';
-import useSWR, { mutate } from 'swr';
-import { create } from 'domain';
 import { fetcher } from '@/fetchers/fetcher';
 import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 import { ShowReviewSection } from './ShowReviewSection/ShowReviewSection';
 import { ShowDetails } from './ShowDetails/ShowDetails';
+import useSWR from 'swr';
 
 interface IShowSection {
   show: IShow;

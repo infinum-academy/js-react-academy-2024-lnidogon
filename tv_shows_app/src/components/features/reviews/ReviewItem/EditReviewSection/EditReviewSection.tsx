@@ -3,9 +3,7 @@ import {
   Button,
   Flex,
   FormControl,
-  FormErrorIcon,
   FormErrorMessage,
-  IconButton,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -16,23 +14,16 @@ import {
   Spinner,
   Textarea,
   useDisclosure,
-  Text,
 } from '@chakra-ui/react';
 import { IReview } from '../ReviewItem';
-import { EditIcon } from '@chakra-ui/icons';
-import { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { IReviewFormInputs } from '@/components/features/reviews/ReviewForm/ReviewForm';
-import { register } from 'module';
 import { StarReview } from '../../StarReview';
 import { swrKeys } from '@/fetchers/swrKeys';
 import useSWRMutation from 'swr/mutation';
 import { updateReviewMutator } from '@/fetchers/mutators';
-import { ResolvedViewport } from 'next';
-import { error } from 'console';
 import useSWR from 'swr';
 import { fetcher } from '@/fetchers/fetcher';
-import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 
 interface IEditReviewSectionProps {
   review: IReview;

@@ -12,7 +12,6 @@ import {
 } from '@chakra-ui/react';
 import { PlannerStepper } from './components/PlannerStepper';
 import { PlannerButtons } from './components/PlannerButtons';
-import { useContext } from 'react';
 
 export const Planner = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -1,23 +1,21 @@
 'use client';
 import { mutator } from '@/fetchers/mutators';
-import { EmailIcon, LockIcon, RepeatIcon } from '@chakra-ui/icons';
+import { EmailIcon } from '@chakra-ui/icons';
 import NextLink from 'next/link';
 import {
-  Box,
   Button,
   Flex,
   FormControl,
+  FormErrorMessage,
   Heading,
   Input,
   InputGroup,
   InputLeftElement,
-  Spinner,
   Text,
 } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import useSWRMutation from 'swr/mutation';
 import { useState } from 'react';
-import { SuccessWindow } from '@/components/shared/auth/SuccessWindow';
 import { PasswordInput } from '@/components/shared/auth/PasswordInput';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { useRouter } from 'next/navigation';
@@ -33,7 +31,8 @@ export const RegisterForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    getValues,
+    formState: { isSubmitting, errors },
   } = useForm<IRegisterForm>();
   const [errorMesssage, setErrorMessage] = useState('');
   const { trigger } = useSWRMutation(swrKeys.register, mutator<IRegisterForm>, {
@@ -42,14 +41,12 @@ export const RegisterForm = () => {
     },
   });
   const onRegister = async (data: IRegisterForm) => {
-    if (data.password.length < 8) {
-      setErrorMessage('Password must be at least 8 characters');
+    if (
+      errors.email != undefined ||
+      errors.password != undefined ||
+      errors.password_confirmation != undefined
+    )
       return;
-    }
-    if (data.password != data.password_confirmation) {
-      setErrorMessage('Password mismatch');
-      return;
-    }
     await trigger(data);
   };
   return (
@@ -90,10 +87,15 @@ export const RegisterForm = () => {
             ml={{ base: 0, lg: '56px' }}
             fontSize="md"
           />
-          <FormControl textColor="white">
+          <FormControl
+            textColor="white"
+            isInvalid={errors.email?.message != ''}
+          >
             <Input
               isDisabled={isSubmitting}
-              {...register('email', { required: true })}
+              {...register('email', {
+                required: 'Email is required',
+              })}
               placeholder="Email"
               type="email"
               _placeholder={{ color: 'white' }}
@@ -101,17 +103,35 @@ export const RegisterForm = () => {
               data-testid="email"
               mx={{ base: '0', lg: '56px' }}
             />
+            <FormErrorMessage color="error" mx={{ base: '0', lg: '80px' }}>
+              {errors.email?.message}
+            </FormErrorMessage>
           </FormControl>
         </InputGroup>
         <PasswordInput
           isDisabled={isSubmitting}
-          {...register('password')}
+          error={errors.password?.message}
+          {...register('password', {
+            required: 'Password is required',
+            validate: (value) => {
+              return (
+                value.length > 8 ||
+                'Password must be at least 8 characters long'
+              );
+            },
+          })}
           placeholder="Password"
           testId="password"
         />
         <PasswordInput
           isDisabled={isSubmitting}
-          {...register('password_confirmation')}
+          error={errors.password_confirmation?.message}
+          {...register('password_confirmation', {
+            required: 'Please confirm your password',
+            validate: (value) => {
+              return value == getValues('password') || 'Passwords do not match';
+            },
+          })}
           placeholder="Confirm password"
           testId="password-confirmation"
         />

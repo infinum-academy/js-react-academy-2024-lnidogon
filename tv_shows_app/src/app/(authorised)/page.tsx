@@ -1,5 +1,9 @@
 'use client';
+
+import { useRouter } from 'next/navigation';
+
 export default function HomeRedirect() {
-  window.location.href = '/shows';
-  return <></>;
+  const router = useRouter();
+  router.push('/shows');
+  return null;
 }

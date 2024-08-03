@@ -1,28 +1,25 @@
 'use client';
-import { EmailIcon, LockIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { LockIcon, ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import {
-  Button,
   FormControl,
-  Hide,
+  FormErrorMessage,
   IconButton,
   Input,
   InputGroup,
   InputLeftElement,
   InputProps,
   InputRightElement,
-  Show,
-  Text,
 } from '@chakra-ui/react';
 import { forwardRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
 
 interface IPasswordInput extends InputProps {
+  error: string | undefined;
   placeholder: string;
   testId: string;
 }
 
 export const PasswordInput = forwardRef(
-  ({ placeholder, testId, ...rest }: IPasswordInput, ref) => {
+  ({ placeholder, testId, error, ...rest }: IPasswordInput, ref) => {
     const [hidden, setHidden] = useState(true);
     return (
       <>
@@ -32,7 +29,7 @@ export const PasswordInput = forwardRef(
             children={<LockIcon color="white" width="24px" />}
             ml={{ base: 0, lg: '56px' }}
           />
-          <FormControl textColor="white">
+          <FormControl textColor="white" isInvalid={error != ''}>
             <Input
               ref={ref}
               {...rest}
@@ -43,6 +40,9 @@ export const PasswordInput = forwardRef(
               mx={{ base: 'auto', lg: '56px' }}
               data-testid={testId}
             />
+            <FormErrorMessage color="error" mx={{ base: 'auto', lg: '80px' }}>
+              {error}
+            </FormErrorMessage>
           </FormControl>
           <InputRightElement fontSize="md">
             <IconButton

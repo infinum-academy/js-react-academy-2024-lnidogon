@@ -1,29 +1,21 @@
 'use client';
-import { AuthRedirect } from '@/components/shared/auth/AuthRedirect';
 import { PasswordInput } from '@/components/shared/auth/PasswordInput';
-import { SuccessWindow } from '@/components/shared/auth/SuccessWindow';
-import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
 import { mutator } from '@/fetchers/mutators';
 import { swrKeys } from '@/fetchers/swrKeys';
-import theme from '@/styles/theme/theme';
-import { EmailIcon, LockIcon } from '@chakra-ui/icons';
+import { EmailIcon } from '@chakra-ui/icons';
 import {
   Button,
   Flex,
   FormControl,
+  FormErrorMessage,
   Heading,
   Input,
   InputGroup,
   InputLeftElement,
-  Show,
-  Spinner,
   Text,
-  typography,
 } from '@chakra-ui/react';
-import { log } from 'console';
 import NextLink from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useSWRMutation from 'swr/mutation';
 
@@ -37,7 +29,7 @@ export const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting, errors },
   } = useForm<ILoginForm>();
   const { trigger } = useSWRMutation(swrKeys.login, mutator<ILoginForm>, {
     onSuccess: () => {
@@ -81,10 +73,13 @@ export const LoginForm = () => {
               fontSize="md"
               ml={{ base: 0, lg: '56px' }}
             />
-            <FormControl textColor="white">
+            <FormControl
+              textColor="white"
+              isInvalid={errors.email?.message != ''}
+            >
               <Input
                 isDisabled={isSubmitting}
-                {...register('email')}
+                {...register('email', { required: 'Email is required' })}
                 placeholder="Email"
                 type="email"
                 color="white"
@@ -93,11 +88,15 @@ export const LoginForm = () => {
                 data-testid="email"
                 mx={{ base: 'auto', lg: '56px' }}
               />
+              <FormErrorMessage color="error" mx={{ base: 'auto', lg: '80px' }}>
+                {errors.email?.message}
+              </FormErrorMessage>
             </FormControl>
           </InputGroup>
           <PasswordInput
             isDisabled={isSubmitting}
-            {...register('password', { required: true })}
+            error={errors.password?.message}
+            {...register('password', { required: 'Password is required' })}
             placeholder="Password"
             testId="password"
           />

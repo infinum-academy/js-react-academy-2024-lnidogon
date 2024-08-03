@@ -6,9 +6,7 @@ import {
   FormControl,
   Spinner,
 } from '@chakra-ui/react';
-import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Form } from 'react-router-dom';
 import { StarReview } from '@/components/features/reviews/StarReview';
 import { swrKeys } from '@/fetchers/swrKeys';
 import { createReviewMutator } from '@/fetchers/mutators';
@@ -16,7 +14,7 @@ import useSWR, { mutate } from 'swr';
 import useSWRMutation from 'swr/mutation';
 import { fetcher } from '@/fetchers/fetcher';
 import { IReview } from '../ReviewItem/ReviewItem';
-import { LoadingScreen } from '@/components/shared/LoadingScreen/LoadingScreen';
+import { useEffect, useState } from 'react';
 
 export interface IReviewFormProps {
   showId: number;
@@ -33,23 +31,24 @@ interface ICreateReviewParams {
   show_id: number;
 }
 
-interface ICreateResponseParams {
-  review: IReview;
-}
-
 export const ReviewForm = ({ showId }: IReviewFormProps) => {
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors, isSubmitting },
+    getValues,
+    formState: { isSubmitting },
+    watch,
+    reset,
   } = useForm<IReviewFormInputs>({ defaultValues: { comment: '', rating: 0 } });
+  const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
+  watch(() => {
+    setIsSubmitButtonDisabled(
+      isSubmitting || getValues('comment') == '' || getValues('rating') == 0
+    );
+  });
 
-  const {
-    data: ogData,
-    mutate,
-    isLoading,
-  } = useSWR<{ reviews: Array<IReview> }>(
+  const { data: ogData, mutate } = useSWR<{ reviews: Array<IReview> }>(
     swrKeys.listReviews(showId),
     async () =>
       await fetcher<{ reviews: Array<IReview> }>(swrKeys.listReviews(showId))
@@ -62,6 +61,10 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
       onSuccess: (data) => {
         if (!ogData) mutate();
         else mutate({ reviews: [data.review, ...ogData.reviews] }, false);
+        reset({
+          rating: 0,
+          comment: '',
+        });
       },
     }
   );
@@ -90,7 +93,7 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
     >
       <FormControl>
         <Textarea
-          {...register('comment')}
+          {...register('comment', { required: true })}
           required
           backgroundColor="white"
           color="purple.300"
@@ -123,7 +126,7 @@ export const ReviewForm = ({ showId }: IReviewFormProps) => {
           )}
         />
         <Button
-          isDisabled={isSubmitting}
+          isDisabled={isSubmitButtonDisabled}
           type="submit"
           onSubmit={handleSubmit(onSubmitHandler)}
           marginLeft="auto"
